@@ -1,0 +1,9 @@
+#+TITLE: Changelog
+#+AUTHOR: cheeesy
+#+DATE: 2018-2019
+
+** November 2018 - November 2019:
+*** 4. November 2018 - 22. November 2019
+- Grundlegende Spielmechanismen hinzugefügt (Geld, Motivation, Position, ...)
+*** 23. November 2019
+- Repositorium gegründet.

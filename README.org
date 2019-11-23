@@ -1,0 +1,15 @@
+#+TITLE:CLIfe
+#+AUTHOR: cheeesy
+#+DATE: 2018-2019
+
+** Was ist CLIfe?
+CLIfe ist der Versuch eines Textabenteuers / RPG-Spieles in C :)
+
+Eine feste Story ist bis jetzt noch nicht vorhanden, wird aber später noch geschehen.
+** Wozu dienen die '0'-Dateien?
+Dateien, die '0' heißen, sind lediglich Platzhalter und sollen dafür sorgen, dass das GitHub-Repositorium diese Ordner erstellt bzw. nicht löscht.
+
+Die Ordner werden im Spiel mit Daten beschrieben und sind benötigt.
+** To-Dos
+*** TODO Englische Übersetzung
+|Wann? |Vor dem ersten Release. |

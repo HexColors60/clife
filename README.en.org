@@ -1,0 +1,15 @@
+#+TITLE:CLIfe
+#+AUTHOR: cheeesy
+#+DATE: 2018-2019
+
+** What is CLIfe?
+CLIfe is my try on a text adventure / RPG-game, written in C :)
+
+A real story is not implemented yet, because the game is still in planning stage.
+** Why are there files just called '0'?
+Files called '0' are just place holders and ensure that GitHub creates those folders, or rather, doesn't delete them.
+
+The folders will, when running the game, be written with data and are necessary.
+** To-Dos
+*** TODO English Translation
+|When? |Before the first Release |
