@@ -10,3 +10,4 @@
 ** December 2019
 *** 3. December 2019
 - TODO: Using of items is broken
+- Travelling between countries now costs 30 gold pieces.

@@ -15,6 +15,10 @@ Die Ordner werden im Spiel mit Daten beschrieben und sind benötigt.
 20% der erhofften Funktionen, die implementiert sind, entsprechen meinen Anforderungen.
 
 Das Item- bzw. Gegenstandssystem ist aktuell auf Eis gelegt, bis ich eine Lösung für das unerwartete Verhalten gefunden habe.
+
+Um der großen Aufgabe einer englischen Übersetzung keine weiteren Hürden auflegen zu müssen,
+werden Funktionsnamen sowie Kommentare von nun an in Englisch verfasst.
 ** To-Dos
 *** TODO Englische Übersetzung
-|Wann? |Vor dem ersten Release. |
+| Wann? | Vor dem ersten Release. |
+|       |                         |

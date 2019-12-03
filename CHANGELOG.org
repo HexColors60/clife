@@ -10,3 +10,4 @@
 ** Dezember 2019:
 *** 3. Dezember 2019
 - TODO: Benutzung von Items ist kaputt
+- Reisen kostet jetzt 30 Goldstücke Zoll

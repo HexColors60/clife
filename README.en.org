@@ -15,6 +15,8 @@ The folders will, when running the game, be written with data and are necessary.
 I am satisfied with 20% of implemented functions.
 
 The Item system is currently on hold, until I have a better plan on how to work it out.
+To not make it harder for me to reach the goal of a complete english translation,
+function names and comments will form now on be created in English.
 ** To-Dos
 *** TODO English Translation
 |When? |Before the first Release |

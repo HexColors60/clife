@@ -29,6 +29,7 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "../inc/read.h" // Funktionen zum Lesen von Dateien.
 #include "../inc/file.h" // Funktionen zur Dateibenutzung
 #include "../inc/story.h" // Funktionen zum Storytelling und Spielbeginn.
+#include "../inc/money.h"
 #include "../inc/map.h" // Funktionen zum Benutzen der Spielkarte.
 #include "../inc/reisen.h" // In Ländern reisen
 #include "../inc/arb.h" // Funktionen zum Geld verdienen
@@ -46,7 +47,7 @@ char *rolle;
 char *loc;
 char *land;
 char *hilfspfad;
-const char *ver = "clife 2019.11.23";
+const char *ver = "clife 2019.12.03";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
@@ -169,9 +170,11 @@ int main(int argc, char *argv[]) {
     /*   motivation = atoi(read(MOTI)); } */
     
     if(!strcmp(input,"r") | !strcmp(input,"reisen")) {
-      loc = ganz_reisen(loc, land, motivation); // Diese Funktion ist gedacht, um z.B. von Aritrea nach Liberium zu reisen, aber
+      loc = ganz_reisen(loc, land, motivation, geld); // Diese Funktion ist gedacht, um z.B. von Aritrea nach Liberium zu reisen, aber
       // tatsächlich wird von Metron (Gateway-Stadt) in die Hauptstadt Orar gereist.
       motivation = atoi(read(MOTI)); // Da nur ein Zustand zurückgebracht werden kann, muss der Rest auf die Platte geschrieben werden.
+      if(strcmp(land,landErmitteln(loc))) { printf("Du musst 30 Goldstücke an Zoll bezahlen!\n");
+        geld = removeMoney(geld, 30); }
       land = landErmitteln(loc); // Wir müssen ebenfalls noch im Nachhinein, mit Hilfe der Stadt, das Land ermitteln.
     }
     if(!strcmp(input,"motivation") | !strcmp(input,"m")) motivationSehen(motivation);

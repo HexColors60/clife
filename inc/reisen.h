@@ -40,7 +40,11 @@ char *landWechseln(char *l, char *p) {
   return "nowhere"; }
 free(buf);
 }
-char *ganz_reisen(char *l, char *p, int Motivation) {
+char *ganz_reisen(char *l, char *p, int Motivation, int Geld) {
+  if(Geld<30) {
+    printf("Du kannst den Zoll nicht bezahlen, also nicht reisen!\n");
+    return l;
+  }
   p = landWechseln(l, p);
   if(!strcmp(p, "Liberium")) l = "Orar"; // Es wird immer in die Hauptstadt gereist.
   if(!strcmp(p, "Aritrea")) l = "Majkius";
