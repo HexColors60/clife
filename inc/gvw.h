@@ -1,3 +1,6 @@
+// UNBENUTZT // UNUSED
+
+/*
 #include<stdio.h>
 #include<string.h>
 #define PRD "arch/locs/shop/shops.rtf"
@@ -87,3 +90,4 @@ int Einkaufen(char *inventar, int geldbeutel) {
   //   return geldbeutel;
   // }
 }
+*/

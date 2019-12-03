@@ -1,5 +1,6 @@
      all: src/main.c
-	gcc -Og -ggdb -o bin/clife src/main.c
+#	gcc -Og -ggdb -o bin/clife src/main.c
+	gcc -g -o bin/clife src/main.c
 
      clean:
 	rm bin/clife

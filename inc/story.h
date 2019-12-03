@@ -47,6 +47,7 @@ void setRole() {
   for(int i=0; i<73;i++) {
     printf("░");
   }
+  printf("\n");
   write2(ROLE, role);
 }
 void setGeld() {
@@ -55,9 +56,6 @@ void setGeld() {
 }
 void setPos() {
   write2(POSI, "Majkius"); // Man startet in Majkius
-}
-void setInv() {
-  write2(INV, "");
 }
 void setMot() {
   wrinte2(MOTI, 100);
@@ -107,6 +105,5 @@ void begSequence() {
   if(exists(ROLE)==false) setRole();
   if(exists(GELD)==false) setGeld();
   if(exists(POSI)==false) setPos();
-  if(exists(INV)==false)  setInv();
   if(exists(MOTI)==false) setMot();
 }

@@ -7,3 +7,6 @@
 - Main game mechanisms added (Money, Motivation, Position, ...)
 *** 23. November 2019
 - Repository created.
+** December 2019
+*** 3. December 2019
+- TODO: Using of items is broken

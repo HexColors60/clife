@@ -1,3 +1,6 @@
+// UNBENUTZT // UNUSED
+
+/*
 #include<stdio.h>
 char *bencp;
 char *neuinv;
@@ -41,6 +44,7 @@ void benutzen(char *inventar, char *objekt, int moti) {
   if(!strcmp(objekt,"w")) {
     printf("Du trinkst Wasser!\n");
     moti = moti + 15; // Motivation wird um 15% geheilt
+    if(moti>100) moti = 100;
     wrinte2(MOTI, moti);
     /* strtok(neuinv,"[w];"); */
     /* printf("Inventar: \n---%s\n---", neuinv); */
@@ -50,6 +54,7 @@ void benutzen(char *inventar, char *objekt, int moti) {
   if(!strcmp(objekt,"t")) {
     printf("Du trinkst Tee!\n");
     moti = moti + 20; // Motivation wird zu 20% geheilt
+    if(moti>100) moti = 100;
     wrinte2(MOTI, moti);
     neuesInventar(inventar, objekt);
     return;
@@ -59,8 +64,8 @@ void benutzen(char *inventar, char *objekt, int moti) {
     moti = 100;
     wrinte2(MOTI, moti);
     /* strtok(neuinv,"[k];"); */
+    return;
   }
-  return neuinv;
 }
 void benAuswahl(char *inventar) {
   printf("Was möchtest du haben?\nInventar:\n");
@@ -71,10 +76,11 @@ void benAuswahl(char *inventar) {
   fgets(bencp, 15, stdin);
   strtok(bencp,"\n");
   if(!strstr(inventar,bencp)) { printf("Du besitzt das Objekt nicht!\n");
-    return inventar; }
+    return; }
   omot = atoi(read(MOTI));
-  benutzen(inventar, bencp, omot);
   free(bencp);
+  benutzen(inventar, bencp, omot);
   // free(neuinv);
   return;
 }
+*/

@@ -1,6 +1,4 @@
-/*
- * CLIfe
- */
+// Copyright (C) 2018-2019 cheeesy
 
 /* CLIfe is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,9 +17,9 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #define ROLE "arch/svf/dab.rtf" // Rolle des Spielers
 #define GELD "arch/svf/gel.rtf" // Geld
 #define POSI "arch/svf/loc.rtf" // Position des Spielers auf der Karte.
-#define INV "arch/svf/inv.rtf" // Inventar
 #define MOTI "arch/svf/mot.rtf" // Motivation
 #define MANU "arch/man/" // Die Hilfsdateien
+//#define INV "arch/svf/inv.rtf" // Inventar
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -34,10 +32,10 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "../inc/map.h" // Funktionen zum Benutzen der Spielkarte.
 #include "../inc/reisen.h" // In Ländern reisen
 #include "../inc/arb.h" // Funktionen zum Geld verdienen
-#include "../inc/gvw.h" // Geldverwertung
-#include "../inc/ben.h" // Objekte benutzen
 #include "../inc/o.h" // Andere Funktionen
 #include "../inc/amp.h" // ASCII Spielkarte
+//#include "../inc/gvw.h" // Geldverwertung
+//#include "../inc/ben.h" // Objekte benutzen
 bool file_;
 int geld;
 int motivation;
@@ -47,7 +45,6 @@ char *name;
 char *rolle;
 char *loc;
 char *land;
-char *inv;
 char *hilfspfad;
 const char *ver = "clife 2019.11.23";
 const char *help = "clife\n\
@@ -64,7 +61,6 @@ const char *comms = "                            CLIfe Befehle:\n\
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n\
 | h, hilfe:                        | Alle Befehle auflisten.           |\n\
 | geld:                            | Geld ansehen.                     |\n\
-| i, inv:                          | Inventar ansehen.                 |\n\
 | a, arbeit:                       | Geld verdienen.                   |\n\
 | wbi:                             | Wo bin ich?                       |\n\
 | land:                            | In welchem Land bin ich?          |\n\
@@ -92,31 +88,17 @@ int cexit() {
   if(exists(ROLE)==false) write2(ROLE, rolle); // Daher wird sie nur geschrieben, falls sie, wie auch immer, gelöscht wurde.
   wrinte2(GELD, geld); // Der neue Geldstand wird immer gespeichert.
   write2(POSI, loc); // Die Position wird immer gespeichert.
-  write2(INV, inv); // Das Inventar wird immer gespeichert.
   wrinte2(MOTI, motivation); // Die Motivation wird immer gespeichert.
   return 0;
 }
 
-/* void reden() { */
-/*   printf("Mit wem möchtest du reden?\n"); */
-/*   scanf("%s", &input); */
-/*   ladeKonvo(input, loc); */
-/* } */
-void inventar() {
-  printf("%s\n", inv);
-  return;
-  if(!strcmp(inv,"")) { printf("Dein Rucksack ist leer.\n");
-    return; }
-  if(strstr(inv,"[w];")) printf("Wasser\n");
-  if(strstr(inv,"[t];")) printf("Tee\n");
-  if(strstr(inv,"[k];")) printf("Kaffee\n");
-}
 void EchoThing() {
   for(;;) {
-    printf("p");
+    putchar('P');
     normalInput(input);
+    input[strcspn(input, "\n")] = 0;   // \n löschen
     printf("%s\n", input);
-    if(!strcmp(normalInput,"quit")) return;
+    if(!strcmp(input,"quit")) return;
     else continue;
   }
 }
@@ -146,7 +128,6 @@ int main(int argc, char *argv[]) {
   rolle = read(ROLE);
   geld = atoi(read(GELD));
   loc = read(POSI);
-  inv = read(INV);
   motivation = atoi(read(MOTI));
   name[strcspn(name, "\n")] = 0;   // \n löschen
   rolle[strcspn(rolle, "\n")] = 0; //     ^^
@@ -158,17 +139,11 @@ int main(int argc, char *argv[]) {
   printf("\n");
   for(;;) {
     normalInput(input);
-    /* printf("> ");
-    fgets(input, 16, stdin);
-    strtok(input, "\n");
-    fflush(stdin); */
     if(motivation<=0) { printf("%s", nichtMotiviert);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
     if(!strcmp(input,"hilfe") | !strcmp(input,"h")) printf("%s\n", comms);
-    //    if(!strcmp(input,"rede")) reden();
     if(!strcmp(input,"geld")) geldbeutel();
-    if(!strcmp(input,"inv") | !strcmp(input,"i")) inventar();
     if(!strcmp(input,"arbeit") | !strcmp(input,"a")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
       else { geld = arbeiten(geld);
         loc = read(POSI); // Falls gereist wird, wird es wieder gelesen.
@@ -180,16 +155,19 @@ int main(int argc, char *argv[]) {
     if(!strcmp(input,"map")) printASCIImap(loc);
     if(!strcmp(input,"goto")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
       else loc = geheZu(loc, land); }
-    if(!strcmp(input,"einkaufen") | !strcmp(input,"e")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
+    
+    /* if(!strcmp(input,"einkaufen") | !strcmp(input,"e")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
       else { Einkaufen(inv, geld);
         geld = atoi(read(GELD));
         inv = read(INV);
         printf("Durch das Einkaufen hast du Motivation verloren.\n");
-        motivation = motivation - 5; } }
-    if(!strcmp(input,"benutzen") | !strcmp(input,"b")) { benAuswahl(inv);
-      // inv = benAuswahl(inv); sorgt für unvorhersehbares Verhalten.
-      inv = read(INV);
-      motivation = atoi(read(MOTI)); }
+        motivation = motivation - 5; } } */
+    
+    /* if(!strcmp(input,"benutzen") | !strcmp(input,"b")) { benAuswahl(inv); */
+    /*   // inv = benAuswahl(inv); sorgt für unvorhersehbares Verhalten. */
+    /*   inv = read(INV); */
+    /*   motivation = atoi(read(MOTI)); } */
+    
     if(!strcmp(input,"r") | !strcmp(input,"reisen")) {
       loc = ganz_reisen(loc, land, motivation); // Diese Funktion ist gedacht, um z.B. von Aritrea nach Liberium zu reisen, aber
       // tatsächlich wird von Metron (Gateway-Stadt) in die Hauptstadt Orar gereist.
