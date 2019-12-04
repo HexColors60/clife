@@ -21,4 +21,3 @@ werden Funktionsnamen sowie Kommentare von nun an in Englisch verfasst.
 ** To-Dos
 *** TODO Englische Übersetzung
 | Wann? | Vor dem ersten Release. |
-|       |                         |

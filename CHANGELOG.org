@@ -11,3 +11,8 @@
 *** 3. Dezember 2019
 - TODO: Benutzung von Items ist kaputt
 - Reisen kostet jetzt 30 Goldstücke Zoll
+*** 4. Dezember 2019
+- env.h erstellt
+- lookAround()
+- arch/locs/ wurde erneuert
+- Kommentare am Anfang von main.c übersetzt

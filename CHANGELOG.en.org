@@ -11,3 +11,8 @@
 *** 3. December 2019
 - TODO: Using of items is broken
 - Travelling between countries now costs 30 gold pieces.
+*** 4. December 2019
+- env.h created
+- lookAround()
+- Revamped arch/locs/
+- Translated comments at the beginning of main.c

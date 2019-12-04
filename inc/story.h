@@ -47,7 +47,7 @@ void setRole() {
   for(int i=0; i<73;i++) {
     printf("░");
   }
-  printf("\n");
+  printf("\n\n");
   write2(ROLE, role);
 }
 void setGeld() {

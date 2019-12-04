@@ -13,41 +13,41 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
-#define NAME "arch/svf/nom.rtf" // Spielername
-#define ROLE "arch/svf/dab.rtf" // Rolle des Spielers
-#define GELD "arch/svf/gel.rtf" // Geld
-#define POSI "arch/svf/loc.rtf" // Position des Spielers auf der Karte.
+#define NAME "arch/svf/nom.rtf" // Name
+#define ROLE "arch/svf/dab.rtf" // Role
+#define GELD "arch/svf/gel.rtf" // Money
+#define POSI "arch/svf/loc.rtf" // Player's position
 #define MOTI "arch/svf/mot.rtf" // Motivation
-#define MANU "arch/man/" // Die Hilfsdateien
-//#define INV "arch/svf/inv.rtf" // Inventar
+#define MANU "arch/man/" // Help files
+//#define INV "arch/svf/inv.rtf" // Inventory // defunct
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<stdbool.h>
 #include<signal.h>
 #include<time.h>
-#include "../inc/read.h" // Funktionen zum Lesen von Dateien.
-#include "../inc/file.h" // Funktionen zur Dateibenutzung
-#include "../inc/story.h" // Funktionen zum Storytelling und Spielbeginn.
-#include "../inc/money.h"
-#include "../inc/map.h" // Funktionen zum Benutzen der Spielkarte.
-#include "../inc/reisen.h" // In Ländern reisen
-#include "../inc/arb.h" // Funktionen zum Geld verdienen
-#include "../inc/o.h" // Andere Funktionen
-#include "../inc/amp.h" // ASCII Spielkarte
-//#include "../inc/gvw.h" // Geldverwertung
-//#include "../inc/ben.h" // Objekte benutzen
+#include "../inc/read.h" // File reading
+#include "../inc/file.h" // exists(), File writing
+#include "../inc/story.h" // Storytelling on first Startup and splash screen
+#include "../inc/money.h" // Money Management
+#include "../inc/map.h" // In-Game Map
+#include "../inc/reisen.h" // Travelling inbetween Countries
+#include "../inc/arb.h" // Working / earning Money
+#include "../inc/env.h" // Enviroment
+#include "../inc/o.h" // Other functions
+#include "../inc/amp.h" // ASCII (Semigraphical) Map
+//#include "../inc/gvw.h" // Shopping // defunct
+//#include "../inc/ben.h" // Using items // defunct
 bool file_;
 int geld;
 int motivation;
-double zeit;
 char input[10];
 char *name;
 char *rolle;
 char *loc;
 char *land;
 char *hilfspfad;
-const char *ver = "clife 2019.12.03";
+const char *ver = "clife 2019.12.04";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
@@ -180,6 +180,7 @@ int main(int argc, char *argv[]) {
     if(!strcmp(input,"motivation") | !strcmp(input,"m")) motivationSehen(motivation);
     if(!strcmp(input,"schlafen")) { if(schlafen(motivation)!=3) motivation = motivation + 15;
       else motivation = motivation - 10; }
+    if(!strcmp(input,"umsehen")) lookAround(loc, land);
     if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
     if(!strcmp(input, "printf")) EchoThing();
   }
