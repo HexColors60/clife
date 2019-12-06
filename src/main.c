@@ -26,10 +26,10 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include<stdbool.h>
 #include<signal.h>
 #include<time.h>
+#include "../inc/money.h" // Money Management
 #include "../inc/read.h" // File reading
 #include "../inc/file.h" // exists(), File writing
 #include "../inc/story.h" // Storytelling on first Startup and splash screen
-#include "../inc/money.h" // Money Management
 #include "../inc/map.h" // In-Game Map
 #include "../inc/reisen.h" // Travelling inbetween Countries
 #include "../inc/arb.h" // Working / earning Money
@@ -47,7 +47,7 @@ char *rolle;
 char *loc;
 char *land;
 char *hilfspfad;
-const char *ver = "clife 2019.12.04";
+const char *ver = "clife 2019.12.06";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
@@ -178,9 +178,10 @@ int main(int argc, char *argv[]) {
       land = landErmitteln(loc); // Wir müssen ebenfalls noch im Nachhinein, mit Hilfe der Stadt, das Land ermitteln.
     }
     if(!strcmp(input,"motivation") | !strcmp(input,"m")) motivationSehen(motivation);
-    if(!strcmp(input,"schlafen")) { if(schlafen(motivation)!=3) motivation = motivation + 15;
+    if(!strcmp(input,"schlafen")) { if(schlafen(motivation)!=3) motivation = motivation + 30;
       else motivation = motivation - 10; }
     if(!strcmp(input,"umsehen")) lookAround(loc, land);
+    if(!strcmp(input,"de")) inspectDialog(loc, land);
     if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
     if(!strcmp(input, "printf")) EchoThing();
   }

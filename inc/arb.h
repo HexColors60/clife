@@ -55,19 +55,35 @@ bool arbeitMinigame(char *typ) {
     }
     }
   }
+  if(!strcmp(typ,"rechner")) {
+    printf("Die Rechnungsüberprüfungsbehörde Aritreas verlangt von dir das Ergebnis der folgenden Rechnung:\n");
+    int num1 = generieren(1,6);
+    int num2 = generieren(1,6);
+    num1 = num1 * 1000;
+    num1 = generieren(num1,(num1+999));
+    printf("%d + ", num1);
+    num2 = num2 * 100;
+    num2 = generieren(num2,(num2+999));
+    printf("%d\n\n", num2);
+    int decinp;
+    scanf("%d", &decinp);
+    if(decinp==(num1+num2)) { printf("Du bekommst eine Entlohnung von 50 Goldstücken.\n"); return true; }
+    return false;
+  }
 }
 int geldHinzufuegen(int algel, int lohn) { // Altes Geld + Lohn = neues Geld
   ngeld = algel + lohn;
   return ngeld;
 }
 bool arbeitWaehlen() {
-  /* srand(time(NULL)); */
-  /* ranint = generieren(4, 1); */
-  /* if(ranint==1) { */
+  srand(time(NULL));
+  ranint = generieren(1, 4);
+  if(ranint==1) {
     printf("Du arbeitest als Redakteur bei der Regionalzeitung Majkius.\n");
     return arbeitMinigame("zeitung");
-  /* } */
-
+  } else {
+    return arbeitMinigame("rechner");
+  }
     
   /*   if(strcmp(p, "Nova A")) { printf("Du reist für deinen Job nach Nova A.\n"); */
   /*     p = "Nova A"; */
@@ -103,7 +119,8 @@ bool arbeitWaehlen() {
 }
 int arbeiten(int algeld) {
   if(arbeitWaehlen()==true) {
-    geldHinzufuegen(algeld, 50);
+    //    geldHinzufuegen(algeld, 50);
+    return addMoney(algeld, 50);
   }
 
   

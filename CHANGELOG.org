@@ -16,3 +16,5 @@
 - lookAround()
 - arch/locs/ wurde erneuert
 - Kommentare am Anfang von main.c übersetzt
+*** 6. Dezember 2019
+- Neues Arbeitsminispiel hinzugefügt.
