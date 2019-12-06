@@ -18,3 +18,4 @@
 - Kommentare am Anfang von main.c übersetzt
 *** 6. Dezember 2019
 - Neues Arbeitsminispiel hinzugefügt.
+- EchoThing() nutzt nun eigene, größere Variable.

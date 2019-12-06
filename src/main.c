@@ -94,12 +94,16 @@ int cexit() {
 }
 
 void EchoThing() {
+  char echo[128];
   for(;;) {
     putchar('P');
-    normalInput(input);
-    input[strcspn(input, "\n")] = 0;   // \n löschen
-    printf("%s\n", input);
-    if(!strcmp(input,"quit")) return;
+    // normalInput(input);
+    printf("> ");
+    fgets(echo, 128, stdin);
+    echo[strlen(echo)-1] = '\0';
+    fflush(stdin);
+    printf("%s\n", echo);
+    if(echo[0]=='q') if(echo[1]=='u') if(echo[2]=='i') if(echo[3]=='t') if(echo[4]=='\0') return;
     else continue;
   }
 }

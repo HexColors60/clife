@@ -18,3 +18,4 @@
 - Translated comments at the beginning of main.c
 *** 6. December 2019
 - New working minigame added.
+- EchoThing() now uses own, bigger variable.
