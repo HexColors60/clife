@@ -6,10 +6,6 @@
 CLIfe ist der Versuch eines Textabenteuers / RPG-Spieles in C :)
 
 Eine feste Story ist bis jetzt noch nicht vorhanden, wird aber später noch geschehen.
-** Wozu dienen die '0'-Dateien?
-Dateien, die '0' heißen, sind lediglich Platzhalter und sollen dafür sorgen, dass das GitHub-Repositorium diese Ordner erstellt bzw. nicht löscht.
-
-Die Ordner werden im Spiel mit Daten beschrieben und sind benötigt.
 ** Status Quo
 15% der erhofften Funktionen sind implementiert.
 20% der erhofften Funktionen, die implementiert sind, entsprechen meinen Anforderungen.
