@@ -19,3 +19,6 @@
 *** 6. December 2019
 - New working minigame added.
 - EchoThing() now uses own, bigger variable.
+** February 2020
+*** 10. February 2020
+- replaced '0' with '.gitkeep'

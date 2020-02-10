@@ -19,3 +19,6 @@
 *** 6. Dezember 2019
 - Neues Arbeitsminispiel hinzugefügt.
 - EchoThing() nutzt nun eigene, größere Variable.
+** Februar 2020:
+*** 10. Februar 2020:
+- '0' durch '.gitkeep' ersetzt
