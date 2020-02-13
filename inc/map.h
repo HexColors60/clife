@@ -1,8 +1,10 @@
+//--TRANSLATED 100%--\\
+
 #include<stdio.h>
 #include<stdlib.h>
 char *minput;
 char *tmpNorth, *tmpSouth;
-char *getNorth(char *p) { // Da Structs nicht funktioniert haben (Ich muss mich da noch mal einlesen), speichere ich Nord- und Süddaten manuell für jeden Ort ab.
+char *getNorth(char *p) { // I have a problem with structs, so I save North and South data for every city manually. Tedious, but it works.
   if(!strcmp(p,"Majkius")) return "Nova A";
   else if(!strcmp(p,"Nova A")) return "0";
   else if(!strcmp(p,"Metron")) return "Majkius";
@@ -16,19 +18,19 @@ char *getSouth(char *p) {
 }
 void createMap(char *p, char *l) {
   printf("\n┌──────────────────────────────────────────┐\n");
-  printf("│                                          │\r│ Du bist in %s.\n", p);
+  printf("│                                          │\r│ You are in %s.\n", p);
 
   tmpNorth = (char*)malloc(33 * sizeof(char));
   strcpy(tmpNorth,getNorth(p));
   if(strcmp(tmpNorth,"0")) {
-    printf("│                                          │\r│ Nördlich von dir ist %s.\n", tmpNorth);
+    printf("│                                          │\r│ North from you is %s.\n", tmpNorth);
     free(tmpNorth);
   } else free(tmpNorth);
 
   tmpSouth = (char*)malloc(33 * sizeof(char));
   strcpy(tmpSouth,getSouth(p));
   if(strcmp(tmpSouth,"0")) {
-    printf("│                                          │\r│ Südlich von dir ist %s.\n",tmpSouth);
+    printf("│                                          │\r│ South from you is %s.\n",tmpSouth);
     free(tmpSouth);
   } else free(tmpSouth);
   printf("└──────────────────────────────────────────┘\n\n");
@@ -45,48 +47,48 @@ void printMap(char *p, char *l) {
   return;
 }
 
-char *wegVorhanden(char *start, char *richtung) { // Bis ich eine elegantere Lösung gefunden habe, muss das hier funktionieren.
+char *isAWay(char *start, char *richtung) { // Bis ich eine elegantere Lösung gefunden habe, muss das hier funktionieren.
   if(!strcmp(start,"Majkius")) {
-    if(!strcmp(richtung, "norden")) { printf("Du gehst nach Norden zu Nova A.\n");
+    if(!strcmp(richtung, "north")) { printf("You go north to Nova A.\n");
       return "Nova A"; }
-    else if(!strcmp(richtung, "sueden")) { printf("Du gehst nach Süden zu Metron.\n");
+    else if(!strcmp(richtung, "south")) { printf("You go south to Metron.\n");
       return "Metron"; }
-    else { printf("Dort führt kein Weg entlang.\n");
+    else { printf("We don't go there anymore.\n");
       return start; }
   }
 
   if(!strcmp(start, "Nova A")) {
-    if(!strcmp(richtung, "sueden")) { printf("Du gehst nach Süden zu Majkius.\n");
+    if(!strcmp(richtung, "south")) { printf("You go south to Majkius.\n");
       return "Majkius"; }
-    else { printf("Dort führt kein Weg entlang.\n");
+    else { printf("We don't go there anymore.\n");
       return start; }
   }
 
   if(!strcmp(start, "Metron")) {
-    if(!strcmp(richtung, "norden")) { printf("Du gehst nach Norden zu Majkius.\n");
+    if(!strcmp(richtung, "north")) { printf("You go north to Majkius.\n");
       return "Majkius"; }
-    else { printf("Dort führt kein Weg entlang.\n");
+    else { printf("We don't go there anymore.\n");
       return start; }
   }
 
   if(!strcmp(start, "Orar")) {
-    printf("Dort führt kein Weg entlang.\n");
+    printf("We don't go there anymore.\n");
     return start;
   }
 }
 
 char *geheZu(char *p, char *l) {
   printMap(p, l);
-  printf("In welche Richtung willst du gehen?\nSchreibweise für Richtungen:\nnorden\nosten\nsueden\nwesten\n\n");
+  printf("In what direction do you want to go?\nThey are written like so:\nnorth\neast\nsouth\nwest\n\n");
   minput = (char*)malloc(129 * sizeof(char));
   fgets(minput, 128, stdin);
   strtok(minput, "\n");
   fflush(stdin);
-  if(!strcmp(p, "Majkius") | !strcmp(p, "Nova A") | !strcmp(p, "Metron") | !strcmp(p, "Orar")) p = wegVorhanden(p, minput);
+  if(!strcmp(p, "Majkius") | !strcmp(p, "Nova A") | !strcmp(p, "Metron") | !strcmp(p, "Orar")) p = isAWay(p, minput);
   free(minput);
   return p;
 }
-char *landErmitteln(char *p) {
+char *getCountry(char *p) {
   if(!strcmp(p, "Nova A")) return "Aritrea";
   if(!strcmp(p, "Majkius")) return "Aritrea";
   if(!strcmp(p, "Metron")) return "Aritrea";

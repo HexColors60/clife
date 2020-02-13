@@ -1,3 +1,5 @@
+//--TRANSLATED 100%--\\
+
 // Environment
 
 #include<stdio.h>
@@ -13,14 +15,14 @@ int inspect(char b[], char *location, char *country) {
   strcpy(envpath, "arch/locs/");
   strcat(envpath, country);
   if(exists(envpath)==false) {
-    printf("Es gibt einen Fehler mit dem Spiel. \"%s\" ist kein akzeptabler Pfad!\n", envpath);
+    printf("ERROR: \"%s\" is not an acceptable path!\n", envpath);
     free(envpath);
     return 0;
   }
   strcat(envpath, "/");
   strcat(envpath, location);
   if(exists(envpath)==false) {
-    printf("Es gibt einen Fehler mit dem Spiel. \"%s\" ist kein akzeptabler Pfad!\n", envpath);
+    printf("ERROR: \"%s\" is not an acceptable path!\n", envpath);
     free(envpath);
     return 0;
   }
@@ -32,9 +34,9 @@ int inspect(char b[], char *location, char *country) {
   free(bupath);
   
   if(strstr(builds, build)) {
-    printf("Es gibt %s\n", build);
+    printf("%s exists.\n", build);
   } else {
-    printf("Es gibt nicht %s\n", build);
+    printf("%s doesn't exist.\n", build);
   }
      
   free(envpath);
@@ -46,14 +48,14 @@ void lookAround(char *location, char *country) {
   strcpy(envpath, "arch/locs/");
   strcat(envpath, country);
   if(exists(envpath)==false) {
-    printf("Es gibt einen Fehler mit dem Spiel. \"%s\" ist kein akzeptabler Pfad!\n", envpath);
+    printf("ERROR: \"%s\" is not an acceptable path!\n", envpath);
     free(envpath);
     return;
   }
   strcat(envpath, "/");
   strcat(envpath, location);
   if(exists(envpath)==false) {
-    printf("Es gibt einen Fehler mit dem Spiel. \"%s\" ist kein akzeptabler Pfad!\n", envpath);
+    printf("ERROR: \"%s\" is not an acceptable path!\n", envpath);
     free(envpath);
     return;
   }

@@ -1,4 +1,6 @@
-// Copyright (C) 2018-2019 cheeesy
+//--TRANSLATED 15%--\\
+
+// Copyright (C) 2018-2020 cheeesy
 
 /* CLIfe is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,7 +17,7 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
 #define NAME "arch/svf/nom.rtf" // Name
 #define ROLE "arch/svf/dab.rtf" // Role
-#define GELD "arch/svf/gel.rtf" // Money
+#define GOLD "arch/svf/gel.rtf" // Money
 #define POSI "arch/svf/loc.rtf" // Player's position
 #define MOTI "arch/svf/mot.rtf" // Motivation
 #define MANU "arch/man/" // Help files
@@ -39,57 +41,58 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 //#include "../inc/gvw.h" // Shopping // defunct
 //#include "../inc/ben.h" // Using items // defunct
 bool file_;
-int geld;
+int gold;
 int motivation;
 char input[10];
 char *name;
-char *rolle;
+char *role;
 char *loc;
-char *land;
-char *hilfspfad;
-const char *ver = "clife 2019.12.06";
+char *ch;
+char *helpath;
+const char *ver = "clife 2020.02";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
               Version\n\
 -h, --help\n\
-              Hilfe\n\
+              Help\n\
 -c, --commands\n\
-              Befehle\n\
+              Commands\n\
 \n\
-clife auf GitHub: [ https://github.com/cheeesy/clife ]";
-const char *comms = "                            CLIfe Befehle:\n\
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n\
-| h, hilfe:                        | Alle Befehle auflisten.           |\n\
-| geld:                            | Geld ansehen.                     |\n\
-| a, arbeit:                       | Geld verdienen.                   |\n\
-| wbi:                             | Wo bin ich?                       |\n\
-| land:                            | In welchem Land bin ich?          |\n\
-| map:                             | ASCII-Karte anzeigen.             |\n\
-| goto:                            | Innerhalb des Landes bewegen.     |\n\
-| r, reisen:                       | Reise von einem Land zum anderen. |\n\
-| e, einkaufen:                    | Etwas kaufen.                     |\n\
-| b, benutzen:                     | Benutzen.                         |\n\
-| m, motivation:                   | Deine Motivation sehen.           |\n\
-| schlafen:                        | Schlafen.                         |\n\
-| q, quit, tschüs, tschüß, servus: | Das Spiel verlassen.              |\n\
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+";
-const char *nichtMotiviert = "+-+-ACHTUNG+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n\
-Du bist unmotiviert!\n\
-Du kannst die meisten Aktionen nicht mehr tun,\n\
-bis du etwas isst oder schlafen gehst.\n\
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n";
-void geldbeutel() {
-  if(geld==0) printf("Du hast kein Geld bei dir.\n");
-  else printf("Du hast %d Goldstücke bei dir.\n", geld);
+clife on GitHub: [ https://github.com/cheeesy/clife ]";
+const char *comms = "                             CLIfe commands\n\
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n\
+| h, help:                         | List all commandsisten.             |\n\
+| g, gold, money:                  | View your current money.            |\n\
+| a, work:                         | Earn money.                         |\n\
+| b, beg:                          | Beg for money.                      |\n\
+| wai:                             | Where am I?                         |\n\
+| ch:                              | In which country am I?              |\n\
+| map:                             | Show ASCII-Map.                     |\n\
+| goto:                            | Travel in a country.                |\n\
+| r, travel:                       | Traven from one country to another. |\n\
+| m, motivation:                   | View your current motivation.       |\n\
+| s, sleep:                        | Sleep.                              |\n\
+| q, quit, tschüs, tschüß, servus: | Quit the game.                      |\n\
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+";
+const char *unMotivated = "+-+-ATTENTION-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n\
+You are unmovitvated!\n\
+If you are unmotivated you will not be able\n\
+to do most things until you sleep!\n\
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n";
+
+void moneyc() {
+  if(gold==0) printf("You don't have any money with you.\n");
+  else printf("You have %d gold coins.\n", gold);
 }
 int cexit() {
-  printf("Tschüß, %s der %s!\n", name, rolle);
-  if(exists(NAME)==false) write2(NAME, name); // Name und Rolle verändern sich nicht
-  if(exists(ROLE)==false) write2(ROLE, rolle); // Daher wird sie nur geschrieben, falls sie, wie auch immer, gelöscht wurde.
-  wrinte2(GELD, geld); // Der neue Geldstand wird immer gespeichert.
-  write2(POSI, loc); // Die Position wird immer gespeichert.
-  wrinte2(MOTI, motivation); // Die Motivation wird immer gespeichert.
+  printf("Arheto, %s, the %s!\n", name, role); // "Arheto" means "Goodbye" in Aritrean.
+  // Name and Role don't change, and are therefore only written if the file is lost - for whatever reason.
+  if(exists(NAME)==false) write2(NAME, name); 
+  if(exists(ROLE)==false) write2(ROLE, role);
+  wrinte2(GOLD, gold); // The amount of gold is always saved.
+  write2(POSI, loc); // The location is always saved.
+  wrinte2(MOTI, motivation); // The motivation is always saved.
   return 0;
 }
 
@@ -97,7 +100,6 @@ void EchoThing() {
   char echo[128];
   for(;;) {
     putchar('P');
-    // normalInput(input);
     printf("> ");
     fgets(echo, 128, stdin);
     echo[strlen(echo)-1] = '\0';
@@ -107,18 +109,19 @@ void EchoThing() {
     else continue;
   }
 }
-int main(int argc, char *argv[]) {
+
+int main(int argc, char *argv[]) { 
   if(argv[1]!=NULL) {
     if(!strcmp(argv[1], "-v") | !strcmp(argv[1], "--version")) { printf("%s\n", ver);
       return 0; }
     if(!strcmp(argv[1], "-h") | !strcmp(argv[1], "--help")) {
-      if(argv[2]!=NULL) { hilfspfad = (char*)malloc(65 * sizeof(char));
-        strcat(hilfspfad, MANU);
-        strcat(hilfspfad, argv[2]);
-        strcat(hilfspfad, ".rtf");
-        if(exists(hilfspfad)==0) return 0;
-        else pread(hilfspfad);
-        free(hilfspfad);
+      if(argv[2]!=NULL) { helpath = (char*)malloc(65 * sizeof(char));
+        strcat(helpath, MANU);
+        strcat(helpath, argv[2]);
+        strcat(helpath, ".rtf");
+        if(exists(helpath)==0) return 0;
+        else pread(helpath);
+        free(helpath);
         printf("\n");
         return 0; }
       printf("%s\n", help);
@@ -130,63 +133,57 @@ int main(int argc, char *argv[]) {
   }
   begSequence();
   name = read(NAME);
-  rolle = read(ROLE);
-  geld = atoi(read(GELD));
+  role = read(ROLE);
+  gold = atoi(read(GOLD));
   loc = read(POSI);
   motivation = atoi(read(MOTI));
-  name[strcspn(name, "\n")] = 0;   // \n löschen
-  rolle[strcspn(rolle, "\n")] = 0; //     ^^
-  printf("Du bist %s der %s.\n", name, rolle);
-  geldbeutel();
+  name[strcspn(name, "\n")] = 0;   // remove \n
+  role[strcspn(role, "\n")] = 0; // remove \n
+  printf("You are %s, the %s.\n", name, role);
+  moneyc();
   printf("\n");
-  land = landErmitteln(loc);
-  printMap(loc, land);
+  ch = getCountry(loc);
+  printMap(loc, ch);
   printf("\n");
-  for(;;) {
+  for(;;) { // Loop until cexit()==0
     normalInput(input);
-    if(motivation<=0) { printf("%s", nichtMotiviert);
+    if(motivation<=0) { printf("%s", unMotivated);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
-    if(!strcmp(input,"hilfe") | !strcmp(input,"h")) printf("%s\n", comms);
-    if(!strcmp(input,"geld")) geldbeutel();
-    if(!strcmp(input,"arbeit") | !strcmp(input,"a")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
-      else { geld = arbeiten(geld);
-        loc = read(POSI); // Falls gereist wird, wird es wieder gelesen.
-        printf("Das Arbeiten hat deine Motivation gesenkt.\n");
+    // If motivation is too high or too low, change it to the maximum/minimum.
+    if(!strcmp(input,"help") | !strcmp(input,"h")) printf("%s\n", comms);
+    if(!strcmp(input,"gold") | !strcmp(input,"g") | !strcmp(input,"money")) moneyc();
+    if(!strcmp(input,"work") | !strcmp(input,"a")) { if(motivation<=0) printf("You aren't motivated enough to work.\n");
+      else { gold = work(gold, loc);
+	printf("Your motivation has been lowered.\n");
         motivation = motivation - 10; }
     }
-    if(!strcmp(input,"wbi")) printMap(loc, land);
-    if(!strcmp(input,"land")) printf("%s\n", land);
+    if(!strcmp(input,"beg") | !strcmp(input,"b")) { if(motivation<=0) printf("You are not motivated enough to beg.\n");
+      else { gold = beg(gold);
+	printf("Your motivation has been lowered.\n");
+	motivation = motivation - 10; }
+    }
+    if(!strcmp(input,"wai")) printMap(loc, ch);
+    if(!strcmp(input,"ch")) printf("%s\n", ch);
     if(!strcmp(input,"map")) printASCIImap(loc);
-    if(!strcmp(input,"goto")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
-      else loc = geheZu(loc, land); }
+    if(!strcmp(input,"goto")) { if(motivation<=0) printf("You are not motivated enough!\n");
+      else loc = geheZu(loc, ch); }
     
-    /* if(!strcmp(input,"einkaufen") | !strcmp(input,"e")) { if(motivation<=0) printf("Du bist zu unmotiviert!\n");
-      else { Einkaufen(inv, geld);
-        geld = atoi(read(GELD));
-        inv = read(INV);
-        printf("Durch das Einkaufen hast du Motivation verloren.\n");
-        motivation = motivation - 5; } } */
-    
-    /* if(!strcmp(input,"benutzen") | !strcmp(input,"b")) { benAuswahl(inv); */
-    /*   // inv = benAuswahl(inv); sorgt für unvorhersehbares Verhalten. */
-    /*   inv = read(INV); */
-    /*   motivation = atoi(read(MOTI)); } */
-    
-    if(!strcmp(input,"r") | !strcmp(input,"reisen")) {
-      loc = ganz_reisen(loc, land, motivation, geld); // Diese Funktion ist gedacht, um z.B. von Aritrea nach Liberium zu reisen, aber
-      // tatsächlich wird von Metron (Gateway-Stadt) in die Hauptstadt Orar gereist.
-      motivation = atoi(read(MOTI)); // Da nur ein Zustand zurückgebracht werden kann, muss der Rest auf die Platte geschrieben werden.
-      if(strcmp(land,landErmitteln(loc))) { printf("Du musst 30 Goldstücke an Zoll bezahlen!\n");
-        geld = removeMoney(geld, 30); }
-      land = landErmitteln(loc); // Wir müssen ebenfalls noch im Nachhinein, mit Hilfe der Stadt, das Land ermitteln.
+    if(!strcmp(input,"r") | !strcmp(input,"travel")) {
+      loc = ganz_reisen(loc, ch, motivation, gold); // Travel from gateway city to capital of country.
+      motivation = atoi(read(MOTI)); // Read motivation after travel
+      if(strcmp(ch,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
+        gold = removeMoney(gold, 30); }
+      ch = getCountry(loc); // Also we have to get the country using the city we now have.
     }
     if(!strcmp(input,"motivation") | !strcmp(input,"m")) motivationSehen(motivation);
-    if(!strcmp(input,"schlafen")) { if(schlafen(motivation)!=3) motivation = motivation + 30;
+    if(!strcmp(input,"sleep") | !strcmp(input,"s")) { if(sleep(motivation)!=3) motivation = motivation + 30;
       else motivation = motivation - 10; }
-    if(!strcmp(input,"umsehen")) lookAround(loc, land);
-    if(!strcmp(input,"de")) inspectDialog(loc, land);
     if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
+
+    // DEBUG TOOLS
+    if(!strcmp(input,"umsehen")) lookAround(loc, ch);
+    if(!strcmp(input,"de")) inspectDialog(loc, ch);
     if(!strcmp(input, "printf")) EchoThing();
   }
 }

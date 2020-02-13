@@ -1,7 +1,7 @@
 #include<stdio.h>
 void printASCIImap(char *location) {
-  printf("Du bist in %s.\n\n", location);
-  printf("+------CLIfe---Aritreanischer-Zirkel---------------------+\n");
+  printf("You are in %s.\n\n", location);
+  printf("+------CLIfe-----Aritrean-Circle-------------------------+\n");
   printf("|      \\                                        |        |\n");
   printf("|       |                                       |        |\n");
   printf("|        \\_/\\         /^\\__                     |        |\n");

@@ -1,3 +1,5 @@
+//--TRANSLATED 100%--\\
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
@@ -12,7 +14,7 @@ bool exists(const char *fpath) {
 void write2(const char *fpath, const char *message) {
   FILE *f = fopen(fpath, "w");
   if(f==NULL) {
-    printf("Datei konnte nicht gelesen werden!\nDateiname: %s", fpath);
+    printf("File could not be read!\nFilename: %s", fpath);
     exit(1);
   }
   fprintf(f, message);
@@ -21,7 +23,7 @@ void write2(const char *fpath, const char *message) {
 void wrinte2(const char *fpath, int inte) {
   FILE *f = fopen(fpath, "w");
   if(f==NULL) {
-    printf("Datei konnte nicht gelesen werden!\nDateiname: %s", fpath);
+    printf("File could not be read!\nFilename: %s", fpath);
     exit(1);
   }
   fprintf(f, "%d", inte);
@@ -30,7 +32,7 @@ void wrinte2(const char *fpath, int inte) {
 void cat2(const char *fpath, const char *message) {
   FILE *f = fopen(fpath, "a");
   if(f==NULL) {
-    printf("Datei konnte nicht gelesen werden!\nDateiname: %s", fpath);
+    printf("File could not be read!\nFilename: %s", fpath);
     exit(1);
   }
   fprintf(f, message);

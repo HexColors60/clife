@@ -1,9 +1,11 @@
+//--TRANSLATED 100%--\\
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-char *landWechseln(char *l, char *p) {
-  printf("In welches Land möchtest du?\n");
-  printf("Du kannst von %s nach:\n", p);
+char *travelCountry(char *l, char *p) {
+  printf("What country do you want to travel to?\n");
+  printf("From %s you can go to:\n", p);
   if(!strcmp(p, "Aritrea")) printf("Liberium\n");
   if(!strcmp(p, "Liberium")) printf("Aritrea\n");
   char *buf = (char*)malloc(128 * sizeof(char));
@@ -12,11 +14,11 @@ char *landWechseln(char *l, char *p) {
   if(!strcmp(p, "Aritrea")) {
     if(!strcmp(buf, "Liberium")) {
       if(!strcmp(l,"Metron")) {
-        printf("Du reist nach %s.\n", buf);
+        printf("You travel to %s.\n", buf);
         p = buf;
         return buf;
       } else {
-        printf("Metron ist der einzige Weg nach Liberium.\n");
+        printf("Metron is the only way to Liberium.\n");
         free(buf);
         return "nowhere";
       }
@@ -25,32 +27,32 @@ char *landWechseln(char *l, char *p) {
   if(!strcmp(p, "Liberium")) {
     if(!strcmp(buf, "Aritrea")) {
       if(!strcmp(l, "Orar")) {
-        printf("Du reist nach %s.\n", buf);
+        printf("You travel to %s.\n", buf);
         p = buf;
         return buf;
       } else {
-        printf("Orar ist der einzige Weg nach Aritrea.\n");
+        printf("Orar is the only way to Aritrea.\n");
         free(buf);
         return "nowhere";
       }
     }
   }
-  else { printf("Das Land ist nicht bekannt oder betretbar!\n");
+  else { printf("This is No Man's Land!\n");
   free(buf);
   return "nowhere"; }
 free(buf);
 }
-char *ganz_reisen(char *l, char *p, int Motivation, int Geld) {
-  if(Geld<30) {
-    printf("Du kannst den Zoll nicht bezahlen, also nicht reisen!\n");
+char *ganz_reisen(char *l, char *p, int Motivation, int Gold) {
+  if(Gold<30) {
+    printf("You can't pay the toll, so you can't travel!\n");
     return l;
   }
-  p = landWechseln(l, p);
-  if(!strcmp(p, "Liberium")) l = "Orar"; // Es wird immer in die Hauptstadt gereist.
+  p = travelCountry(l, p);
+  if(!strcmp(p, "Liberium")) l = "Orar"; // Player always travels to capital.
   if(!strcmp(p, "Aritrea")) l = "Majkius";
-  if(!strcmp(p, "nowhere")) l = l; // Man geht quasi nirgendswo hin, sondern bleibt, wo man ist.
+  if(!strcmp(p, "nowhere")) l = l; // Player stays where he is.
   if(strcmp(p,"nowhere")) {
-    printf("Du bist vom Reisen ganz unmotiviert. Am besten gönnst du dir erstmal eine Pause.\n");
+    printf("You are extremely unmotivated from travelling. You should sleep.\n");
     if(Motivation>=35) Motivation = 35;
     wrinte2(MOTI, Motivation);
   }

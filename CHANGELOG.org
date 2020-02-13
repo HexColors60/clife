@@ -1,24 +1,30 @@
 #+TITLE: Changelog
 #+AUTHOR: cheeesy
-#+DATE: 2018-2019
+#+DATE: 2018-2020
 
 ** November 2018 - November 2019:
 *** 4. November 2018 - 22. November 2019
-- Grundlegende Spielmechanismen hinzugefügt (Geld, Motivation, Position, ...)
+- Main game mechanisms added (Money, Motivation, Position, ...)
 *** 23. November 2019
-- Repositorium gegründet.
-** Dezember 2019:
-*** 3. Dezember 2019
-- TODO: Benutzung von Items ist kaputt
-- Reisen kostet jetzt 30 Goldstücke Zoll
-*** 4. Dezember 2019
-- env.h erstellt
+- Repository created.
+** December 2019
+*** 3. December 2019
+- TODO: Using of items is broken
+- Travelling between countries now costs 30 gold pieces.
+*** 4. December 2019
+- env.h created
 - lookAround()
-- arch/locs/ wurde erneuert
-- Kommentare am Anfang von main.c übersetzt
-*** 6. Dezember 2019
-- Neues Arbeitsminispiel hinzugefügt.
-- EchoThing() nutzt nun eigene, größere Variable.
-** Februar 2020:
-*** 10. Februar 2020:
-- '0' durch '.gitkeep' ersetzt
+- Revamped arch/locs/
+- Translated comments at the beginning of main.c
+*** 6. December 2019
+- New working minigame added.
+- EchoThing() now uses own, bigger variable.
+** February 2020
+*** 10. February 2020
+- replaced '0' with '.gitkeep'
+*** 13. February 2020
+- Updated copyright notice in main.c
+- Whole Translation of CLIfe started
+- You can now only work if your current location has work places.
+- Also, obviously, you don't travel for work anymore.
+- You can now beg if you happen to run out of money in a city without jobs.

@@ -1,9 +1,11 @@
+//--TRANSLATED 100%--\\
+
 #include<stdio.h>
 #include<stdlib.h>
 char *read(const char *fpath) {
   FILE *f;
   f = fopen(fpath, "r");
-  if(f==NULL) { printf("ERROR: Datei %s existiert nicht!\n", fpath);
+  if(f==NULL) { printf("ERROR: File %s doesn't exist!\n", fpath);
     return ""; }
   const size_t line_size = 300;
   char *buf;
@@ -14,7 +16,7 @@ char *read(const char *fpath) {
 char *pread(const char *fpath) {
   FILE *f;
   f = fopen(fpath, "r");
-  if(f==NULL) { printf("Datei %s existiert nicht!\nMöglicherweise musst du die Groß-Kleinschreibung umdrehen.\n", fpath);
+  if(f==NULL) { printf("ERROR: File %s doesn't exist!\n", fpath);
     return ""; }
   const size_t line_size = 300;
   char *buf;

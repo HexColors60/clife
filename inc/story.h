@@ -1,3 +1,5 @@
+//--TRANSLATED 100%--\\
+
 #include<stdio.h>
 
 char *sent;
@@ -13,32 +15,32 @@ char getSuffix(char rolle[]) {
 
 void setName() {
   char nom[100];
-  printf("Wie nennt man dich?\nIch bin ");
+  printf("How are you called?\nI am ");
   scanf("%s", &nom);
-  printf("%s\n\nEin guter Name für eine gute Persönlichkeit.\n", nom);
+  printf("%s\n\nA fitting name for a personality like yours.\n", nom);
   write2(NAME, nom);
 }
 void setRole() {
   char *nom = (char*)malloc(101*sizeof(char));
   char role[50];
   strcpy(nom,read(NAME));
-  printf("Von welcher Rasse bist du?\n\nIch bin %s der ", nom);
+  printf("Of what race are you?\n\nI am %s, the ", nom);
   free(nom);
   scanf("%s", &role);
-  printf("Ein %s also... Aha.\n", role);
+  printf("So you are a %s... I see.\n", role);
   printf("┌");
   for(int i=0;i<71;i++) {
     printf("─");
   }
   printf("┐\n");
-  printf("│                                                                       │░\r  Nun, %s%s... Ich sehe eine glorreiche Zukunft für dich.\r│\n", role, formulateSentence(getSuffix(role)));
-  printf("│                                                                       │░\r  Du wirst eine lange Reise gehen, und viele Schmerzen ertragen müssen.\r│\n");
-  printf("│                                                                       │░\r  Aber es ist wichtig, dass du mir das Geheimnis von Ko'hdor bringst.\r│\n");
+  printf("│                                                                       │░\r Well, %s%s... I can see a glorious Fufute for you.      \r│\n", role, formulateSentence(getSuffix(role)));
+  printf("│                                                                       │░\r  You will go a long road, and experience certain pain.                \r│\n");
   printf("│                                                                       │░\n");
-  printf("│                                                                       │░\r  Niemand darf es in die Hände bekommen.\r│\n");
+  printf("│                                                                       │░\r But it is important that you give me the secret of Ko'hdor.        \r│\n");
+  printf("│                                                                       │░\r  Nobody may ever receive it.           \r│\n");
   printf("│                                                                       │░\n");
-  printf("│                                                                       │░\r  Du fragst dich, was das Geheimnis ist? Nun ja...\r│\n");
-  printf("│                                                                       │░\r  Am besten wäre es, wenn du es nicht weißt, bis es nötig ist.\r│\n");
+  printf("│                                                                       │░\r You ask what it is? Well...                     \r│\n");
+  printf("│                                                                       │░\r  Some secrets are best kept so.                              \r│\n");
   printf("└");
   for(int i=0;i<71;i++) {
     printf("─");
@@ -50,12 +52,12 @@ void setRole() {
   printf("\n\n");
   write2(ROLE, role);
 }
-void setGeld() {
-  int sgeld = 0; // Startgeld
-  wrinte2(GELD, sgeld);
+void setGold() {
+  int sgold = 0; // Player starts with 0 gold coins
+  wrinte2(GOLD, sgold);
 }
 void setPos() {
-  write2(POSI, "Majkius"); // Man startet in Majkius
+  write2(POSI, "Majkius"); // Majkius is the starting city.
 }
 void setMot() {
   wrinte2(MOTI, 100);
@@ -79,11 +81,15 @@ const char *title4 = "+-+-+-+-+-+\n\
 |C|L|I|f|e|\n\
 +-+-+-+-+-+\n";
 
-const char *title5 = "/siː laɪf/\n";
+const char *title5 = "+---+---+---+---+---+\n\
+|067|076|073|102|101|\n\
++---+---+---+---+---+\n";
+
+const char *title6 = "/siː laɪf/\n";
 
 void begSequence() {
   srand(time(NULL));
-  int ranint = rand() % 5 + 1;
+  int ranint = rand() % 6 + 1;
   switch(ranint) {
   case 1:
     printf("%s\n", title1);
@@ -100,10 +106,13 @@ void begSequence() {
   case 5:
     printf("%s\n", title5);
     break;
+  case 6:
+    printf("%s\n", title6);
+    break;
   }
   if(exists(NAME)==false) setName();
   if(exists(ROLE)==false) setRole();
-  if(exists(GELD)==false) setGeld();
+  if(exists(GOLD)==false) setGold();
   if(exists(POSI)==false) setPos();
   if(exists(MOTI)==false) setMot();
 }
