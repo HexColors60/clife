@@ -28,3 +28,6 @@
 - Du kannst nun nur noch arbeiten, falls deine aktuelle Position Arbeitsplätze hat.
 - Ebenfalls reist du nun natürlich nicht mehr für Arbeit.
 - Du kannst nun um Geld betteln, solltest du in einer Stadt ohne Arbeitsplätze ohne Geld herumlaufen.
+*** 14. Februar 2020:
+- Dateinamen geändert; um alte Spielstände zu migrieren, nutze ~migrate.sh~
+- Spiel stürzt nicht mehr ab, wenn der Spieler in das selbe Land reist, in dem er ist.

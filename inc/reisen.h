@@ -22,6 +22,12 @@ char *travelCountry(char *l, char *p) {
         free(buf);
         return "nowhere";
       }
+    } else {
+      if(!strcmp(buf, p)) {
+	printf("You don't move an inch.\n");
+	free(buf);
+	return "nowhere";
+      }
     }
   }
   if(!strcmp(p, "Liberium")) {
@@ -35,6 +41,12 @@ char *travelCountry(char *l, char *p) {
         free(buf);
         return "nowhere";
       }
+    } else {
+      if(!strcmp(buf, p)) {
+	printf("You don't move an inch.\n");
+	free(buf);
+	return "nowhere";
+      }
     }
   }
   else { printf("This is No Man's Land!\n");
@@ -42,6 +54,7 @@ char *travelCountry(char *l, char *p) {
   return "nowhere"; }
 free(buf);
 }
+
 char *ganz_reisen(char *l, char *p, int Motivation, int Gold) {
   if(Gold<30) {
     printf("You can't pay the toll, so you can't travel!\n");

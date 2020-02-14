@@ -16,8 +16,8 @@ You should have received a copy of the GNU General Public License
 along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
 #define NAME "arch/svf/nom.rtf" // Name
-#define ROLE "arch/svf/dab.rtf" // Role
-#define GOLD "arch/svf/gel.rtf" // Money
+#define ROLE "arch/svf/rol.rtf" // Role
+#define GOLD "arch/svf/gol.rtf" // Money
 #define POSI "arch/svf/loc.rtf" // Player's position
 #define MOTI "arch/svf/mot.rtf" // Motivation
 #define MANU "arch/man/" // Help files
@@ -182,8 +182,8 @@ int main(int argc, char *argv[]) {
     if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
 
     // DEBUG TOOLS
-    if(!strcmp(input,"umsehen")) lookAround(loc, ch);
-    if(!strcmp(input,"de")) inspectDialog(loc, ch);
+    if(!strcmp(input, "umsehen")) lookAround(loc, ch);
+    if(!strcmp(input, "de")) inspectDialog(loc, ch);
     if(!strcmp(input, "printf")) EchoThing();
   }
 }

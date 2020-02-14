@@ -28,3 +28,6 @@
 - You can now only work if your current location has work places.
 - Also, obviously, you don't travel for work anymore.
 - You can now beg if you happen to run out of money in a city without jobs.
+*** 14. February 2020
+- Changed file names; to migrate old saves, use ~migrate.sh~.
+- Game no longer crashes when travelling to the same country you are in.

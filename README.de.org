@@ -6,6 +6,10 @@
 CLIfe ist der Versuch eines Textabenteuers / RPG-Spieles in C :)
 
 Eine feste Story ist bis jetzt noch nicht vorhanden, wird aber später noch geschehen.
+** CLIfe in Deutsch
+CLIfe wird nicht mehr in Deutsch weiterentwickelt.
+An einem unbestimmten Zeitpunkt werden auch die deutschen Dokumente (~README.de.org~ und ~CHANGELOG.de.org~) gelöscht.
+Ob es einen Branch mit der deutschen Übersetzung geben wird, ist ungewiss.
 ** Status Quo
 15% der erhofften Funktionen sind implementiert.
 20% der erhofften Funktionen, die implementiert sind, entsprechen meinen Anforderungen.
