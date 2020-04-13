@@ -3,6 +3,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+
+int elaMotivatio(int mot) {
+  static int elaMoti;
+  if(mot!=101) { printf("Set Motivation to %d!\n", mot); elaMoti = mot; } // Calling with mot = 101, writing with anything else
+  return elaMoti;
+}
+
 char *travelCountry(char *l, char *p) {
   printf("What country do you want to travel to?\n");
   printf("From %s you can go to:\n", p);
@@ -66,8 +73,11 @@ char *ganz_reisen(char *l, char *p, int Motivation, int Gold) {
   if(!strcmp(p, "nowhere")) l = l; // Player stays where he is.
   if(strcmp(p,"nowhere")) {
     printf("You are extremely unmotivated from travelling. You should sleep.\n");
-    if(Motivation>=35) Motivation = 35;
-    wrinte2(MOTI, Motivation);
+    Motivation = 35;
+    /* if(Motivation>=35) Motivation = 35; */
+    printf("Trying to set Motivation..\n");
+    elaMotivatio(Motivation);
+    /* wrinte2(MOTI, Motivation); */
   }
   return l;
 }

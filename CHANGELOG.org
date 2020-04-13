@@ -31,3 +31,14 @@
 *** 14. February 2020
 - Changed file names; to migrate old saves, use ~migrate.sh~.
 - Game no longer crashes when travelling to the same country you are in.
+** March 2020
+*** 12. March 2020
+- Fixed typos (Line 65 -> src/main.c)
+- Replaced writing of motivation with a static int (Line 7-11 & Line 79 ->
+  inc/reisen.h)
+- Replaced reading of motivation with reading a static int (Line 176 -> src/main.c)
+- Replaced switch construction with if construction (Line 22 & Line 46 -> inc/arb.h)
+*** 13. March 2020
+- Ported Building system from files to struct to crack down on unnecessary
+  hard drive read/write action ( new file "inc/buildings.h", rewrite inc/env.h)
+- Removed unnecessary hard drive read/write code in main code ( Line 206-216 & Line 125 -> src/main.c)
