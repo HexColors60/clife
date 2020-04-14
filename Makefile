@@ -1,5 +1,5 @@
      all: src/main.c
-	gcc -g -o bin/clife src/main.c
+	gcc -g -o bin/clife src/main.c -lncurses
 
      clean:
 	rm bin/clife

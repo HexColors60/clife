@@ -77,7 +77,7 @@ void benAuswahl(char *inventar) {
   strtok(bencp,"\n");
   if(!strstr(inventar,bencp)) { printf("Du besitzt das Objekt nicht!\n");
     return; }
-  omot = atoi(read(MOTI));
+  omot = atoi(cL_read(MOTI));
   free(bencp);
   benutzen(inventar, bencp, omot);
   // free(neuinv);

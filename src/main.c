@@ -28,27 +28,28 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include<stdbool.h>
 #include<signal.h>
 #include<time.h>
+#include<ncurses.h>
 #include "../inc/money.h" // Money Management
 #include "../inc/read.h" // File reading
 #include "../inc/file.h" // exists(), File writing
-#include "../inc/story.h" // Storytelling on first Startup and splash screen
+#include "../inc/story.h" // Storytelling on first Startup, and splash screen
 #include "../inc/map.h" // In-Game Map
 #include "../inc/travel.h" // Travelling inbetween Countries
 #include "../inc/arb.h" // Working / earning Money
 #include "../inc/env.h" // Enviroment
 #include "../inc/o.h" // Other functions
 #include "../inc/amp.h" // ASCII (Semigraphical) Map
-#include "../inc/building.h" // Building structure
+#include "../inc/structs.h" // Building structure
 //#include "../inc/gvw.h" // Shopping // defunct
 //#include "../inc/ben.h" // Using items // defunct
-bool file_;
+bool file_; // <-- What is this even used for?
 int gold;
 int motivation;
-char input[10];
-char *name;
-char *role;
-char *loc;
-char *ch;
+char input[10]; // Command input
+char *name; // User name
+char *role; // User Role <-- May be removed or altered in the future
+char *loc; // Location
+char *ch; // Country
 char *helpath;
 const char *ver = "clife 2020.04";
 const char *help = "clife\n\
@@ -77,7 +78,7 @@ const char *comms = "                             CLIfe commands\n\
 | q, quit, tschüs, tschüß, servus: | Quit the game.                      |\n\
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+";
 const char *unMotivated = "+-+-ATTENTION-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n\
-You are unmovitvated!\n\
+You are unmotivated!\n\
 If you are unmotivated you will not be able\n\
 to do most things until you sleep!\n\
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n";
@@ -86,6 +87,7 @@ void moneyc();
 int cexit();
 void EchoThing();
 void detStruct(char *location, char *country, int la);
+/* int getPerson(); */
 
 int main(int argc, char *argv[]) {
   if(argv[1]!=NULL) {
@@ -97,7 +99,7 @@ int main(int argc, char *argv[]) {
         strcat(helpath, argv[2]);
         strcat(helpath, ".rtf");
         if(exists(helpath)==0) return 0;
-        else pread(helpath);
+        else cL_pread(helpath);
         free(helpath);
         printf("\n");
         return 0; }
@@ -108,12 +110,17 @@ int main(int argc, char *argv[]) {
     else { printf("%s\n", help);
       return 0; }
   }
+  //  getPerson();
+  /* return 0; // Return */
   begSequence();
-  name = read(NAME);
-  role = read(ROLE);
-  gold = atoi(read(GOLD));
-  loc = read(POSI);
-  motivation = atoi(read(MOTI));
+  name = cL_read(NAME);
+  role = cL_read(ROLE);
+  gold = atoi(cL_read(GOLD));
+  loc = cL_read(POSI);
+  motivation = atoi(cL_read(MOTI));  
+  old.gold = gold;
+  old.loc = loc;
+  old.mot = motivation;
   name[strcspn(name, "\n")] = 0;   // remove \n
   role[strcspn(role, "\n")] = 0; // remove \n
   printf("You are %s, the %s.\n", name, role);
@@ -128,18 +135,17 @@ int main(int argc, char *argv[]) {
     if(motivation<=0) { printf("%s", unMotivated);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
-    // If motivation is too high or too low, change it to the maximum/minimum.
     if(!strcmp(input,"help") | !strcmp(input,"h")) printf("%s\n", comms);
     if(!strcmp(input,"gold") | !strcmp(input,"g") | !strcmp(input,"money")) moneyc();
     if(!strcmp(input,"w") | !strcmp(input,"work") | !strcmp(input,"a")) { if(motivation<=0) printf("You aren't motivated enough to work.\n");
       else { gold = work(gold, loc);
-	printf("Your motivation has been lowered.\n");
+  	printf("Your motivation has been lowered.\n");
         motivation = motivation - 10; }
     }
     if(!strcmp(input,"beg") | !strcmp(input,"b")) { if(motivation<=0) printf("You are not motivated enough to beg.\n");
       else { gold = beg(gold);
-	printf("Your motivation has been lowered.\n");
-	motivation = motivation - 10; }
+  	printf("Your motivation has been lowered.\n");
+  	motivation = motivation - 10; }
     }
     if(!strcmp(input,"wai")) printMap(loc, ch);
     if(!strcmp(input,"ch")) printf("%s\n", ch);
@@ -149,7 +155,7 @@ int main(int argc, char *argv[]) {
     
     if(!strcmp(input,"r") | !strcmp(input,"travel")) {
       loc = ganz_reisen(loc, ch, motivation, gold); // Travel from gateway city to capital of country.
-      //motivation = atoi(read(MOTI)); // Read motivation after travel
+      //motivation = atoi(cL_read(MOTI)); // Read motivation after travel
       printf("Reading Motivation!\n");
       motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
       if(strcmp(ch,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
@@ -179,9 +185,9 @@ int cexit() {
   // Name and Role don't change, and are therefore only written if the file is lost - for whatever reason.
   if(exists(NAME)==false) write2(NAME, name); 
   if(exists(ROLE)==false) write2(ROLE, role);
-  wrinte2(GOLD, gold); // The amount of gold is always saved.
-  write2(POSI, loc); // The location is always saved.
-  wrinte2(MOTI, motivation); // The motivation is always saved.
+  if(old.gold!=gold) wrinte2(GOLD, gold); // The amount of gold is always saved, unless it did not change.
+  if(strcmp(old.loc,loc)) write2(POSI, loc); // The location is always saved, unless it did not change.
+  if(old.mot!=motivation) wrinte2(MOTI, motivation); // The motivation is always saved, unless it did not change.
   return 0;
 }
 
@@ -210,3 +216,32 @@ void detStruct(char *location, char *country, int la) { // la = lookAround?
   }
   return;
 }
+
+/* int getPerson() { */
+/*   char inputNom[64]; // The string the name is saved in */
+/*   int rows, cols; // This is actually unnecessary... Oops! */
+
+/*   printf("Going into ncurses...\n"); */
+/*   initscr(); // Begin ncurses */
+/*   cbreak(); // Allow ncurses to be exited with CTRL+C */
+
+/*   int yMax, xMax; // Height and width (rows and columns) of Terminal */
+/*   getmaxyx(stdscr, yMax, xMax); // Get the height and width */
+
+/*   box(stdscr, 0, 0); // Make a fancy box on the terminal */
+/*   refresh(); // Make the box appear */
+
+/*   move(1, 1); // Move to Position y:1 x:1 in the terminal */
+/*   printw("Please enter your name.\n"); */
+/*   move(2, 2); // Move to position y:2 x:1 in the terminal, to enter string */
+
+/*   /\* fgets(inputNom, 64, stdin); //  <-- this is where shit hits the fan, supposed to get string input to inputNom *\/ */
+/*   getstr(inputNom); */
+
+/*   endwin(); // Leave ncurses */
+/*   printf("Going out of ncurses.\n"); */
+
+/*   /\* printf("You entered: %s\n", inputNom); *\/ */
+
+/*   return 0; */
+/* } */

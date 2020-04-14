@@ -42,7 +42,7 @@ int inspect(char b[], char *location, char *country, char *buildings[], char key
   /* strcpy(bupath, envpath); */
   /* strcat(bupath, "/buildings.rtf"); */
   /* if(exists(bupath)==false) strcpy(bupath, envpath); */
-  /* else builds = read(bupath); // Print all buildings in Country/City */
+  /* else builds = cL_read(bupath); // Print all buildings in Country/City */
   /* free(bupath); */
   
   /* if(strstr(builds, build)) { */
@@ -81,7 +81,7 @@ void lookAround(char *location, char *country, char *b[]) { // Len of b is alway
   /* strcpy(bupath, envpath); */
   /* strcat(bupath, "/buildings.rtf"); */
   /* if(exists(bupath)==false) strcpy(bupath, envpath); */
-  /* else pread(bupath); // Print all buildings in Country/City */
+  /* else cL_pread(bupath); // Print all buildings in Country/City */
   /* free(bupath); */
   /* free(envpath); */
   /* return; */

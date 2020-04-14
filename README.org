@@ -5,7 +5,11 @@
 ** What is CLIfe?
 CLIfe is my try on a text adventure / RPG-game, written in C :)
 
-A real story is not implemented yet, because the game is still in planning stage.
+A real story is not implemented yet, because the game is still in planning
+stage.
+
+As of currently the code seems to be limited to GCC, I tried it on Clang
+(OpenBSD) and it did not work.
 ** Status Quo
 15% of necessary functions are implemented.
 I am satisfied with 20% of implemented functions.

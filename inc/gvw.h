@@ -12,7 +12,7 @@ char *prodName;
 
 void produktListe() {
   printf("Produktliste:\n");
-  pread(PRD);
+  cL_pread(PRD);
   printf("\n-------------\n");
 }
 int kaufen(char *inventar, char *produkt, int geldbeutel) {
@@ -22,7 +22,7 @@ int kaufen(char *inventar, char *produkt, int geldbeutel) {
   strcat(ppath, ".rtf");
   int preis;
   char *buf2 = (char*)malloc(128 * sizeof(char));
-  if(exists(ppath)==true) buf2 = read(ppath);
+  if(exists(ppath)==true) buf2 = cL_read(ppath);
   else { printf("Das Produkt existiert nicht!\nKauf abgebrochen.");
     return 51; }
   free(ppath);
@@ -77,7 +77,7 @@ int Einkaufen(char *inventar, int geldbeutel) {
       }
       else printf("Du hast dieses Objekt schon!\n");
     }
-    geldbeutel = atoi(read(GELD));
+    geldbeutel = atoi(cL_read(GELD));
     free(buf);
     free(xd);
     return geldbeutel;
