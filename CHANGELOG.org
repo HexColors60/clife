@@ -47,4 +47,6 @@
 - Revamped cexit() -> It only saves gold, loc and motivation when it has
   changed from when the game was first loaded (Line 185-187 -> src/main.c)
 - Added ncurses-based Name and Role selector (Line 131-263 -> src/main.c)
+- Renamed read and pread to cL_read and cL_pread to avoid conflicts with
+  ncurses (inc/read.h)
 - Revamped story.h
