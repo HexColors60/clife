@@ -42,14 +42,13 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "../inc/structs.h" // Building structure
 //#include "../inc/gvw.h" // Shopping // defunct
 //#include "../inc/ben.h" // Using items // defunct
-bool file_; // <-- What is this even used for?
 int gold;
 int motivation;
 char input[10]; // Command input
 char *name; // User name
 char *role; // User Role <-- May be removed or altered in the future
 char *loc; // Location
-char *ch; // Country
+char *country; // Country
 char *helpath;
 const char *ver = "clife 2020.04";
 const char *help = "clife\n\
@@ -63,31 +62,30 @@ const char *help = "clife\n\
 \n\
 clife on GitHub: [ https://github.com/cheeesy/clife ]";
 const char *comms = "                             CLIfe commands\n\
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n\
-| h, help:                         | List all commands.                  |\n\
-| g, gold, money:                  | View your current money.            |\n\
-| w, work, a:                      | Earn money.                         |\n\
-| b, beg:                          | Beg for money.                      |\n\
-| wai:                             | Where am I?                         |\n\
-| ch:                              | In which country am I?              |\n\
-| map:                             | Show ASCII-Map.                     |\n\
-| goto:                            | Travel in a country.                |\n\
-| r, travel:                       | Traven from one country to another. |\n\
-| m, motivation:                   | View your current motivation.       |\n\
-| s, sleep:                        | Sleep.                              |\n\
-| q, quit, tschüs, tschüß, servus: | Quit the game.                      |\n\
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+";
-const char *unMotivated = "+-+-ATTENTION-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n\
-You are unmotivated!\n\
-If you are unmotivated you will not be able\n\
-to do most things until you sleep!\n\
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n";
+┌──────────────────────────────────┬─────────────────────────────────────┐\n\
+│ h, help:                         │ List all commands.                  │\n\
+│ g, gold, money:                  │ View your current money.            │\n\
+│ w, work, a:                      │ Earn money.                         │\n\
+│ b, beg:                          │ Beg for money.                      │\n\
+│ wai:                             │ Where am I?                         │\n\
+│ ch:                              │ In which country am I?              │\n\
+│ map:                             │ Show ASCII-Map.                     │\n\
+│ goto:                            │ Travel in a country.                │\n\
+│ r, travel:                       │ Traven from one country to another. │\n\
+│ m, motivation:                   │ View your current motivation.       │\n\
+│ s, sleep:                        │ Sleep.                              │\n\
+│ q, quit, tschüs, tschüß, servus: │ Quit the game.                      │\n\
+└──────────────────────────────────┴─────────────────────────────────────┘";
 
-void moneyc();
+const char *unMotivated = "┌─ATTENTION!───────────────────────────────┐\n\
+│ You are unmotivated!                     │\n\
+│ If you are unmotivated you will not be   │\n\
+│ able to do most things until you sleep!  │\n\
+└──────────────────────────────────────────┘\n";
+
 int cexit();
 void EchoThing();
 void detStruct(char *location, char *country, int la);
-/* int getPerson(); */
 
 int main(int argc, char *argv[]) {
   if(argv[1]!=NULL) {
@@ -112,8 +110,6 @@ int main(int argc, char *argv[]) {
   }
   /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
   /* return 0; */
-  //  getPerson();
-  /* return 0; // Return */
   begSequence();
   name = cL_read(NAME);
   role = cL_read(ROLE);
@@ -126,60 +122,53 @@ int main(int argc, char *argv[]) {
   name[strcspn(name, "\n")] = 0;   // remove \n
   role[strcspn(role, "\n")] = 0; // remove \n
   printf("You are %s, the %s.\n", name, role);
-  moneyc();
+  moneyc(gold);
+  country = getCountry(loc);
+  printMap(loc, country);
   printf("\n");
-  ch = getCountry(loc);
-  printMap(loc, ch);
-  printf("\n");
-  setAll();
+  setAll(); // set all structs
   for(;;) { // Loop until cexit()==0
     normalInput(input);
     if(motivation<=0) { printf("%s", unMotivated);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
     if(!strcmp(input,"help") | !strcmp(input,"h")) printf("%s\n", comms);
-    if(!strcmp(input,"gold") | !strcmp(input,"g") | !strcmp(input,"money")) moneyc();
+    if(!strcmp(input,"gold") | !strcmp(input,"g") | !strcmp(input,"money")) moneyc(gold);
     if(!strcmp(input,"w") | !strcmp(input,"work") | !strcmp(input,"a")) { if(motivation<=0) printf("You aren't motivated enough to work.\n");
       else { gold = work(gold, loc);
   	printf("Your motivation has been lowered.\n");
-        motivation = motivation - 10; }
+        motivation-=10; }
     }
     if(!strcmp(input,"beg") | !strcmp(input,"b")) { if(motivation<=0) printf("You are not motivated enough to beg.\n");
       else { gold = beg(gold);
   	printf("Your motivation has been lowered.\n");
-  	motivation = motivation - 10; }
+  	motivation-=10; }
     }
-    if(!strcmp(input,"wai")) printMap(loc, ch);
-    if(!strcmp(input,"ch")) printf("%s\n", ch);
+    if(!strcmp(input,"wai")) printMap(loc, country);
+    if(!strcmp(input,"ch")) printf("%s\n", country);
     if(!strcmp(input,"map")) printASCIImap(loc);
     if(!strcmp(input,"goto")) { if(motivation<=0) printf("You are not motivated enough!\n");
-      else loc = geheZu(loc, ch); }
+      else loc = geheZu(loc, country); }
     
     if(!strcmp(input,"r") | !strcmp(input,"travel")) {
-      loc = ganz_reisen(loc, ch, motivation, gold); // Travel from gateway city to capital of country.
-      //motivation = atoi(cL_read(MOTI)); // Read motivation after travel
-      printf("Reading Motivation!\n");
+      loc = ganz_reisen(loc, country, motivation, gold); // Travel from gateway city to capital of country.
+      /* printf("Reading Motivation!\n"); */
       motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
-      if(strcmp(ch,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
+      if(strcmp(country,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
         gold = removeMoney(gold, 30); }
-      ch = getCountry(loc); // Also we have to get the country using the city we now have.
+      country = getCountry(loc); // Also we have to get the country using the city we now have.
     }
-    if(!strcmp(input,"motivation") | !strcmp(input,"m")) motivationSehen(motivation);
-    if(!strcmp(input,"sleep") | !strcmp(input,"s")) { if(sleep(motivation)!=3) motivation = motivation + 30;
-      else motivation = motivation - 10; }
+    if(!strcmp(input,"motivation") | !strcmp(input,"m")) seeMotivation(motivation);
+    if(!strcmp(input,"sleep") | !strcmp(input,"s")) { if(sleep(motivation)!=3) motivation = 80;
+      else motivation-=10; }
+      /* else motivation = motivation - 10; } */
     if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
 
-    // DEBUG TOOLS; WILL BE REMOVED SOON
-    /* if(!strcmp(input, "umsehen")) lookAround(loc, ch, Majkius.buildings); */
-    if(!strcmp(input, "umsehen")) detStruct(loc, ch, 1);
-    if(!strcmp(input, "de")) detStruct(loc, ch, 0);
+    // DEBUG TOOLS; WILL BE REMOVED OR BUILT IN SOON
+    if(!strcmp(input, "umsehen")) detStruct(loc, country, 1);
+    if(!strcmp(input, "de")) detStruct(loc, country, 0);
     if(!strcmp(input, "printf")) EchoThing();
   }
-}
-
-void moneyc() {
-  if(gold==0) printf("You don't have any money with you.\n");
-  else printf("You have %d gold coins.\n", gold);
 }
 
 int cexit() {
@@ -187,9 +176,9 @@ int cexit() {
   // Name and Role don't change, and are therefore only written if the file is lost - for whatever reason.
   if(exists(NAME)==false) write2(NAME, name); 
   if(exists(ROLE)==false) write2(ROLE, role);
-  if(old.gold!=gold) wrinte2(GOLD, gold); // The amount of gold is always saved, unless it did not change.
-  if(strcmp(old.loc,loc)) write2(POSI, loc); // The location is always saved, unless it did not change.
-  if(old.mot!=motivation) wrinte2(MOTI, motivation); // The motivation is always saved, unless it did not change.
+  if(old.gold!=gold) wrinte2(GOLD, gold); // The amount of gold, the location and the motivation is always saved, unless it did not change.
+  if(strcmp(old.loc,loc)) write2(POSI, loc);
+  if(old.mot!=motivation) wrinte2(MOTI, motivation);
   return 0;
 }
 
@@ -202,7 +191,7 @@ void EchoThing() {
     echo[strlen(echo)-1] = '\0';
     fflush(stdin);
     printf("%s\n", echo);
-    if(echo[0]=='q') if(echo[1]=='u') if(echo[2]=='i') if(echo[3]=='t') if(echo[4]=='\0') printf("Quitting.\n"); return;
+    if(echo[0]=='q' && echo[1]=='u' && echo[2]=='i' && echo[3]=='t'&& echo[4]=='\0') { printf("Quitting.\n"); return; }
     if(echo[0]=='g') printf("%d\n", gold);
     if(echo[0]=='l') printf("%s\n", loc);
     if(echo[0]=='c') printf("%s\n", getCountry(loc));
@@ -211,14 +200,14 @@ void EchoThing() {
   }
 }
 
-void detStruct(char *location, char *country, int la) { // la = lookAround?
+void detStruct(char *location, char *country, int la) { // la = lookAround? <- determines if the command is lookAround or inspectDialog
   if(!strcmp(country,"Aritrea")) {
     if(!strcmp(location,"Majkius")) if(la==1) lookAround(location, country, Majkius.buildings); else inspectDialog(location, country, Majkius.buildings, Majkius.key);
     if(!strcmp(location,"Nova A")) if(la==1) lookAround(location, country, NovaA.buildings); else inspectDialog(location, country, NovaA.buildings, NovaA.key);
-    if(!strcmp(location,"Metron")) lookAround(location, country, Metron.buildings);
+    if(!strcmp(location,"Metron")) if(la==1) lookAround(location, country, Metron.buildings); else inspectDialog(location, country, Metron.buildings, Metron.key);
   }
   if(!strcmp(country,"Liberium")) {
-    if(!strcmp(location,"Orar")) lookAround(location, country, Orar.buildings);
+    if(!strcmp(location,"Orar")) if(la==1) lookAround(location, country, Orar.buildings); else inspectDialog(location, country, Orar.buildings, Orar.key);
   }
   return;
 }

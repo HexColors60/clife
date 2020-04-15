@@ -51,5 +51,19 @@
   ncurses (inc/read.h)
 - Revamped story.h
 *** 15. March 2020
+- Added cL_readWholeFile() to use with a configuration file reading technique
+  currently being developed.
+- Added ~createsvf.sh~ to create svf.rtf out of other files, until it works
+  well enough until I can put it into the writing function.
 - Created 'dev' branch to move unstable development to.
 - Created "name" entry for every city (inc/structs.h)
+- Fixed printf (Line 205 -> src/main.c)
+- Revamped if statement in printf (Line 205 -> src/main.c)
+- Redesigned border of command screen (called by 'h' or 'help') and
+  unMotivated (called by having less than or 0 motivation) too look more
+  like the general style of the borders. (Line 65-78 -> src/main.c)
+- Changed the regeneration of motivation by sleeping to set it to 80 everytime
+  player sleeps successfully (Line 166 -> src/main.c)
+- Removed motivationNiedriger because it was not used (inc/o.h)
+- Moved moneyc from src/main.c to inc/o.h (Line 178-181 src/main.c --MOVED-->
+  Line 24-27 inc/o.h & Line 127 src/main.c edited for functionality)

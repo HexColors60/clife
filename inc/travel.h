@@ -6,7 +6,7 @@
 
 int elaMotivatio(int mot) {
   static int elaMoti;
-  if(mot!=101) { printf("Set Motivation to %d!\n", mot); elaMoti = mot; } // Calling with mot = 101, writing with anything else
+  if(mot!=101) { /* printf("Set Motivation to %d!\n", mot); */ elaMoti = mot; } // Calling with mot = 101, writing with anything else
   return elaMoti;
 }
 
@@ -73,9 +73,9 @@ char *ganz_reisen(char *l, char *p, int Motivation, int Gold) {
   if(!strcmp(p, "nowhere")) l = l; // Player stays where he is.
   if(strcmp(p,"nowhere")) {
     printf("You are extremely unmotivated from travelling. You should sleep.\n");
-    Motivation = 35;
+    Motivation = 0;
     /* if(Motivation>=35) Motivation = 35; */
-    printf("Trying to set Motivation..\n");
+    /* printf("Trying to set Motivation..\n"); */
     elaMotivatio(Motivation);
     /* wrinte2(MOTI, Motivation); */
   }
