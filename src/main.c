@@ -85,7 +85,7 @@ const char *unMotivated = "┌─ATTENTION!────────────�
 
 int cexit();
 void EchoThing();
-void detStruct(char *location, char *country, int la);
+/* void detStruct(char *location, char *country, int la); */
 
 int main(int argc, char *argv[]) {
   if(argv[1]!=NULL) {
@@ -200,14 +200,3 @@ void EchoThing() {
   }
 }
 
-void detStruct(char *location, char *country, int la) { // la = lookAround? <- determines if the command is lookAround or inspectDialog
-  if(!strcmp(country,"Aritrea")) {
-    if(!strcmp(location,"Majkius")) if(la==1) lookAround(location, country, Majkius.buildings); else inspectDialog(location, country, Majkius.buildings, Majkius.key);
-    if(!strcmp(location,"Nova A")) if(la==1) lookAround(location, country, NovaA.buildings); else inspectDialog(location, country, NovaA.buildings, NovaA.key);
-    if(!strcmp(location,"Metron")) if(la==1) lookAround(location, country, Metron.buildings); else inspectDialog(location, country, Metron.buildings, Metron.key);
-  }
-  if(!strcmp(country,"Liberium")) {
-    if(!strcmp(location,"Orar")) if(la==1) lookAround(location, country, Orar.buildings); else inspectDialog(location, country, Orar.buildings, Orar.key);
-  }
-  return;
-}

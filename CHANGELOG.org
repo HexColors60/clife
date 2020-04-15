@@ -31,18 +31,18 @@
 *** 14. February 2020
 - Changed file names; to migrate old saves, use ~migrate.sh~.
 - Game no longer crashes when travelling to the same country you are in.
-** March 2020
-*** 12. March 2020
+** April 2020
+*** 12. April 2020
 - Fixed typos (Line 65 -> src/main.c)
 - Replaced writing of motivation with a static int (Line 7-11 & Line 79 ->
   inc/reisen.h)
 - Replaced reading of motivation with reading a static int (Line 176 -> src/main.c)
 - Replaced switch construction with if construction (Line 22 & Line 46 -> inc/arb.h)
-*** 13. March 2020
+*** 13. April 2020
 - Ported Building system from files to struct to crack down on unnecessary
   hard drive read/write action ( new file "inc/buildings.h", rewrite inc/env.h)
 - Removed unnecessary hard drive read/write code in main code ( Line 206-216 & Line 125 -> src/main.c)
-*** 14. March 2020
+*** 14. April 2020
 - Renamed 'buildings.h' to 'structs.h'
 - Revamped cexit() -> It only saves gold, loc and motivation when it has
   changed from when the game was first loaded (Line 185-187 -> src/main.c)
@@ -50,7 +50,7 @@
 - Renamed read and pread to cL_read and cL_pread to avoid conflicts with
   ncurses (inc/read.h)
 - Revamped story.h
-*** 15. March 2020
+*** 15. April 2020
 - Added cL_readWholeFile() to use with a configuration file reading technique
   currently being developed.
 - Added ~createsvf.sh~ to create svf.rtf out of other files, until it works
@@ -67,3 +67,5 @@
 - Removed motivationNiedriger because it was not used (inc/o.h)
 - Moved moneyc from src/main.c to inc/o.h (Line 178-181 src/main.c --MOVED-->
   Line 24-27 inc/o.h & Line 127 src/main.c edited for functionality)
+- Moved detStruct to inc/structs.h (Line 203-213 src/main.c --MOVED--> Line
+  26-36 inc/structs.h)

@@ -82,9 +82,9 @@ int arb_addMoney(int algel, int lohn) { // New Gold = Old Gold + Salary
   ngold = algel + lohn;
   return ngold;
 }
-bool arbeitWaehlen(char *loca) {
+bool chooseWork(char *loca) {
   srand(time(NULL));
-  ranint = generate(1, 4);
+  ranint = generate(1, 2);
   if(ranint==1) {
     if(!strcmp(loca,"Majkius")) {
       printf("You get a job offer for the regional newspaper of Majkius.\n");
@@ -95,10 +95,10 @@ bool arbeitWaehlen(char *loca) {
       return workMinigame("calculator");
     }
   }
-  return false;
+  return false; // If the above requirements do not match
 }
 int work(int algold, char *loca) {
-  if(arbeitWaehlen(loca)==true) {
+  if(chooseWork(loca)==true) {
     return arb_addMoney(algold, 50);
   } else {
     printf("There are no Jobs in this city.\n");
