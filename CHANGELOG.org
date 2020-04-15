@@ -50,3 +50,6 @@
 - Renamed read and pread to cL_read and cL_pread to avoid conflicts with
   ncurses (inc/read.h)
 - Revamped story.h
+*** 15. March 2020
+- Created 'dev' branch to move unstable development to.
+- Created "name" entry for every city (inc/structs.h)

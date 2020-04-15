@@ -13,6 +13,14 @@ void setAll() { // Get rid of reading dozens of files and replace it with a nice
   Majkius.name = "Majkius";
   Majkius.buildings[0] = "Church";
   Majkius.key[0] = 'r';
+
+  NovaA.name = "NovaA";
+  NovaA.buildings[0] = "Plateau";
+  NovaA.key[0] = 'a';
+
+  Metron.name = "Metron";
+
+  Orar.name = "Orar";
 }
 
 

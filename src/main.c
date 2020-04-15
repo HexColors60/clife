@@ -110,6 +110,8 @@ int main(int argc, char *argv[]) {
     else { printf("%s\n", help);
       return 0; }
   }
+  /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
+  /* return 0; */
   //  getPerson();
   /* return 0; // Return */
   begSequence();
@@ -193,14 +195,18 @@ int cexit() {
 
 void EchoThing() {
   char echo[128];
-  for(;;) {
+  while(1) {
     putchar('P');
     printf("> ");
     fgets(echo, 128, stdin);
     echo[strlen(echo)-1] = '\0';
     fflush(stdin);
     printf("%s\n", echo);
-    if(echo[0]=='q') if(echo[1]=='u') if(echo[2]=='i') if(echo[3]=='t') if(echo[4]=='\0') return;
+    if(echo[0]=='q') if(echo[1]=='u') if(echo[2]=='i') if(echo[3]=='t') if(echo[4]=='\0') printf("Quitting.\n"); return;
+    if(echo[0]=='g') printf("%d\n", gold);
+    if(echo[0]=='l') printf("%s\n", loc);
+    if(echo[0]=='c') printf("%s\n", getCountry(loc));
+    if(echo[0]=='m') printf("%d\n", motivation);
     else continue;
   }
 }
@@ -208,7 +214,7 @@ void EchoThing() {
 void detStruct(char *location, char *country, int la) { // la = lookAround?
   if(!strcmp(country,"Aritrea")) {
     if(!strcmp(location,"Majkius")) if(la==1) lookAround(location, country, Majkius.buildings); else inspectDialog(location, country, Majkius.buildings, Majkius.key);
-    if(!strcmp(location,"Nova A")) lookAround(location, country, NovaA.buildings);
+    if(!strcmp(location,"Nova A")) if(la==1) lookAround(location, country, NovaA.buildings); else inspectDialog(location, country, NovaA.buildings, NovaA.key);
     if(!strcmp(location,"Metron")) lookAround(location, country, Metron.buildings);
   }
   if(!strcmp(country,"Liberium")) {
@@ -216,32 +222,3 @@ void detStruct(char *location, char *country, int la) { // la = lookAround?
   }
   return;
 }
-
-/* int getPerson() { */
-/*   char inputNom[64]; // The string the name is saved in */
-/*   int rows, cols; // This is actually unnecessary... Oops! */
-
-/*   printf("Going into ncurses...\n"); */
-/*   initscr(); // Begin ncurses */
-/*   cbreak(); // Allow ncurses to be exited with CTRL+C */
-
-/*   int yMax, xMax; // Height and width (rows and columns) of Terminal */
-/*   getmaxyx(stdscr, yMax, xMax); // Get the height and width */
-
-/*   box(stdscr, 0, 0); // Make a fancy box on the terminal */
-/*   refresh(); // Make the box appear */
-
-/*   move(1, 1); // Move to Position y:1 x:1 in the terminal */
-/*   printw("Please enter your name.\n"); */
-/*   move(2, 2); // Move to position y:2 x:1 in the terminal, to enter string */
-
-/*   /\* fgets(inputNom, 64, stdin); //  <-- this is where shit hits the fan, supposed to get string input to inputNom *\/ */
-/*   getstr(inputNom); */
-
-/*   endwin(); // Leave ncurses */
-/*   printf("Going out of ncurses.\n"); */
-
-/*   /\* printf("You entered: %s\n", inputNom); *\/ */
-
-/*   return 0; */
-/* } */
