@@ -113,6 +113,10 @@ int main(int argc, char *argv[]) {
   /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
   /* return 0; */
   begSequence();
+  struct DATA data;
+  proto_readConfig("arch/svf/svf.rtf", &data);
+  /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
+  /* return 0; */
   name = cL_read(NAME);
   role = cL_read(ROLE);
   gold = atoi(cL_read(GOLD));

@@ -1,3 +1,8 @@
+struct DATA {
+  int data1;
+  int blah;
+};
+
 struct o {
   int gold;
   char *loc;
