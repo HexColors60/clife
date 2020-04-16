@@ -16,15 +16,15 @@ int generate(int start, int end) { // Fix the confusing rand() syntax
 
 bool workMinigame(char *type) {
   if(!strcmp(type,"newspaper")) {
-    ranint = generate(1,4);
+    ranint = generate(1,2);
     printf("%d\n", ranint);
 
     if(ranint==1) { 
       int sentence = generate(1,2);
       char cSentence[128]; // Correct sentence
       char wSentence[128]; // Obfuscated Sentence
-      if(sentence==1) { strcpy(cSentence, "ju Majkius, ra kapitlon, traga prazidento uffas"); strcpy(wSentence, "ju Majkius, 'ra käpit'lon, 5traga präzidento üff'as"); }
-      if(sentence==2) { strcpy(cSentence, "tar peitors, re tuvil, san terkol ut ghavul"); strcpy(wSentence, "tar 'pei...tors, re,. tu'vil, sa^n ter^\\'kol ut g'havul_____..-.....ejf3jif3ji"); }
+      if(sentence==1) { strcpy(cSentence, "ju Majkius ra kapitlon traga prazidento uffas"); strcpy(wSentence, "ju Majkius 'ra käpit'lon 5traga präzidento üff'as"); }
+      if(sentence==2) { strcpy(cSentence, "tar peitors re tuvil san terkol ut ghavul"); strcpy(wSentence, "tar 'pei.tors re. tu'vil, sa^n ter^\\'kol ut g'havul_____..-.....ejf3jif3ji"); }
       
       arbst = (char*)malloc(129 * sizeof(char));
       printf("\nOh no! A worker hasn't done his job right and left numbers and weird characters into the sentence!\nCan you correct this Aritrean sentence?\n\n");
@@ -54,7 +54,7 @@ bool workMinigame(char *type) {
       if(strcmp(arbst,"ghrat tismul prazidenton arhitreon hjutals")) {
 	printf("trejeku supralent u tangjha arhitreon utuls pulk-effers junae! (Dein Aritreanisch muss besser werden!\n");
 	free(arbst);
-	return false; // Kein Gold verdient
+	return false; // No money earned
       } else {
 	printf("You get a small salary of 50 gold coins for your work.\n");
 	free(arbst);

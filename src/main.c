@@ -44,12 +44,13 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 //#include "../inc/ben.h" // Using items // defunct
 int gold;
 int motivation;
-char input[10]; // Command input
-char *name; // User name
-char *role; // User Role <-- May be removed or altered in the future
-char *loc; // Location
-char *country; // Country
-char *helpath;
+char action = 0;   // See inc/env.h:emotion() for more details.
+char input[32];    // Command input
+char *name;        // User name
+char *role;        // User Role <-- May be removed or altered in the future.
+char *loc;         // Location
+char *country;     // Country
+char *helpath;     // The path of the help pages <-- May be removed or altered in the future.
 const char *ver = "clife 2020.04";
 const char *help = "clife\n\
 \n\
@@ -71,6 +72,7 @@ const char *comms = "                             CLIfe commands\n\
 │ ch:                              │ In which country am I?              │\n\
 │ map:                             │ Show ASCII-Map.                     │\n\
 │ goto:                            │ Travel in a country.                │\n\
+│ e:                               │ Use an emotion.                     │\n\
 │ r, travel:                       │ Traven from one country to another. │\n\
 │ m, motivation:                   │ View your current motivation.       │\n\
 │ s, sleep:                        │ Sleep.                              │\n\
@@ -115,7 +117,7 @@ int main(int argc, char *argv[]) {
   role = cL_read(ROLE);
   gold = atoi(cL_read(GOLD));
   loc = cL_read(POSI);
-  motivation = atoi(cL_read(MOTI));  
+  motivation = atoi(cL_read(MOTI));
   old.gold = gold;
   old.loc = loc;
   old.mot = motivation;
@@ -129,45 +131,60 @@ int main(int argc, char *argv[]) {
   setAll(); // set all structs
   for(;;) { // Loop until cexit()==0
     normalInput(input);
+
+    action = checkForReaction(action);
+
     if(motivation<=0) { printf("%s", unMotivated);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
-    if(!strcmp(input,"help") | !strcmp(input,"h")) printf("%s\n", comms);
-    if(!strcmp(input,"gold") | !strcmp(input,"g") | !strcmp(input,"money")) moneyc(gold);
-    if(!strcmp(input,"w") | !strcmp(input,"work") | !strcmp(input,"a")) { if(motivation<=0) printf("You aren't motivated enough to work.\n");
+    
+    if(!strcmp(input,";help") | !strcmp(input,";h")) printf("%s\n", comms);
+
+    if(!strcmp(input,";gold") | !strcmp(input,";g") | !strcmp(input,";money")) moneyc(gold);
+
+    if(!strcmp(input,";w") | !strcmp(input,";work") | !strcmp(input,";a")) { if(motivation<=0) printf("You aren't motivated enough to work.\n");
       else { gold = work(gold, loc);
-  	printf("Your motivation has been lowered.\n");
+        printf("Your motivation has been lowered.\n");
         motivation-=10; }
     }
-    if(!strcmp(input,"beg") | !strcmp(input,"b")) { if(motivation<=0) printf("You are not motivated enough to beg.\n");
+
+    if(!strcmp(input,";beg") | !strcmp(input,";b")) { if(motivation<=0) printf("You are not motivated enough to beg.\n");
       else { gold = beg(gold);
-  	printf("Your motivation has been lowered.\n");
-  	motivation-=10; }
+        printf("Your motivation has been lowered.\n");
+        motivation-=10; }
     }
-    if(!strcmp(input,"wai")) printMap(loc, country);
-    if(!strcmp(input,"ch")) printf("%s\n", country);
-    if(!strcmp(input,"map")) printASCIImap(loc);
-    if(!strcmp(input,"goto")) { if(motivation<=0) printf("You are not motivated enough!\n");
+
+    if(!strcmp(input,";wai")) printMap(loc, country);
+    
+    if(!strcmp(input,";ch")) printf("%s\n", country);
+    
+    if(!strcmp(input,";map")) printASCIImap(loc);
+    
+    if(!strcmp(input,";goto")) { if(motivation<=0) printf("You are not motivated enough!\n");
       else loc = geheZu(loc, country); }
     
-    if(!strcmp(input,"r") | !strcmp(input,"travel")) {
+    if(strstr(input,";e ")!=NULL) { action = emotion(input, action); }
+    
+    if(!strcmp(input,";r") | !strcmp(input,";travel")) {
       loc = ganz_reisen(loc, country, motivation, gold); // Travel from gateway city to capital of country.
-      /* printf("Reading Motivation!\n"); */
       motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
       if(strcmp(country,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
         gold = removeMoney(gold, 30); }
       country = getCountry(loc); // Also we have to get the country using the city we now have.
     }
-    if(!strcmp(input,"motivation") | !strcmp(input,"m")) seeMotivation(motivation);
-    if(!strcmp(input,"sleep") | !strcmp(input,"s")) { if(sleep(motivation)!=3) motivation = 80;
+    
+    if(!strcmp(input,";motivation") | !strcmp(input,";m")) seeMotivation(motivation);
+
+    if(!strcmp(input,";sleep") | !strcmp(input,";s")) { if(sleep(motivation)!=3) motivation = 80;
       else motivation-=10; }
       /* else motivation = motivation - 10; } */
-    if(!strcmp(input,"servus") | !strcmp(input,"tschüß") | !strcmp(input,"tschüs") | !strcmp(input, "quit") | !strcmp(input,"q")) if(cexit()==0) return 0;
+
+    if(!strcmp(input,";servus") | !strcmp(input,";tschüß") | !strcmp(input,";tschüs") | !strcmp(input,";quit") | !strcmp(input,";q")) if(cexit()==0) return 0;
 
     // DEBUG TOOLS; WILL BE REMOVED OR BUILT IN SOON
-    if(!strcmp(input, "umsehen")) detStruct(loc, country, 1);
-    if(!strcmp(input, "de")) detStruct(loc, country, 0);
-    if(!strcmp(input, "printf")) EchoThing();
+    if(!strcmp(input, ";umsehen")) detStruct(loc, country, 1);
+    if(!strcmp(input, ";de")) detStruct(loc, country, 0);
+    if(!strcmp(input, ";printf")) EchoThing();
   }
 }
 

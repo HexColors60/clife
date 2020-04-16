@@ -95,3 +95,24 @@ void inspectDialog(char *location, char *country, char *buildings[], char key[])
   inspect(build, location, country, buildings, key);
   return;
 }
+
+char checkForReaction(char action) {
+  /* printf("Checking for reaction.\n"); */
+  if(action==0) return 0;
+  if(action=='l') printf("A passerby is giving you a weird stare as you stop laughing.\n");
+  return 0;
+}
+
+char emotion(char input[], char action) {
+  if(strstr(input," laugh")!=NULL) { // ;e laugh
+    printf("You begin laughing maniacally.\n");
+    action = 'l'; // Keymap may be changed in the future
+  }
+  return action;
+}
+
+/**
+ * KEYMAP
+ *
+ * 'l' = laughing action
+ **/

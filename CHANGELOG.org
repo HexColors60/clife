@@ -69,3 +69,13 @@
   Line 24-27 inc/o.h & Line 127 src/main.c edited for functionality)
 - Moved detStruct to inc/structs.h (Line 203-213 src/main.c --MOVED--> Line
   26-36 inc/structs.h)
+*** 16. April 2020
+- Expanded normalInput() to add a semicolon to every input command, in order
+  to make the new command ;e work. (normalInput() -> inc/o.h)
+- Added ;e command (emotion() -> inc/env.h)
+- Added checkForReaction command (checkForReaction() -> inc/env.h)
+- Improved readability in for(;;) loop in src/main.c
+- Fixed a bug in arb.h:workMinigame() that didn't allow the newspaper minigame
+  sometimes. (workMinigame() -> arb.h)
+- Revamped cSentence and wSentence in arb.h:workMinigame() (workMinigame() ->
+  arb.h) to make it more easy.

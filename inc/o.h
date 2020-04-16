@@ -27,7 +27,13 @@ void moneyc(int gold) {
 }
 void normalInput(char *i) {
   printf("> ");
-  fgets(i, 16, stdin);
-  i[strcspn(i, "\n")] = 0; // Removing \n
+  char tmps[10];
+  char *tmpsem = ";";
+  fgets(tmps, 32, stdin);
+  tmps[strcspn(tmps, "\n")] = 0;
+  strcpy(i, tmpsem);
+  strcat(i, tmps);
+  /* i = strcat(i, &tmps); */
+  /* i[strcspn(i, "\n")] = 0; // Removing \n */
   fflush(stdin);
 }
