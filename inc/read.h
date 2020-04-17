@@ -7,6 +7,7 @@ char *cL_pread(const char *fpath);
 char *cL_readWholeFile(const char *fpath, char *buf);
 
 int proto_readConfig(const char *fpath, struct DATA *data) {
+  printf("Hey, you loaded!\n");
   //TODO: code
   FILE *f;
   f = fopen(fpath, "r");
@@ -16,8 +17,8 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
   char *buf;
   char *line = malloc(line_size);
   while(fgets(line, line_size, f) != NULL) {
-    char *KEY;
-    char *VALUE;
+    char *KEY = malloc(line_size/2);
+    char *VALUE = malloc(line_size/2);
     int counter = 0;
     int found = 0;
     int result = 0;
@@ -26,11 +27,21 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       else counter++;
     }
     if(found==0) { printf("ERROR! ERROR! RUN IN CIRCLES!\n"); return 1; }
+    printf("Got counter %d.\n", counter);
 
-    for(int i=0; i<(result-1); ++i) {
-      KEY[i] = line[i];
+    int whitespace = 0;
+    for(int i=0; i<(result); ++i) {
+      if(line[i]==' ') { printf("Found a whitespace!\n"); whitespace = 1; break; }
+      KEY[i] = line[i]; // Don't add whitespaces into the key
+    }
+    if(whitespace==1) {
+      fputs("Found a whitespace in the configuration file!\n", stdout);
+      fputs("Please check arch/svf/svf.rtf and remove any whitespaces!\n", stdout);
+      return 2;
     }
     printf("%s\n", KEY);
+    free(KEY);
+    free(VALUE);
     
     if(1) {
     } else if(2) {

@@ -79,3 +79,10 @@
   sometimes. (workMinigame() -> arb.h)
 - Revamped cSentence and wSentence in arb.h:workMinigame() (workMinigame() ->
   arb.h) to make it more easy.
+*** 17. April 2020
+- Added read.h:proto_readConfig() as an early version of the new save file
+  loading function.
+- You cannot enter whitespaces in your name anymore, they will be substituted
+  for '_', (inc/story.h:getName())
+- If a whitespace is found in arch/svf/svf.rtf (the new save file format), the
+  game will exit telling you to fix the error.

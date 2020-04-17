@@ -223,6 +223,8 @@ int getName() {
   move(2, ((xMax/2) - (strlen(pleaseName)/2))); // Move to position y:2 x:1 in the terminal, to enter string
   printw("%s", pleaseName);
 
+
+
   WINDOW *inputwin = newwin(3, xMax, (yMax-3), 1);
   refresh();
   box(inputwin, 0, 0);
@@ -231,6 +233,12 @@ int getName() {
   mvwprintw(inputwin, 1, 1, "I am ");
 
   wgetstr(inputwin, inputNom);
+
+  for(int i=0; i<strlen(inputNom); ++i) { // Remove Whitespaces
+    if(inputNom[i]==' ') {
+      inputNom[i] = '_'; // Replace ' ' with '_' 
+    }
+  }
 
   strcat(yourName, inputNom);
 
