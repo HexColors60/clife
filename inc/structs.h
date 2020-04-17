@@ -1,3 +1,5 @@
+# ifndef __CLIFE_STRUCTS_H__
+# define __CLIFE_STRUCTS_H__
 struct DATA { // for the data read from the save file
   int gold;
   int moti;
@@ -48,3 +50,4 @@ void detStruct(char *location, char *country, int la) { // la = lookAround? <- d
 /* a - Center of a city
    r - Religious Building
 */
+# endif

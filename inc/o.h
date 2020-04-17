@@ -1,3 +1,5 @@
+# ifndef __CLIFE_O_H__
+# define __CLIFE_O_H__
 //--TRANSLATED 100%--\\
 
 #include<stdio.h>
@@ -37,3 +39,4 @@ void normalInput(char *i) {
   /* i[strcspn(i, "\n")] = 0; // Removing \n */
   fflush(stdin);
 }
+# endif

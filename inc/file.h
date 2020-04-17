@@ -1,3 +1,5 @@
+# ifndef __CLIFE_FILE_H__
+# define __CLIFE_FILE_H__
 //--TRANSLATED 100%--\\
 
 #include<stdio.h>
@@ -38,3 +40,4 @@ void cat2(const char *fpath, const char *message) {
   fprintf(f, message);
   fclose(f);
 }
+# endif

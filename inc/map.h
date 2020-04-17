@@ -1,3 +1,5 @@
+# ifndef __CLIFE_MAP_H__
+# define __CLIFE_MAP_H__
 //--TRANSLATED 100%--\\
 
 #include<stdio.h>
@@ -94,3 +96,4 @@ char *getCountry(char *p) {
   if(!strcmp(p, "Metron")) return "Aritrea";
   if(!strcmp(p, "Orar")) return "Liberium";
 }
+# endif

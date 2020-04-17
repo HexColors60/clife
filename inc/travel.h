@@ -1,3 +1,5 @@
+# ifndef __CLIFE_TRAVEL_H__
+# define __CLIFE_TRAVEL_H__
 //--TRANSLATED 100%--\\
 
 #include<stdio.h>
@@ -81,3 +83,4 @@ char *ganz_reisen(char *l, char *p, int Motivation, int Gold) {
   }
   return l;
 }
+# endif
