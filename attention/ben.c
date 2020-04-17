@@ -1,12 +1,7 @@
-# ifndef __CLIFE_BEN_H__
-# define __CLIFE_BEN_H__
 // UNBENUTZT // UNUSED
 
-/*
-#include<stdio.h>
-char *bencp;
-char *neuinv;
-int omot;
+
+#include "ben.h"
 
 void neuesInventar(char *inventar, char *benutztesObjekt) {
   neuinv = (char*)malloc(65*sizeof(char));
@@ -69,6 +64,7 @@ void benutzen(char *inventar, char *objekt, int moti) {
     return;
   }
 }
+
 void benAuswahl(char *inventar) {
   printf("Was möchtest du haben?\nInventar:\n");
   if(strstr(inventar,"[w];")) printf("w - Wasser\n");
@@ -85,5 +81,3 @@ void benAuswahl(char *inventar) {
   // free(neuinv);
   return;
 }
-*/
-# endif

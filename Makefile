@@ -19,7 +19,7 @@ all: $(BIN)
 
 $(BIN) : $(OBJS)
 	mkdir -p $(@D)
-	$(CC) $(CC_FLAGS) $^ -o $@
+	$(CC) $(CC_FLAGS) $^ -o $@ $(LFLAGS)
 
 -include $(DEPS)
 
