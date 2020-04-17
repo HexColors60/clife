@@ -37,7 +37,7 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "../inc/travel.h" // Travelling inbetween Countries
 #include "../inc/arb.h" // Working / earning Money
 #include "../inc/env.h" // Enviroment
-#include "../inc/o.h" // Other functions
+#include "../inc/misc.h" // Other functions
 #include "../inc/amp.h" // ASCII (Semigraphical) Map
 #include "../inc/structs.h" // Building structure
 //#include "../inc/gvw.h" // Shopping // defunct
