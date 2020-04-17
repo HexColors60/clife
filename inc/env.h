@@ -1,3 +1,5 @@
+# ifndef __CLIFE_ENV_H__
+# define __CLIFE_ENV_H__
 //--TRANSLATED 100%--\\
 
 // Environment
@@ -44,17 +46,17 @@ int inspect(char b[], char *location, char *country, char *buildings[], char key
   /* if(exists(bupath)==false) strcpy(bupath, envpath); */
   /* else builds = cL_read(bupath); // Print all buildings in Country/City */
   /* free(bupath); */
-  
+
   /* if(strstr(builds, build)) { */
   /*   printf("%s exists.\n", build); */
   /* } else { */
   /*   printf("%s doesn't exist.\n", build); */
   /* } */
-     
+
   /* free(envpath); */
   /* return 0; */
 }
-            
+
 void lookAround(char *location, char *country, char *b[]) { // Len of b is always 12
   printf("You are in %s\nAround you is:\n", location);
   for(int i=0; i<12; ++i) {
@@ -116,3 +118,4 @@ char emotion(char input[], char action) {
  *
  * 'l' = laughing action
  **/
+# endif

@@ -1,3 +1,5 @@
+# ifndef __CLIFE_GVW_H__
+# define __CLIFE_GVW_H__
 // UNBENUTZT // UNUSED
 
 /*
@@ -91,3 +93,4 @@ int Einkaufen(char *inventar, int geldbeutel) {
   // }
 }
 */
+# endif

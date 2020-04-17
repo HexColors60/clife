@@ -1,3 +1,5 @@
+# ifndef __CLIFE_READ_H__
+# define __CLIFE_READ_H__
 //--TRANSLATED 100%--\\
 
 #include<stdio.h>
@@ -42,7 +44,7 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
     printf("%s\n", KEY);
     /* if(!strcmp(KEY,"GOLD")) { */
 
-    
+
     if(!strcmp(KEY,"GOLD")) {
       printf("Okay, we are in the Gold currently.\n");
       printf("Before: '%s'\n", line);
@@ -75,9 +77,9 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
     } else { // Big error :(
       printf("OH NO! OH GOD NO! RUN IN CIRCLES! RUN IN CIRCLES! WE HAVE AN ERROR!\n");
     }
-    
+
     free(KEY);
-    free(VALUE);    
+    free(VALUE);
   }
 }
 
@@ -141,7 +143,7 @@ int readConfig(const char *fpath, int g, char *l, int m, char *n, char *r) { // 
     printf("Rest of confFile: %s\n", confFile);
   }
   printf("Going out of check.\n");
-  
+
   return 0;
 
 
@@ -199,3 +201,4 @@ char *cL_pread(const char *fpath) {
   free(line);
   return "";
 }
+# endif

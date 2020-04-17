@@ -1,3 +1,5 @@
+# ifndef __CLIFE_BEN_H__
+# define __CLIFE_BEN_H__
 // UNBENUTZT // UNUSED
 
 /*
@@ -84,3 +86,4 @@ void benAuswahl(char *inventar) {
   return;
 }
 */
+# endif

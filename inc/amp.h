@@ -1,3 +1,5 @@
+# ifndef __CLIFE_AMP_H__
+# define __CLIFE_AMP_H__
 #include<stdio.h>
 void printASCIImap(char *location) {
   printf("You are in %s.\n\n", location);
@@ -42,3 +44,4 @@ void printASCIImap(char *location) {
   printf("|      |                 |                            |  |\n");
   printf("+--------------------------------------------------------+\n");
 }
+# endif

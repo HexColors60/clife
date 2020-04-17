@@ -1,3 +1,5 @@
+# ifndef __CLIFE_STORY_H__
+# define __CLIFE_STORY_H__
 //--TRANSLATED 100%--\\
 
 /* #include<ncurses.h>*/
@@ -124,7 +126,7 @@ int getRole() {
   int choice;
   int highlight = 0;
 
-  printf("%d\n", 3); // 3 = size of choices 
+  printf("%d\n", 3); // 3 = size of choices
 
   // Start ncurses
   initscr();
@@ -195,7 +197,7 @@ int getRole() {
     role = "Mage";
     break;
   }
-  
+
   printf("You chose: %s\n", role);
   write2(ROLE, role);
   return 0;
@@ -236,7 +238,7 @@ int getName() {
 
   for(int i=0; i<strlen(inputNom); ++i) { // Remove Whitespaces
     if(inputNom[i]==' ') {
-      inputNom[i] = '_'; // Replace ' ' with '_' 
+      inputNom[i] = '_'; // Replace ' ' with '_'
     }
   }
 
@@ -261,3 +263,4 @@ int getName() {
 
   return 0;
 }
+# endif
