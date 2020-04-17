@@ -114,7 +114,9 @@ int main(int argc, char *argv[]) {
   /* return 0; */
   begSequence();
   struct DATA data;
+  /* struct DATA *dptr = &data; */
   if(proto_readConfig("arch/svf/svf.rtf", &data)==2) return 0;
+  return 0;
   /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
   /* return 0; */
   name = cL_read(NAME);

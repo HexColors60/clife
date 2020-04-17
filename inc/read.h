@@ -40,13 +40,44 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       return 2;
     }
     printf("%s\n", KEY);
-    free(KEY);
-    free(VALUE);
+    /* if(!strcmp(KEY,"GOLD")) { */
+
     
-    if(1) {
-    } else if(2) {
+    if(!strcmp(KEY,"GOLD")) {
+      printf("Okay, we are in the Gold currently.\n");
+      printf("Before: '%s'\n", line);
+      while(line[0]!='=') {
+	line++; // Remove the first character until the first character is =
+      }
+      line++; // Remove =
+
+      char gChar[line_size];
+      for(int i=0; i<line_size; ++i) {
+	if(line[i]!='\n') {
+	  gChar[i] = line[i];
+	}
+      }
+      printf("gChar: %s\n", gChar);
+      int goldInt = atoi(gChar);
+      if(goldInt<=-1) { printf("Re-setting Gold!\n"); goldInt = 0; // If gold is below 0, set it to 0
+      }
+      printf("Gold, as an int: %d\n", goldInt);
+      printf("After: '%s'\n", line);
+      data->gold = goldInt; // <-- halp
+    } else if(!strcmp(KEY,"LOCA")) {
+      printf("Okay, we are in the Location currently.\n");
+    } else if(!strcmp(KEY,"MOTI")) {
+      printf("Okay, we are in the Motivation currently.\n");
+    } else if(!strcmp(KEY,"NAME")) {
+      printf("Okay, we are in the Name currently.\n");
+    } else if(!strcmp(KEY,"ROLE")) {
+      printf("Okay, we are in the Role currently.\n");
     } else { // Big error :(
+      printf("OH NO! OH GOD NO! RUN IN CIRCLES! RUN IN CIRCLES! WE HAVE AN ERROR!\n");
     }
+    
+    free(KEY);
+    free(VALUE);    
   }
 }
 

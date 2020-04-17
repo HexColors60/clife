@@ -1,9 +1,12 @@
-struct DATA {
-  int data1;
-  int blah;
+struct DATA { // for the data read from the save file
+  int gold;
+  int moti;
+  char *loca;
+  char *name;
+  char *role;
 };
 
-struct o {
+struct o {    // a copy of what was read from the save file, to compare to the changed variables.
   int gold;
   char *loc;
   int mot;
