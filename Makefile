@@ -1,14 +1,14 @@
-     all: src/main.c
+all: src/main.c
 	gcc -g -o bin/clife src/main.c -lncurses
 
-     clean:
+clean:
 	rm bin/clife
 
-     halfclean:
+halfclean:
 	rm -r arch/svf/*.rtf
 
-     cheat:
+cheat:
 	echo -n "[w];[t];" > arch/svf/inv.rtf
 
-     help:
+help:
 	cat Makefile
