@@ -47,7 +47,7 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
 
     if(!strcmp(KEY,"GOLD")) {
       printf("Okay, we are in the Gold currently.\n");
-      printf("Before: '%s'\n", line);
+      printf("Before: '%s'\n", ptr);
       /* int linecounter = 0; */
       while(ptr[0]!='=') {
 	ptr++; // Remove the first character until the first character is =
@@ -65,11 +65,11 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       if(goldInt<=-1) { printf("Re-setting Gold!\n"); goldInt = 0; // If gold is below 0, set it to 0
       }
       printf("Gold, as an int: %d\n", goldInt);
-      printf("After: '%s'\n", line);
+      printf("After: '%s'\n", ptr);
       data->gold = goldInt; // <-- halp
     } else if(!strcmp(KEY,"LOCA")) {
       printf("Okay, we are in the Location currently.\n");
-      printf("Before: %s\n", line);
+      printf("Before: %s\n", ptr);
 
       while(ptr[0]!='=') {
 	ptr++;
@@ -84,7 +84,7 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       }
       printf("lChar: %s\n", lChar);
       data->loca = lChar;
-      printf("After: %s\n", line);
+      printf("After: %s\n", ptr);
     } else if(!strcmp(KEY,"MOTI")) {
       printf("Okay, we are in the Motivation currently.\n");
     } else if(!strcmp(KEY,"NAME")) {
@@ -98,6 +98,7 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
     free(KEY);
     free(VALUE);
   }
+  /* free(ptr); */
   free(line);
 }
 
