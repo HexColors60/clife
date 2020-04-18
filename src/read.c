@@ -62,6 +62,22 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       data->gold = goldInt; // <-- halp
     } else if(!strcmp(KEY,"LOCA")) {
       printf("Okay, we are in the Location currently.\n");
+      printf("Before: %s\n", line);
+
+      while(line[0]!='=') {
+	line++;
+      }
+      line++;
+
+      char lChar[line_size];
+      for(int i=0; i<line_size; ++i) {
+	if(line[i]!='\n' && line[i]>=65) {
+	  lChar[i] = line[i];
+	}
+      }
+      printf("lChar: %s\n", lChar);
+      data->loca = lChar;
+      printf("After: %s\n", line);
     } else if(!strcmp(KEY,"MOTI")) {
       printf("Okay, we are in the Motivation currently.\n");
     } else if(!strcmp(KEY,"NAME")) {

@@ -44,6 +44,8 @@ int main(int argc, char *argv[]) {
   struct DATA data;
   /* struct DATA *dptr = &data; */
   if(proto_readConfig("arch/svf/svf.rtf", &data)==2) return 0;
+  printf("Gold: %d\n", data.gold);
+  printf("Location: %s\n", data.loca);
   return 0;
   /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
   /* return 0; */
