@@ -1,4 +1,4 @@
-//--TRANSLATED 15%--\\
+//--TRANSLATED 15%--//
 
 // Copyright (C) 2018-2020 cheeesy
 
@@ -15,79 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
-#define NAME "arch/svf/nom.rtf" // Name
-#define ROLE "arch/svf/rol.rtf" // Role
-#define GOLD "arch/svf/gol.rtf" // Money
-#define POSI "arch/svf/loc.rtf" // Player's position
-#define MOTI "arch/svf/mot.rtf" // Motivation
-#define MANU "arch/man/" // Help files
-//#define INV "arch/svf/inv.rtf" // Inventory // defunct
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<stdbool.h>
-#include<signal.h>
-#include<time.h>
-#include<ncurses.h>
-#include "../inc/money.h" // Money Management
-#include "../inc/read.h" // File reading
-#include "../inc/file.h" // exists(), File writing
-#include "../inc/story.h" // Storytelling on first Startup, and splash screen
-#include "../inc/map.h" // In-Game Map
-#include "../inc/travel.h" // Travelling inbetween Countries
-#include "../inc/arb.h" // Working / earning Money
-#include "../inc/env.h" // Enviroment
-#include "../inc/misc.h" // Other functions
-#include "../inc/amp.h" // ASCII (Semigraphical) Map
-#include "../inc/structs.h" // Building structure
-//#include "../inc/gvw.h" // Shopping // defunct
-//#include "../inc/ben.h" // Using items // defunct
-int gold;
-int motivation;
-char action = 0;   // See inc/env.h:emotion() for more details.
-char input[32];    // Command input
-char *name;        // User name
-char *role;        // User Role <-- May be removed or altered in the future.
-char *loc;         // Location
-char *country;     // Country
-char *helpath;     // The path of the help pages <-- May be removed or altered in the future.
-const char *ver = "clife 2020.04";
-const char *help = "clife\n\
-\n\
--v, --version\n\
-              Version\n\
--h, --help\n\
-              Help\n\
--c, --commands\n\
-              Commands\n\
-\n\
-clife on GitHub: [ https://github.com/cheeesy/clife ]";
-const char *comms = "                             CLIfe commands\n\
-┌──────────────────────────────────┬─────────────────────────────────────┐\n\
-│ h, help:                         │ List all commands.                  │\n\
-│ g, gold, money:                  │ View your current money.            │\n\
-│ w, work, a:                      │ Earn money.                         │\n\
-│ b, beg:                          │ Beg for money.                      │\n\
-│ wai:                             │ Where am I?                         │\n\
-│ ch:                              │ In which country am I?              │\n\
-│ map:                             │ Show ASCII-Map.                     │\n\
-│ goto:                            │ Travel in a country.                │\n\
-│ e:                               │ Use an emotion.                     │\n\
-│ r, travel:                       │ Traven from one country to another. │\n\
-│ m, motivation:                   │ View your current motivation.       │\n\
-│ s, sleep:                        │ Sleep.                              │\n\
-│ q, quit, tschüs, tschüß, servus: │ Quit the game.                      │\n\
-└──────────────────────────────────┴─────────────────────────────────────┘";
-
-const char *unMotivated = "┌─ATTENTION!───────────────────────────────┐\n\
-│ You are unmotivated!                     │\n\
-│ If you are unmotivated you will not be   │\n\
-│ able to do most things until you sleep!  │\n\
-└──────────────────────────────────────────┘\n";
-
-int cexit();
-void EchoThing();
-/* void detStruct(char *location, char *country, int la); */
+# include "main.h"
 
 int main(int argc, char *argv[]) {
   if(argv[1]!=NULL) {
@@ -143,7 +71,7 @@ int main(int argc, char *argv[]) {
     if(motivation<=0) { printf("%s", unMotivated);
       motivation = 0; }
     if(motivation>=101) motivation = 100;
-    
+
     if(!strcmp(input,";help") | !strcmp(input,";h")) printf("%s\n", comms);
 
     if(!strcmp(input,";gold") | !strcmp(input,";g") | !strcmp(input,";money")) moneyc(gold);
@@ -161,16 +89,16 @@ int main(int argc, char *argv[]) {
     }
 
     if(!strcmp(input,";wai")) printMap(loc, country);
-    
+
     if(!strcmp(input,";ch")) printf("%s\n", country);
-    
+
     if(!strcmp(input,";map")) printASCIImap(loc);
-    
+
     if(!strcmp(input,";goto")) { if(motivation<=0) printf("You are not motivated enough!\n");
       else loc = geheZu(loc, country); }
-    
+
     if(strstr(input,";e ")!=NULL) { action = emotion(input, action); }
-    
+
     if(!strcmp(input,";r") | !strcmp(input,";travel")) {
       loc = ganz_reisen(loc, country, motivation, gold); // Travel from gateway city to capital of country.
       motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
@@ -178,7 +106,7 @@ int main(int argc, char *argv[]) {
         gold = removeMoney(gold, 30); }
       country = getCountry(loc); // Also we have to get the country using the city we now have.
     }
-    
+
     if(!strcmp(input,";motivation") | !strcmp(input,";m")) seeMotivation(motivation);
 
     if(!strcmp(input,";sleep") | !strcmp(input,";s")) { if(sleep(motivation)!=3) motivation = 80;
@@ -197,7 +125,7 @@ int main(int argc, char *argv[]) {
 int cexit() {
   printf("Arheto, %s, the %s!\n", name, role); // "Arheto" means "Goodbye" in Aritrean.
   // Name and Role don't change, and are therefore only written if the file is lost - for whatever reason.
-  if(exists(NAME)==false) write2(NAME, name); 
+  if(exists(NAME)==false) write2(NAME, name);
   if(exists(ROLE)==false) write2(ROLE, role);
   if(old.gold!=gold) wrinte2(GOLD, gold); // The amount of gold, the location and the motivation is always saved, unless it did not change.
   if(strcmp(old.loc,loc)) write2(POSI, loc);
@@ -222,4 +150,3 @@ void EchoThing() {
     else continue;
   }
 }
-
