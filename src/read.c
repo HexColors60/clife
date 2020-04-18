@@ -12,14 +12,20 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
   const size_t line_size = 300;
   char *buf;
   char *line = malloc(line_size);
+  if(line==NULL) { printf("ERROR: Pointer 'line' not allocated!\n");
+    return 1;
+  }
+  
+  
   while(fgets(line, line_size, f) != NULL) {
+    char *ptr = line;
     char *KEY = malloc(line_size/2);
     char *VALUE = malloc(line_size/2);
     int counter = 0;
     int found = 0;
     int result = 0;
     for(int i=0; i<line_size; ++i) {
-      if(line[i]=='=') { result = i; found = 1; break; }
+      if(ptr[i]=='=') { result = i; found = 1; break; }
       else counter++;
     }
     if(found==0) { printf("ERROR! ERROR! RUN IN CIRCLES!\n"); return 1; }
@@ -27,8 +33,8 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
 
     int whitespace = 0;
     for(int i=0; i<(result); ++i) {
-      if(line[i]==' ') { printf("Found a whitespace!\n"); whitespace = 1; break; }
-      KEY[i] = line[i]; // Don't add whitespaces into the key
+      if(ptr[i]==' ') { printf("Found a whitespace!\n"); whitespace = 1; break; }
+      KEY[i] = ptr[i]; // Don't add whitespaces into the key
     }
     if(whitespace==1) {
       fputs("Found a whitespace in the configuration file!\n", stdout);
@@ -42,15 +48,16 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
     if(!strcmp(KEY,"GOLD")) {
       printf("Okay, we are in the Gold currently.\n");
       printf("Before: '%s'\n", line);
-      while(line[0]!='=') {
-	line++; // Remove the first character until the first character is =
+      /* int linecounter = 0; */
+      while(ptr[0]!='=') {
+	ptr++; // Remove the first character until the first character is =
       }
-      line++; // Remove =
+      ptr++; // Remove =
 
       char gChar[line_size];
       for(int i=0; i<line_size; ++i) {
-	if(line[i]!='\n') {
-	  gChar[i] = line[i];
+	if(ptr[i]!='\n') {
+	  gChar[i] = ptr[i];
 	}
       }
       printf("gChar: %s\n", gChar);
@@ -64,15 +71,15 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       printf("Okay, we are in the Location currently.\n");
       printf("Before: %s\n", line);
 
-      while(line[0]!='=') {
-	line++;
+      while(ptr[0]!='=') {
+	ptr++;
       }
-      line++;
+      ptr++;
 
       char lChar[line_size];
       for(int i=0; i<line_size; ++i) {
-	if(line[i]!='\n' && line[i]>=65) {
-	  lChar[i] = line[i];
+	if(ptr[i]!='\n' && ptr[i]>=65) {
+	  lChar[i] = ptr[i];
 	}
       }
       printf("lChar: %s\n", lChar);
@@ -91,6 +98,7 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
     free(KEY);
     free(VALUE);
   }
+  free(line);
 }
 
 int readConfig(const char *fpath, int g, char *l, int m, char *n, char *r) { // config path file, gold, location, motivation, name, role
