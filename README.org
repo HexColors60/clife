@@ -3,21 +3,24 @@
 #+DATE: 2018-2020
 
 ** What is CLIfe?
-CLIfe is my try on a text adventure / RPG-game, written in C :)
+CLIfe is a singleplayer RPG game written in C.
+It takes inspiration from the classic MUDs from the past and present, and is
+still in early stage.
 
-A real story is not implemented yet, because the game is still in planning
-stage.
+** Supported Operating Systems
+| OS                  | Working? |
+|---------------------+----------|
+| openSUSE x64 (gcc)  | Yes      |
+| openBSD x64 (clang) | No [^1]   |
+| Windows 10 x64      | No [^2]   |
 
-As of currently the code seems to be limited to GCC, I tried it on Clang
-(OpenBSD) and it did not work.
+[^1]: clang support seems to be a problem due to the style of programming and
+will be addressed as soon as possible.
+[^2]: Windows Support will be addressed once the game is in a more mature
+state. For this matter another branch will be opened, as ncurses support is
+not given on Windows.
+
 ** Status Quo
-15% of necessary functions are implemented.
-I am satisfied with 20% of implemented functions.
-
-The Item system is currently on hold, until I have a better plan on how to work it out.
-To not make it harder for me to reach the goal of a complete english translation,
-function names and comments will form now on be created in English.
-** To-Dos
-*** TODO English Translation
-| When?      | Before the first Release |
-| Completed? | To ~66%.                 |
+CLIfe is still in a very early 'infancy' stage. I would not consider it
+playable yet, as it has no content that is fun for a player. This will
+hopefully begin to change in the next few months.

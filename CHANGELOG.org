@@ -86,3 +86,11 @@
   for '_', (inc/story.h:getName())
 - If a whitespace is found in arch/svf/svf.rtf (the new save file format), the
   game will exit telling you to fix the error.
+*** 18. April 2020 - 21. April 2020 (Big thanks to DanielDewberry for the big contribution!)
+_I forgot working on the changelog, hence the documentation here is
+sparse. Check the commits for more information._
+- Improvement on new savefile function
+- refactoring/splitting headers into .c and .h files (Code links in the changelog have probably broken, fix coming
+  soon...)
+- Fixed several memory leaks
+- Rewrote README.org
