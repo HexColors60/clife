@@ -94,13 +94,19 @@ int proto_readConfig(const char *fpath, struct DATA *data) {
       char lChar[line_size];
       for(int i=0; i<line_size; ++i) {
         if(line[i]!='\n' && line[i]>=65) {
+	  if(line[i]<=65) break;
           lChar[i] = line[i];
+
         }
       }
+      for(int i=0; i<line_size; ++i) { // If random numbers appear in lChar, get rid of 'em.
+	if((lChar[i]-'0')<=9 && (lChar[i]-'0')>=0) { lChar[i]='\0'; break; }
+      }
       printf("lChar: %s\n", lChar);
-      data->loca = lChar;
-      printf("After: %s\n", ptr);
+      data->loca = lChar; // Write location to struct
+      printf("After: %s\n", line);
     } else if(!strcmp(KEY,"MOTI")) {
+      printf("\nptr: %s line: %s\n", ptr, line); // <-- Unexpected behavior here.
       printf("Okay, we are in the Motivation currently.\n");
     } else if(!strcmp(KEY,"NAME")) {
       printf("Okay, we are in the Name currently.\n");

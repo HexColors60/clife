@@ -34,7 +34,7 @@ $(OBJDIR)/%.o : %.c
 	help
 
 clean:
-	@- rm bin/clife
+	@- rm bin/main
 	@- rm obj/*
 
 halfclean:
