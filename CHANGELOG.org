@@ -93,3 +93,4 @@ sparse. Check the commits for more information._
 - refactoring/splitting headers into .c and .h files (Code links in the changelog have probably broken, fix coming
   soon...)
 - Fixed several memory leaks
+- Rewrote README.org
