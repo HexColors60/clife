@@ -14,9 +14,7 @@ char *cL_pread(const char *fpath);
 
 char *cL_readWholeFile(const char *fpath, char *buf);
 
-int proto_readConfig(const char *fpath, struct DATA *data);
-
-int readConfig(const char *fpath, int g, char *l, int m, char *n, char *r);  // config path file, gold, location, motivation, name, role
+int readConfig(const char *fpath, struct DATA *data);
 
 char *cL_readWholeFile(const char *fpath, char *buf);
 

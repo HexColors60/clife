@@ -6,11 +6,11 @@
 # include "env.h"
 
 struct DATA { // for the data read from the save file
-  int gold;
-  int moti;
-  char *loca;
-  char *name;
-  char *role;
+  int  gold;
+  int  moti;
+  char loca[300];
+  char name[300];
+  char role[300];
 };
 
 struct o {    // a copy of what was read from the save file, to compare to the changed variables.
