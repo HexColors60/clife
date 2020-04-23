@@ -17,6 +17,16 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
 # include "main.h"
 
+void print_DATA(struct DATA* data)
+{
+    printf("gold: %d\n", data->gold);
+    printf("moti: %d\n", data->moti);
+    printf("loca: %s\n", data->loca);
+    printf("name: %s\n", data->name);
+    printf("role: %s\n", data->role);
+}
+
+
 int main(int argc, char *argv[]) {
   if(argv[1]!=NULL) {
     if(!strcmp(argv[1], "-v") | !strcmp(argv[1], "--version")) { printf("%s\n", ver);
@@ -43,7 +53,10 @@ int main(int argc, char *argv[]) {
   begSequence();
   struct DATA data;
   /* struct DATA *dptr = &data; */
-  if(proto_readConfig("arch/svf/svf.rtf", &data)==2) return 0;
+  if(readConfig("arch/svf/svf.rtf", &data)==2) return 0;
+
+  print_DATA(&data);
+
   printf("Gold: %d\n", data.gold);
   printf("Location: %s\n", data.loca);
   return 0;
