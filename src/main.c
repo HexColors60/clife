@@ -83,13 +83,14 @@ int main(int argc, char *argv[]) {
     printf("\n");
     setAll(); // set all structs
     for(;;) { // Loop until cexit()==0
-        normalInput(input);
-
-        action = checkForReaction(action);
-
+        
         if(motivation<=0) { printf("%s", unMotivated);
             motivation = 0; }
         if(motivation>=101) motivation = 100;
+        
+        normalInput(input);
+
+        action = checkForReaction(action);
 
         if(!strcmp(input,";help") | !strcmp(input,";h")) printf("%s\n", comms);
 

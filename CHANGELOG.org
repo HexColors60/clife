@@ -98,3 +98,4 @@ sparse. Check the commits for more information._
 - Savefile loading thanks to DanielDewberry
 - Savefile saving
 - You can now begin a new game with the new savefile format
+- Put unmotivational message before command prompt
