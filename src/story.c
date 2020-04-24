@@ -32,7 +32,7 @@ const char *title5 = "+---+---+---+---+---+\n\
 
 const char *title6 = "/siː laɪf/\n";
 
-void begSequence() {
+void begSequence(struct DATA *d) {
   srand(time(NULL));
   int ranint = rand() % 6 + 1;
   switch(ranint) {
@@ -55,11 +55,25 @@ void begSequence() {
     printf("%s\n", title6);
     break;
   }
-  if(exists(NAME)==false) getName();
-  if(exists(ROLE)==false) { getRole(); printStory(); }
-  if(exists(GOLD)==false) setGold();
-  if(exists(POSI)==false) setPos();
-  if(exists(MOTI)==false) setMot();
+  if(exists(SVF)==false)
+      {
+          getName(d);
+          printf("NAME: %s\n", d->name);
+          getRole(d);
+          printf("ROLE: %s\n", d->role);
+          /* strcpy(d->name, getName(&data)); */
+          /* d->name = getName(); */
+          /* strcpy(d->role, getRole()); */
+          /* d->role = getRole(); */
+          printStory();
+          d->gold = 0;
+          strcpy(d->loca, "Majkius");
+          /* d->loca = "Majkius"; */
+          d->moti = 100;
+          /* setGold(); */
+          /* setPos(); */
+          /* setMot(); */
+      }
 }
 
 void setGold() {
@@ -104,7 +118,7 @@ void printStory() {
 
 
 
-int getRole() {
+char *getRole(struct DATA *data) {
   char *choices[3] = {"Rogue", "Knight", "Mage"};
   int choice;
   int highlight = 0;
@@ -182,11 +196,11 @@ int getRole() {
   }
 
   printf("You chose: %s\n", role);
-  write2(ROLE, role);
-  return 0;
+  strcpy(data->role, role);
+  return "";
 }
 
-int getName() {
+char *getName(struct DATA *data) {
   char inputNom[64]; // The string the name is saved in
   int rows, cols; // This is actually unnecessary... Oops!
 
@@ -242,7 +256,8 @@ int getName() {
 
   printf("You entered: %s\n", inputNom);
 
-  write2(NAME, inputNom);
-
-  return 0;
+  strcpy(data->name, inputNom);
+  /* data->name = inputNom; */
+  /* return *inputNom; */
+  return "";
 }

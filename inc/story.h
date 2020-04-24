@@ -14,14 +14,14 @@
 # include "read.h"
 
 char *sent;
-int getName();
-int getRole();
+char *getName(struct DATA *data);
+char *getRole(struct DATA *data);
 void printStory();
 void setGold();
 void setPos();
 void setMot();
 
-void begSequence();
+void begSequence(struct DATA *d);
 
 void setGold();
 
@@ -30,9 +30,5 @@ void setPos();
 void setMot();
 
 void printStory();
-
-int getRole();
-
-int getName();
 
 # endif

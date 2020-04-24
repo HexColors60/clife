@@ -50,10 +50,11 @@ int main(int argc, char *argv[]) {
     }
     /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
     /* return 0; */
-    begSequence();
     struct DATA data;
     /* struct DATA *dptr = &data; */
-    if(readConfig(SVF, &data)==2) return 0;
+    if(exists(SVF)==true) if(readConfig(SVF, &data)==2) return 0;
+
+    begSequence(&data);
 
     print_DATA(&data);
   
@@ -143,7 +144,7 @@ int main(int argc, char *argv[]) {
 int cexit() {
     printf("Arheto, %s, the %s!\n", name, role); // "Arheto" means "Goodbye" in Aritrean.
     /* wrtSvf(SVF, data); */
-    if(old.gold!=gold || strcmp(old.loc,loc) || old.mot!=motivation) wrtSvf(SVF);
+    if(exists(SVF)==false || old.gold!=gold || strcmp(old.loc,loc) || old.mot!=motivation) wrtSvf(SVF);
     /* // Name and Role don't change, and are therefore only written if the file is lost - for whatever reason. */
     /* if(exists(NAME)==false) write2(NAME, name); */
     /* if(exists(ROLE)==false) write2(ROLE, role); */

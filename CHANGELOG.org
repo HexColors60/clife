@@ -97,3 +97,4 @@ sparse. Check the commits for more information._
 *** 22. April 2020 - 24. April 2020
 - Savefile loading thanks to DanielDewberry
 - Savefile saving
+- You can now begin a new game with the new savefile format
