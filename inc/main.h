@@ -85,6 +85,8 @@ const char *unMotivated = "┌─ATTENTION!────────────�
 int cexit();
 
 void EchoThing();
+
+int wrtSvf(const char *fpath);
 /* void detStruct(char *location, char *country, int la); */
 
 int main(int argc, char *argv[]);

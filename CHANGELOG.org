@@ -94,3 +94,6 @@ sparse. Check the commits for more information._
   soon...)
 - Fixed several memory leaks
 - Rewrote README.org
+*** 22. April 2020 - 24. April 2020
+- Savefile loading thanks to DanielDewberry
+- Savefile saving
