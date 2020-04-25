@@ -99,3 +99,5 @@ sparse. Check the commits for more information._
 - Savefile saving
 - You can now begin a new game with the new savefile format
 - Put unmotivational message before command prompt
+*** 25. April 2020
+- The obfuscators in the newspaper minigame are now random.

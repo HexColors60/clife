@@ -10,18 +10,29 @@ int generate(int start, int end) { // Fix the confusing rand() syntax
 bool workMinigame(char *type) {
   if(!strcmp(type,"newspaper")) {
     ranint = generate(1,2);
-    printf("%d\n", ranint);
 
     if(ranint==1) {
       int sentence = generate(1,2);
-      char cSentence[128]; // Correct sentence
+      char cSentence[128] = "ju Majkius ra kapitlon traga prazidento uffas"; // Correct sentence
       char wSentence[128]; // Obfuscated Sentence
-      if(sentence==1) { strcpy(cSentence, "ju Majkius ra kapitlon traga prazidento uffas"); strcpy(wSentence, "ju Majkius 'ra käpit'lon 5traga präzidento üff'as"); }
-      if(sentence==2) { strcpy(cSentence, "tar peitors re tuvil san terkol ut ghavul"); strcpy(wSentence, "tar 'pei.tors re. tu'vil, sa^n ter^\\'kol ut g'havul_____..-.....ejf3jif3ji"); }
+      char obfuscators[8] = ";:,.!?/"; // The obfuscators
+      int offset = 0;
+      /* strcpy(cSentence, "ju Majkius ra kapitlon traga prazidento uffas"); */
+
+      if(sentence==1) { strcpy(cSentence, "ju Majkius ra kapitlon traga prazidento uffas"); }
+      if(sentence==2) { strcpy(cSentence, "tar peitors re tuvil san terkol ut ghavul"); }
 
       arbst = (char*)malloc(129 * sizeof(char));
-      printf("\nOh no! A worker hasn't done his job right and left numbers and weird characters into the sentence!\nCan you correct this Aritrean sentence?\n\n");
-      printf("%s\n\n", wSentence);
+      printf("\nOh no! A worker hasn't done his job right and left weird characters in the sentence!\nCan you correct this Aritrean sentence?\n\n");
+
+      for(int i=0; i<128; ++i)
+          {
+              if(cSentence[i]=='\0') break;
+              if(generate(1,5)==3) printf("%c", obfuscators[generate(0,7)]);
+              printf("%c", cSentence[i]);
+          }
+      printf("\n");
+      
       printf("Of course. The sentence is: ");
       fgets(arbst,128, stdin);
       strtok(arbst, "\n");
@@ -35,7 +46,10 @@ bool workMinigame(char *type) {
         free(arbst);
         return true;
       }
+      free(arbst);
+      return false;
     }
+    
     if(ranint==2) { // Replace vowels minigame
       arbst = (char*)malloc(129 * sizeof(char));
       printf("All vowels are moved by one, so a=e, e=i, i=o, o=u, and u=a!\nCan you bring the sentence in correct order again?\n\n");
@@ -45,7 +59,7 @@ bool workMinigame(char *type) {
       strtok(arbst, "\n");
       fflush(stdin);
       if(strcmp(arbst,"ghrat tismul prazidenton arhitreon hjutals")) {
-	printf("trejeku supralent u tangjha arhitreon utuls pulk-effers junae! (Dein Aritreanisch muss besser werden!\n");
+	printf("trejeku supralent u tangjha arhitreon utuls pulk-effers junae! (You need to improve your Aritrean!)\n");
 	free(arbst);
 	return false; // No money earned
       } else {
@@ -53,6 +67,8 @@ bool workMinigame(char *type) {
 	free(arbst);
 	return true;
       }
+      free(arbst);
+      return false;
     } else { printf("Oops!\nAn error happened!\nError code: NEWSPAPER_TOO_LARGE\n"); }
   }
   if(!strcmp(type,"calculator")) { // Calculator minigame

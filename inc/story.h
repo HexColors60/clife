@@ -16,10 +16,7 @@
 char *sent;
 char *getName(struct DATA *data);
 char *getRole(struct DATA *data);
-void printStory();
-void setGold();
-void setPos();
-void setMot();
+void printStory(char *role);
 
 void begSequence(struct DATA *d);
 

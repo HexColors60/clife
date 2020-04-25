@@ -120,11 +120,19 @@ int main(int argc, char *argv[]) {
         if(strstr(input,";e ")!=NULL) { action = emotion(input, action); }
 
         if(!strcmp(input,";r") | !strcmp(input,";travel")) {
+            char *oldloc;
+            oldloc = (char*)malloc(32*sizeof(char));
+            strcpy(oldloc, loc);
             loc = ganz_reisen(loc, country, motivation, gold); // Travel from gateway city to capital of country.
-            motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
-            if(strcmp(country,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
-                gold = removeMoney(gold, 30); }
-            country = getCountry(loc); // Also we have to get the country using the city we now have.
+            if(strcmp(oldloc, loc)) // If player does have the money to pay the toll.
+                {
+                    motivation = elaMotivatio(101); // The argument 101 reads the motivation, anything else writes it.
+                    if(strcmp(country,getCountry(loc))) { printf("You had to pay 30 gold coins as a toll!\n");
+                        gold = removeMoney(gold, 30); }
+                    country = getCountry(loc); // Also we have to get the country using the city we now have.
+                }
+
+            free(oldloc);
         }
 
         if(!strcmp(input,";motivation") | !strcmp(input,";m")) seeMotivation(motivation);

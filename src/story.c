@@ -65,7 +65,7 @@ void begSequence(struct DATA *d) {
             /* d->name = getName(); */
             /* strcpy(d->role, getRole()); */
             /* d->role = getRole(); */
-            printStory();
+            printStory(d->role);
             d->gold = 0;
             strcpy(d->loca, "Majkius");
             /* d->loca = "Majkius"; */
@@ -76,21 +76,7 @@ void begSequence(struct DATA *d) {
         }
 }
 
-void setGold() {
-    int sgold = 0; // Player starts with 0 gold coins
-    wrinte2(GOLD, sgold);
-}
-
-void setPos() {
-    write2(POSI, "Majkius"); // Majkius is the starting city. <-- This might be subject to change.
-}
-
-void setMot() {
-    wrinte2(MOTI, 100);
-}
-
-void printStory() {
-    char *role = cL_read(ROLE);
+void printStory(char *role) {
     printf("┌");
     for(int i=0;i<71;i++) {
         printf("─");
