@@ -6,23 +6,23 @@
 # include "env.h"
 
 struct DATA { // for the data read from the save file
-  int  gold;
-  int  moti;
-  char loca[300];
-  char name[300];
-  char role[300];
+    int  gold;
+    int  moti;
+    char loca[300];
+    char name[300];
+    char role[300];
 };
 
 struct o {    // a copy of what was read from the save file, to compare to the changed variables.
-  int gold;
-  char *loc;
-  int mot;
+    int gold;
+    char *loc;
+    int mot;
 } old;
 
 struct city {
-  char *name;
-  char *buildings[12];
-  char key[12];
+    char *name;
+    char *buildings[12];
+    char key[12];
 } Majkius, NovaA, Metron, Orar;
 
 void setAll(); // Get rid of reading dozens of files and replace it with a nice struct

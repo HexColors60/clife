@@ -101,3 +101,4 @@ sparse. Check the commits for more information._
 - Put unmotivational message before command prompt
 *** 25. April 2020
 - The obfuscators in the newspaper minigame are now random.
+- Fix differing indent size (default is now 4)

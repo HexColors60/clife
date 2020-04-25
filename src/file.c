@@ -2,8 +2,6 @@
 
 #include "file.h"
 
-
-
 bool exists(const char *fpath) {
     FILE *file;
     if((file = fopen(fpath, "r")))
