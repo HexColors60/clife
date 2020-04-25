@@ -31,18 +31,18 @@
 *** 14. February 2020
 - Changed file names; to migrate old saves, use ~migrate.sh~.
 - Game no longer crashes when travelling to the same country you are in.
-** March 2020
-*** 12. March 2020
+** April 2020
+*** 12. April 2020
 - Fixed typos (Line 65 -> src/main.c)
 - Replaced writing of motivation with a static int (Line 7-11 & Line 79 ->
   inc/reisen.h)
 - Replaced reading of motivation with reading a static int (Line 176 -> src/main.c)
 - Replaced switch construction with if construction (Line 22 & Line 46 -> inc/arb.h)
-*** 13. March 2020
+*** 13. April 2020
 - Ported Building system from files to struct to crack down on unnecessary
   hard drive read/write action ( new file "inc/buildings.h", rewrite inc/env.h)
 - Removed unnecessary hard drive read/write code in main code ( Line 206-216 & Line 125 -> src/main.c)
-*** 14. March 2020
+*** 14. April 2020
 - Renamed 'buildings.h' to 'structs.h'
 - Revamped cexit() -> It only saves gold, loc and motivation when it has
   changed from when the game was first loaded (Line 185-187 -> src/main.c)
@@ -50,3 +50,55 @@
 - Renamed read and pread to cL_read and cL_pread to avoid conflicts with
   ncurses (inc/read.h)
 - Revamped story.h
+*** 15. April 2020
+- Added cL_readWholeFile() to use with a configuration file reading technique
+  currently being developed.
+- Added ~createsvf.sh~ to create svf.rtf out of other files, until it works
+  well enough until I can put it into the writing function.
+- Created 'dev' branch to move unstable development to.
+- Created "name" entry for every city (inc/structs.h)
+- Fixed printf (Line 205 -> src/main.c)
+- Revamped if statement in printf (Line 205 -> src/main.c)
+- Redesigned border of command screen (called by 'h' or 'help') and
+  unMotivated (called by having less than or 0 motivation) too look more
+  like the general style of the borders. (Line 65-78 -> src/main.c)
+- Changed the regeneration of motivation by sleeping to set it to 80 everytime
+  player sleeps successfully (Line 166 -> src/main.c)
+- Removed motivationNiedriger because it was not used (inc/o.h)
+- Moved moneyc from src/main.c to inc/o.h (Line 178-181 src/main.c --MOVED-->
+  Line 24-27 inc/o.h & Line 127 src/main.c edited for functionality)
+- Moved detStruct to inc/structs.h (Line 203-213 src/main.c --MOVED--> Line
+  26-36 inc/structs.h)
+*** 16. April 2020
+- Expanded normalInput() to add a semicolon to every input command, in order
+  to make the new command ;e work. (normalInput() -> inc/o.h)
+- Added ;e command (emotion() -> inc/env.h)
+- Added checkForReaction command (checkForReaction() -> inc/env.h)
+- Improved readability in for(;;) loop in src/main.c
+- Fixed a bug in arb.h:workMinigame() that didn't allow the newspaper minigame
+  sometimes. (workMinigame() -> arb.h)
+- Revamped cSentence and wSentence in arb.h:workMinigame() (workMinigame() ->
+  arb.h) to make it more easy.
+*** 17. April 2020
+- Added read.h:proto_readConfig() as an early version of the new save file
+  loading function.
+- You cannot enter whitespaces in your name anymore, they will be substituted
+  for '_', (inc/story.h:getName())
+- If a whitespace is found in arch/svf/svf.rtf (the new save file format), the
+  game will exit telling you to fix the error.
+*** 18. April 2020 - 21. April 2020 (Big thanks to DanielDewberry for the big contribution!)
+_I forgot working on the changelog, hence the documentation here is
+sparse. Check the commits for more information._
+- Improvement on new savefile function
+- refactoring/splitting headers into .c and .h files (Code links in the changelog have probably broken, fix coming
+  soon...)
+- Fixed several memory leaks
+- Rewrote README.org
+*** 22. April 2020 - 24. April 2020
+- Savefile loading thanks to DanielDewberry
+- Savefile saving
+- You can now begin a new game with the new savefile format
+- Put unmotivational message before command prompt
+*** 25. April 2020
+- The obfuscators in the newspaper minigame are now random.
+- Fix differing indent size (default is now 4)

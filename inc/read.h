@@ -1,28 +1,25 @@
-//--TRANSLATED 100%--\\
+# ifndef __CLIFE_READ_H__
+# define __CLIFE_READ_H__
+//--TRANSLATED 100%--//
 
-#include<stdio.h>
-#include<stdlib.h>
-char *cL_read(const char *fpath) {
-  FILE *f;
-  f = fopen(fpath, "r");
-  if(f==NULL) { printf("ERROR: File %s doesn't exist!CODE: 1\n", fpath);
-    return ""; }
-  const size_t line_size = 300;
-  char *buf;
-  char *line = malloc(line_size);
-  while(fgets(line, line_size, f) != NULL) {}
-  return line;
-}
-char *cL_pread(const char *fpath) {
-  FILE *f;
-  f = fopen(fpath, "r");
-  if(f==NULL) { printf("ERROR: File %s doesn't exist!CODE 2\n", fpath);
-    return ""; }
-  const size_t line_size = 300;
-  char *buf;
-  char *line = malloc(line_size);
-  while(fgets(line, line_size, f)!=NULL) { printf("%s", line);
-  }
-  free(line);
-  return "";
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "structs.h"
+
+char *cL_read(const char *fpath);
+
+char *cL_pread(const char *fpath);
+
+char *cL_readWholeFile(const char *fpath, char *buf);
+
+int readConfig(const char *fpath, struct DATA *data);
+
+char *cL_readWholeFile(const char *fpath, char *buf);
+
+char *cL_read(const char *fpath);
+
+char *cL_pread(const char *fpath);
+
+# endif
