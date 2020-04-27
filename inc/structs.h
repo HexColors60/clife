@@ -13,6 +13,11 @@ struct DATA { // for the data read from the save file
     char role[300];
 };
 
+struct DUNGEON {
+    char input[32];
+    int  gold;
+};
+
 struct o {    // a copy of what was read from the save file, to compare to the changed variables.
     int  gold;
     char *loc;
@@ -27,7 +32,7 @@ struct city {
 
 void setAll(); // Get rid of reading dozens of files and replace it with a nice struct
 
-void detStruct(char *location, char *country, int la); // la = lookAround? <- determines if the command is lookAround or inspectDialog
+void detStruct(char *location, char *country, int la, struct DATA *data); // la = lookAround? <- determines if the command is lookAround or inspectDialog
 
 // Keymap
 /* a - Center of a city

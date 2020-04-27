@@ -9,12 +9,17 @@
 
 # include "structs.h"
 
+/* const char *dcommands = "seek: seek for treasures.\nquit: sheepishly leave the dungeon. \n"; */
+
 char decision[8];
+char dinput[32];
 
 int dungeonMain();
 
 int checkForDungeon(struct city *city);
 
 int dungeonHead(struct city *city);
+
+int dSeek();
 
 # endif
