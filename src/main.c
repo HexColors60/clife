@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
         if(motivation>=101) motivation = 100;
         
         normalInput(input);
-
+        
         action = checkForReaction(action);
 
         if(!strcmp(input,";help") | !strcmp(input,";h")) printf("%s\n", comms);
