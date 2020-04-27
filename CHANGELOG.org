@@ -104,4 +104,4 @@ sparse. Check the commits for more information._
 - Fix differing indent size (default is now 4)
 *** 27. April 2020
 - Started work on Dungeon Crawler Mode
-- Added Reward for Dungeon Crawling
+- Added Reward for Dungeon Crawling (Fixed :)
