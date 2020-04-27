@@ -14,9 +14,9 @@ struct DATA { // for the data read from the save file
 };
 
 struct o {    // a copy of what was read from the save file, to compare to the changed variables.
-    int gold;
+    int  gold;
     char *loc;
-    int mot;
+    int  mot;
 } old;
 
 struct city {

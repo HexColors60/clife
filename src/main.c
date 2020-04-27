@@ -144,8 +144,9 @@ int main(int argc, char *argv[]) {
         if(!strcmp(input,";servus") | !strcmp(input,";tschüß") | !strcmp(input,";tschüs") | !strcmp(input,";quit") | !strcmp(input,";q")) if(cexit()==0) return 0;
 
         // DEBUG TOOLS; WILL BE REMOVED OR BUILT IN SOON
-        if(!strcmp(input, ";umsehen")) detStruct(loc, country, 1);
-        if(!strcmp(input, ";de")) detStruct(loc, country, 0);
+        if(!strcmp(input, ";dungeon")) detStruct(loc, country, 2);
+        if(!strcmp(input, ";umsehen")) detStruct(loc, country, 0);
+        if(!strcmp(input, ";de")) detStruct(loc, country, 1);
         if(!strcmp(input, ";printf")) EchoThing();
     }
 }
