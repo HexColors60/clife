@@ -109,3 +109,4 @@ sparse. Check the commits for more information._
 - Added moving in dungeons and barebones fighting mode.
 - Added fighting in dungeons.
 - Added Level and XP
+- Moved game variables to a struct

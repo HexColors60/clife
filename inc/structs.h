@@ -12,7 +12,7 @@ struct DATA { // for the data read from the save file
     char loca[300];
     char name[300];
     char role[300];
-};
+} plr;
 
 struct DUNGEON {
     char input[32];
