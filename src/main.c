@@ -50,6 +50,17 @@ int main(int argc, char *argv[]) {
     }
     /* readConfig("arch/svf/svf.rtf", gold, loc, motivation, name, role); */
     /* return 0; */
+    /* name = "default"; */
+    /* role = "default"; */
+    /* loc = "Majkius"; */
+    /* /\* strcpy(name, "default"); *\/ */
+    /* /\* strcpy(role, "default"); *\/ */
+    /* gold = 0; */
+    /* strcpy(loc, "Majkius"); */
+    /* motivation = 100; */
+    // In case something goes wrong with reading the savefile, this is the backup data.
+
+    
     struct DATA data;
     /* struct DATA *dptr = &data; */
     if(exists(SVF)==true) if(readConfig(SVF, &data)==2) return 0;
@@ -66,6 +77,7 @@ int main(int argc, char *argv[]) {
     gold = data.gold;
     loc = data.loca;
     motivation = data.moti;
+    level = data.levl;
     /* name = cL_read(NAME); */
     /* role = cL_read(ROLE); */
     /* gold = atoi(cL_read(GOLD)); */
@@ -189,7 +201,7 @@ int wrtSvf(const char *fpath)
     char buf[300];
     char *compl;
     compl = (char*)malloc(512*sizeof(char));
-    for(int i=0; i<5; ++i)
+    for(int i=0; i<6; ++i)
         {
             if(i==0) // Gold
                 {
@@ -231,10 +243,20 @@ int wrtSvf(const char *fpath)
                 {
                     strcpy(buf, "ROLE=");
                     strcat(buf, role);
+                    strcat(buf, "\n");
                     printf("'%s'", buf);
                     strcat(compl, buf);
                 }
-            else if(i>4)
+            if(i==5) // Level
+                {
+                    char tmp[8];
+                    sprintf(tmp, "%d", level);
+                    strcpy(buf, "LEVL=");
+                    strcat(buf, tmp);
+                    printf("'%s' '%s'\n", tmp, buf);
+                    strcat(compl, buf);
+                }
+            else if(i>5)
                 {
                     printf("Oopsie!\n");
                 }

@@ -107,6 +107,12 @@ int readConfig(const char *fpath, struct DATA *data) {
                     printf("Okay, we are in the Role currently.\n");
                     strcpy(data->role, VALUE);
                 }
+            else if(!strcmp(KEY,"LEVL"))
+                {
+                    printf("Okay, we are in the Motivation currently.\n");
+                    int levl = atoi(VALUE);
+                    data->levl = levl;
+                }
             else
                 { // Big error :(
                     printf("OH NO! OH GOD NO! RUN IN CIRCLES! RUN IN CIRCLES! WE HAVE AN ERROR!\n");

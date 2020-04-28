@@ -43,6 +43,8 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
 int gold;
 int motivation;
+int level;         // Levels will play a role in minimal and maximal attack in fighting.
+int xp = 0;        // XP is only valid for one session.
 char action = 0;   // See inc/env.h:emotion() for more details.
 char input[32];    // Command input
 char *name;        // User name

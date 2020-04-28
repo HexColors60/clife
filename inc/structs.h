@@ -8,6 +8,7 @@
 struct DATA { // for the data read from the save file
     int  gold;
     int  moti;
+    int  levl;
     char loca[300];
     char name[300];
     char role[300];

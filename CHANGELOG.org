@@ -108,3 +108,4 @@ sparse. Check the commits for more information._
 *** 28. April 2020
 - Added moving in dungeons and barebones fighting mode.
 - Added fighting in dungeons.
+- Added Level and XP
