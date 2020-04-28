@@ -105,3 +105,5 @@ sparse. Check the commits for more information._
 *** 27. April 2020
 - Started work on Dungeon Crawler Mode
 - Added Reward for Dungeon Crawling (Fixed :)
+*** 28. April 2020
+- Added barebones fighting mode

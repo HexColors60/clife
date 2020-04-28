@@ -16,6 +16,17 @@ struct DATA { // for the data read from the save file
 struct DUNGEON {
     char input[32];
     int  gold;
+    int  x;
+    int  y;
+    int  Xmax[2];
+    int  Ymax[2];
+};
+
+struct HUMANOID {
+    int  health;
+    int  maxHP;
+    int  ATK[2];
+    char class;
 };
 
 struct o {    // a copy of what was read from the save file, to compare to the changed variables.

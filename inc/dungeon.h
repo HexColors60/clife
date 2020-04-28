@@ -8,6 +8,7 @@
 # include <ctype.h>
 
 # include "structs.h"
+# include "fight.h"
 
 /* const char *dcommands = "seek: seek for treasures.\nquit: sheepishly leave the dungeon. \n"; */
 
@@ -19,6 +20,8 @@ int dungeonMain();
 int checkForDungeon(struct city *city);
 
 int dungeonHead(struct city *city);
+
+int dSpawn();
 
 int dSeek();
 

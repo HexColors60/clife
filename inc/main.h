@@ -32,6 +32,7 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "dungeon.h" // Dungeon Crawler Mode
 #include "env.h" // Enviroment
 #include "file.h" // exists(), File writing
+#include "fight.h" // Fighting
 #include "map.h" // In-Game Map
 #include "misc.h" // Other functions
 #include "money.h" // Money Management
