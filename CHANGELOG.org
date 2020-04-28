@@ -110,3 +110,4 @@ sparse. Check the commits for more information._
 - Added fighting in dungeons.
 - Added Level and XP
 - Moved game variables to a struct
+- Fixed crash when going into dungeons after moving to struct
