@@ -11,6 +11,8 @@
 char Finput[32];
 int Fround;
 
+int Fattack();
+
 int Fencounter();
 
 # endif
