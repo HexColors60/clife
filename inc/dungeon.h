@@ -19,7 +19,7 @@ int dungeonMain();
 
 int checkForDungeon(struct city *city);
 
-int dungeonHead(struct city *city);
+int dungeonHead(struct city *city, struct DATA *plr);
 
 int dSpawn();
 

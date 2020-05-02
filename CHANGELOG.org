@@ -111,3 +111,6 @@ sparse. Check the commits for more information._
 - Added Level and XP
 - Moved game variables to a struct
 - Fixed crash when going into dungeons after moving to struct
+** May 2020
+*** 1. May 2020
+- Added player struct to dungeonHead (for XP functionality)

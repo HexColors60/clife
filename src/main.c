@@ -173,9 +173,9 @@ int main(int argc, char *argv[]) {
         if(!strcmp(input,";servus") | !strcmp(input,";tschüß") | !strcmp(input,";tschüs") | !strcmp(input,";quit") | !strcmp(input,";q")) if(cexit()==0) return 0;
 
         // DEBUG TOOLS; WILL BE REMOVED OR BUILT IN SOON
-        if(!strcmp(input, ";dungeon")) { detStruct(plr.loca, country, 2, &data); plr.gold = data.gold; }
-        if(!strcmp(input, ";umsehen")) { detStruct(plr.loca, country, 0, &data); plr.gold = data.gold; } 
-        if(!strcmp(input, ";de")) { detStruct(plr.loca, country, 1, &data); plr.gold = data.gold; }
+        if(!strcmp(input, ";dungeon")) { detStruct(plr.loca, country, 2, &data, &plr); plr.gold = data.gold; }
+        if(!strcmp(input, ";umsehen")) { detStruct(plr.loca, country, 0, &data, &plr); plr.gold = data.gold; } 
+        if(!strcmp(input, ";de")) { detStruct(plr.loca, country, 1, &data, &plr); plr.gold = data.gold; }
         if(!strcmp(input, ";printf")) EchoThing();
 
         

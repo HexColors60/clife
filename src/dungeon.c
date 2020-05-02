@@ -75,8 +75,9 @@ int checkForDungeon(struct city *city) {
     return 1;
 }
 
-int dungeonHead(struct city *city) {
+int dungeonHead(struct city *city, struct DATA *plr) {
     if(checkForDungeon(city)!=1) return 0;
+    printf("NAME: %s\n", plr->name);
     struct DUNGEON dungeon;
     dungeon.gold    = 0;
     dungeon.x       = 5;

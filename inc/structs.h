@@ -44,7 +44,7 @@ struct city {
 
 void setAll(); // Get rid of reading dozens of files and replace it with a nice struct
 
-void detStruct(char *location, char *country, int la, struct DATA *data); // la = lookAround? <- determines if the command is lookAround or inspectDialog
+void detStruct(char *location, char *country, int la, struct DATA *data, struct DATA *plr); // la = lookAround? <- determines if the command is lookAround or inspectDialog
 
 // Keymap
 /* a - Center of a city
