@@ -74,7 +74,7 @@ const char *comms = "                             CLIfe commands\n\
 │ map:                             │ Show ASCII-Map.                     │\n\
 │ goto:                            │ Travel in a country.                │\n\
 │ e:                               │ Use an emotion.                     │\n\
-│ r, travel:                       │ Traven from one country to another. │\n\
+│ r, travel:                       │ Travel from one country to another. │\n\
 │ m, motivation:                   │ View your current motivation.       │\n\
 │ s, sleep:                        │ Sleep.                              │\n\
 │ q, quit, tschüs, tschüß, servus: │ Quit the game.                      │\n\

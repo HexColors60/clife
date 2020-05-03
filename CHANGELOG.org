@@ -117,3 +117,4 @@ sparse. Check the commits for more information._
 *** 3. May 2020
 - Getting XP through fighting
 - Added XP and Level to printf (main.c)
+- Fix typo in comms (main.h)
