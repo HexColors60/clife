@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
     /* plr.loca = data.loca; */
     plr.moti = data.moti;
     plr.levl = data.levl;
+    plr.xp = 0; // XP is only valid for one session.
     
     /* name = data.name; */
     /* role = data.role; */
@@ -203,12 +204,14 @@ void EchoThing() {
         fgets(echo, 128, stdin);
         echo[strlen(echo)-1] = '\0';
         fflush(stdin);
-        printf("%s\n", echo);
+        printf("'%s'\n", echo);
         if(echo[0]=='q' && echo[1]=='u' && echo[2]=='i' && echo[3]=='t'&& echo[4]=='\0') { printf("Quitting.\n"); return; }
-        if(echo[0]=='g') printf("%d\n", plr.gold);
-        if(echo[0]=='l') printf("%s\n", plr.loca);
-        if(echo[0]=='c') printf("%s\n", getCountry(plr.loca));
-        if(echo[0]=='m') printf("%d\n", plr.moti);
+        if(echo[0]=='g') printf("Gold: %d\n", plr.gold);
+        if(echo[0]=='l') printf("Location: %s\n", plr.loca);
+        if(echo[0]=='c') printf("Country: %s\n", getCountry(plr.loca));
+        if(echo[0]=='m') printf("Motivation: %d\n", plr.moti);
+        if(echo[0]=='l' && echo[1]=='e') printf("Level: %d\n", plr.levl);
+        if(echo[0]=='x') printf("XP: %d\n", plr.xp);
         else continue;
     }
 }

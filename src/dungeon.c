@@ -2,9 +2,10 @@
 
 # include "dungeon.h"
 
-int dungeonMain(struct DUNGEON *dungeon) {
+int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
     printf("Waiting for command...\n");
     for(;;) {
+        printf("XP: %d\n", plr->xp);
         printf("DUNGEON> ");
         fgets(dinput, 32, stdin);
         dinput[strcspn(dinput, "\n")] = 0;
@@ -13,6 +14,7 @@ int dungeonMain(struct DUNGEON *dungeon) {
 
         if(!strcmp(dinput, "help")) printf("No help.");
         if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y);
+
         
         if(!strcmp(dinput, "n") | !strcmp(dinput, "north"))
             {
@@ -55,7 +57,12 @@ int dungeonMain(struct DUNGEON *dungeon) {
                 dungeon->x--;
             }
 
-        if(!strcmp(dinput, ";spawn")) dungeon->gold += dSpawn();
+
+        if(!strcmp(dinput, ";spawn")) // Debug command; an enemy appearing should be random
+            {
+                dungeon->gold += dSpawn();
+                plr->xp += 10;
+            }
         if(!strcmp(dinput, "seek")) dungeon->gold += dSeek();
         if(!strcmp(dinput, "quit")) break;
         continue;
@@ -96,7 +103,7 @@ int dungeonHead(struct city *city, struct DATA *plr) {
     if(strstr(decision, "yes") || strstr(decision, "i do")!=NULL) // I believe that those are the most common affirmatives.
         {
             printf("You descend the stairs into the dungeon.\n");
-            dungeonMain(&dungeon);
+            dungeonMain(&dungeon, plr);
             printf("You got %d gold!\n", dungeon.gold);
             return dungeon.gold;
         }
