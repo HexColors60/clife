@@ -118,3 +118,4 @@ sparse. Check the commits for more information._
 - Getting XP through fighting
 - Added XP and Level to printf (main.c)
 - Fix typo in comms (main.h)
+- Created new detStruct function which uses only the player struct

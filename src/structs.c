@@ -33,6 +33,17 @@ void detStruct(char *location, char *country, int Sswitch, struct DATA *data, st
     }
     return;
 }
+void detStruct_plr(struct DATA *plr, int Sswitch) {
+    printf("Calling detStruct\n");
+    char *ch = getCountry(plr->loca);
+    if(!strcmp(ch,"Aritrea"))
+        {
+            if(!strcmp(plr->loca,"Majkius"))
+                {
+                    dungeonHead(&Majkius, plr);
+                }
+        }
+}
 
 // Keymap
 /* a - Center of a city

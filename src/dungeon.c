@@ -105,7 +105,8 @@ int dungeonHead(struct city *city, struct DATA *plr) {
             printf("You descend the stairs into the dungeon.\n");
             dungeonMain(&dungeon, plr);
             printf("You got %d gold!\n", dungeon.gold);
-            return dungeon.gold;
+            plr->gold += dungeon.gold;
+            return 0;
         }
     printf("Scared, huh?\n");
     return 0;
