@@ -7,6 +7,11 @@ CLIfe is a singleplayer RPG game written in C.
 It takes inspiration from the classic MUDs from the past and present, and is
 still in early stage.
 
+** Requirements
+To compile, you need:
+- gcc or a comparable compiler
+- gnu standard libraries (see [[https://github.com/cheeesy/clife/issues/7][Compilation Error on OpenBSD 6.6]])
+- ncurses development libraries
 ** Supported Operating Systems
 | OS                  | Working? |
 |---------------------+----------|
