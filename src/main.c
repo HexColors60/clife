@@ -59,6 +59,7 @@ int main(int argc, char *argv[]) {
     /* strcpy(loc, "Majkius"); */
     /* motivation = 100; */
     // In case something goes wrong with reading the savefile, this is the backup data.
+    plr.levl = 0;
 
     
     struct DATA data;
@@ -118,6 +119,12 @@ int main(int argc, char *argv[]) {
         normalInput(input);
         
         action = checkForReaction(action);
+
+        if(checkLevel(level, xp)==1) {
+            printf("You just leveled up!\n%d => ", level);
+            ++level;
+            printf("%d!\n", level);
+        }
 
         if(!strcmp(input,";help") | !strcmp(input,";h")) printf("%s\n", comms);
 
@@ -289,7 +296,7 @@ int wrtSvf(const char *fpath)
                     printf("Oopsie!\n");
                 }
         }
-    printf("\n\nCOMPL: \"%s\"\n\n", compl);
+    printf("\n\nCOMPL: \"%s\"\n\n", compl); // <-- On WSL Debian 10.4 there seemd to be a bug in LEVL where it spits out 5 million something. pls fix.
     write2(SVF, compl);
     free(compl);
     return 0;

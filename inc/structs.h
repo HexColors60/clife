@@ -50,6 +50,8 @@ void detStruct(char *location, char *country, int la, struct DATA *data, struct 
 
 void detStruct_plr(struct DATA *plr, int Sswitch);
 
+int checkLevel(int level, int xp);
+
 // Keymap
 /* a - Center of a city
    r - Religious Building

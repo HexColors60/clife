@@ -45,6 +45,22 @@ void detStruct_plr(struct DATA *plr, int Sswitch) {
         }
 }
 
+int checkLevel(int level, int xp) {
+    if(level<=10)
+        {
+            if(xp>=25)
+                return 1;
+        }
+    
+    else
+        {
+            if(xp>=(level*10))
+                return 1;
+        }
+
+    return 0;
+}
+
 // Keymap
 /* a - Center of a city
    r - Religious Building

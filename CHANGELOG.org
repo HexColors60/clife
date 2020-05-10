@@ -121,3 +121,4 @@ sparse. Check the commits for more information._
 - Created new detStruct function which uses only the player struct
 *** 10. May 2020
 - Added "Requirements" page to README.org
+- Added checkLevel function which works as a level up
