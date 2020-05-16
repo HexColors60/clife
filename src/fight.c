@@ -49,14 +49,14 @@ int Fencounter() {
     printf("Waiting for command...\n");
     for(;;) {
         Fround++;
-        printf("\nIt's round %d\n\nSTATS:\nENEMY HP: %d/%d\nYOUR HP: %d/%d\n\n", Fround, enemy.health, enemy.maxHP, player.health, player.maxHP);
+    getInp:printf("\nIt's round %d\n\nSTATS:\nENEMY HP: %d/%d\nYOUR HP: %d/%d\n\n", Fround, enemy.health, enemy.maxHP, player.health, player.maxHP);
         printf("FIGHT> ");
         fgets(Finput, 32, stdin);
         Finput[strcspn(Finput, "\n")] = 0;
         fflush(stdin);
         printf("You entered: %s\n", Finput);
 
-        if(!strcmp(Finput, "help")) printf("%s\n", Fcomms);
+        if(!strcmp(Finput, "help")) { printf("%s\n", Fcomms); goto getInp; }
         /* if(!strcmp(Finput, "help")) printf("%s\n", "Fighting commands\natk, attack   : attack\nflee          : flee the battle\n"); */
         if(!strcmp(Finput, "a") | !strcmp(Finput, "atk") | !strcmp(Finput, "attack")) { Fattack(&enemy, &player); }
         if(!strcmp(Finput, "flee"))
@@ -72,6 +72,20 @@ int Fencounter() {
                         continue;
                     }
             }
+
+        if(strcmp(Finput, "a") && strcmp(Finput, "atk") && strcmp(Finput, "attack"))
+            {
+                int ranint = 0;
+                ranint = rand() % 4 + 1;
+                
+                if(ranint==3)
+                    {
+                        int dmg = 2;
+                        printf("You got hit by the goblin and lost %d health points!\n", dmg);
+                        player.health -= dmg;
+                    }
+            }
+        
         printf("-----------------------------------\n");
     }
     

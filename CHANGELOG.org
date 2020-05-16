@@ -122,3 +122,6 @@ sparse. Check the commits for more information._
 *** 10. May 2020
 - Added "Requirements" page to README.org
 - Added checkLevel function which works as a level up
+*** 16. May 2020
+- Typing 'help' in a fight does not make the whole round end anymore.
+- When not entering a command there is a chance of taking damage.
