@@ -13,11 +13,12 @@ To compile, you need:
 - gnu standard libraries (see [[https://github.com/cheeesy/clife/issues/7][Compilation Error on OpenBSD 6.6]])
 - ncurses development libraries
 ** Supported Operating Systems
-| OS                  | Working? |
-|---------------------+----------|
-| openSUSE x64 (gcc)  | Yes      |
-| openBSD x64 (clang) | No [^1]   |
-| Windows 10 x64      | No [^2]   |
+| OS                      | Working? |
+|-------------------------+----------|
+| openSUSE x64 (gcc)     | Yes       |
+| Ubuntu 20.04 x64 (gcc) | Yes       |
+| openBSD x64 (clang)    | No [^1]   |
+| Windows 10 x64         | No [^2]   |
 
 [^1]: OpenBSD support seems to be a problem due to the style of programming and
 will be addressed as soon as possible.
