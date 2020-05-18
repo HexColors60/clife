@@ -21,6 +21,19 @@ int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level) {
             player->ATK[1]  = 6;
             player->class   = 'm'; // This should be changed soon!
         }
+    else
+        {
+            printf("Error!\n");
+            enemy->maxHP    = enemy->health  = 0;
+            enemy->ATK[0]   = 0;
+            enemy->ATK[1]   = 0;
+            enemy->class    = 'k';
+
+            player->maxHP   = player->health = 0;
+            player->ATK[0]  = 0;
+            player->ATK[1]  = 0;
+            player->class   = 'm'; // This should be changed soon!
+        }
 }
 
 int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
