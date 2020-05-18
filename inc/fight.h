@@ -11,8 +11,10 @@
 char Finput[32];
 int Fround;
 
+int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level);
+
 int Fattack();
 
-int Fencounter();
+int Fencounter(int level);
 
 # endif

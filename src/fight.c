@@ -8,6 +8,21 @@ const char *Fcomms = "Fighting commands\n\
 │ flee          : flee the battle │\n\
 └─────────────────────────────────┘\n"; // This will make compilation impossible if it stands in fight.h
 
+int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level) {
+    if(level<=5)
+        {
+            enemy->maxHP    = enemy->health  = 25;
+            enemy->ATK[0]   = 1;
+            enemy->ATK[1]   = 4;
+            enemy->class    = 'k';
+
+            player->maxHP   = player->health = 30;
+            player->ATK[0]  = 2;
+            player->ATK[1]  = 6;
+            player->class   = 'm'; // This should be changed soon!
+        }
+}
+
 int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
     printf("ATTACKING!\n\n");
     int ranint = 0;
@@ -29,18 +44,19 @@ int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
     return 0;
 }
 
-int Fencounter() {
+int Fencounter(int level) {
     srand(time(NULL));
     struct HUMANOID enemy;
     struct HUMANOID player;
-    enemy.maxHP   = enemy.health = 100;
-    enemy.ATK[0]  = 1; // Minimal attack
-    enemy.ATK[1]  = 4; // Maximal attack
-    enemy.class   = 'k'; // r = Rogue, k = Knight, m = Mage
-    player.maxHP  = player.health = 100;
-    player.ATK[0] = 1;
-    player.ATK[1] = 6;
-    player.class  = 'm';
+    /* enemy.maxHP   = enemy.health  = 100; */
+    /* enemy.ATK[0]  = 1; // Minimal attack */
+    /* enemy.ATK[1]  = 4; // Maximal attack */
+    /* enemy.class   = 'k'; // r = Rogue, k = Knight, m = Mage */
+    /* player.maxHP  = player.health = 100; */
+    /* player.ATK[0] = 1; */
+    /* player.ATK[1] = 6; */
+    /* player.class  = 'm'; */
+    FdetMatch(&enemy, &player, level);
 
     printf("A goblin appeared!\n");
 

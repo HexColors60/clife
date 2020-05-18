@@ -60,10 +60,10 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
         if(!strcmp(dinput, ";spawn")) // Debug command; an enemy appearing should be random
             {
-                dungeon->gold += dSpawn();
+                dungeon->gold += dSpawn(plr->levl);
                 plr->xp += 10;
             }
-        if(!strcmp(dinput, "seek")) dungeon->gold += dSeek();
+        if(!strcmp(dinput, "seek")) dungeon->gold += dSeek(plr->levl);
         if(!strcmp(dinput, "quit")) break;
         continue;
     }
@@ -112,12 +112,12 @@ int dungeonHead(struct city *city, struct DATA *plr) {
     return 0;
 }
 
-int dSpawn() {
+int dSpawn(int level) {
     printf("You heard something...\n");
-    return Fencounter();
+    return Fencounter(level);
 }
 
-int dSeek() {
+int dSeek(int level) {
     int ranint = rand() % 5 + 1;
     if(ranint!=2)
         {
@@ -127,7 +127,7 @@ int dSeek() {
     else if(ranint==2)
         {
             printf("You heard a voice...\n");
-            return Fencounter();
+            return Fencounter(level);
         }
     else
         {
