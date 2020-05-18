@@ -127,3 +127,4 @@ sparse. Check the commits for more information._
 - When not entering a command there is a chance of taking damage.
 *** 18. May 2020
 - Added & integrated FdetMatch() function to generate matches.
+- Added critical hits

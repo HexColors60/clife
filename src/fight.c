@@ -44,6 +44,11 @@ int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
         {
             printf("The goblin seems to be distracted. You use your chance and curse him!\n");
             int dmg = rand() % player->ATK[1] + player->ATK[0];
+            if(dmg==3)
+                {
+                    printf("You did a critical hit!\nYou dealt 10 damage.\n");
+                    enemy->health -= 10;
+                }
             enemy->health -= dmg;
         }
     if(ranint==2) // Enemy begins
