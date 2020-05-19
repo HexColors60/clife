@@ -178,6 +178,8 @@ int main(int argc, char *argv[]) {
             else plr.moti-=10; }
         /* else motivation = motivation - 10; } */
 
+        if(!strcmp(input,";version")) printf("You're running %s.\n", ver);
+
         if(!strcmp(input,";servus") | !strcmp(input,";tschüß") | !strcmp(input,";tschüs") | !strcmp(input,";quit") | !strcmp(input,";q")) if(cexit()==0) return 0;
 
         // DEBUG TOOLS; WILL BE REMOVED OR BUILT IN SOON

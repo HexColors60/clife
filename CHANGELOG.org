@@ -128,3 +128,5 @@ sparse. Check the commits for more information._
 *** 18. May 2020
 - Added & integrated FdetMatch() function to generate matches.
 - Added critical hits
+*** 19. May 2020
+- Added ';version' command
