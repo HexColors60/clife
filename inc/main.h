@@ -52,7 +52,7 @@ char *role;        // User Role <-- May be removed or altered in the future.
 char *loc;         // Location
 char *country;     // Country
 char *helpath;     // The path of the help pages <-- May be removed or altered in the future.
-const char *ver = "clife 2020.04";
+const char *ver = "clife 2020.05";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
