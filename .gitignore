@@ -1,3 +1,4 @@
+arch/svf/*
 obj/*
 bin/*
 *.swp
