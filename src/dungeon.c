@@ -86,12 +86,12 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
 int checkForDungeon(struct city *city) {
     printf("Looking for dungeon in '%s'.\n", city->name);
-    /* srand(time(NULL)); */
-    /* if((rand() % 5 + 1)!=3) */
-    /*     { */
-    /*         printf("You felt the presence of a dungeon, but you found no entrance.\n"); */
-    /*         return 0; */
-    /*     } */
+    srand(time(NULL));
+    if((rand() % 5 + 1)!=3)
+        {
+            printf("You felt the presence of a dungeon, but you found no entrance.\n");
+            return 0;
+        }
     printf("There it is! The entrance!\n");
     return 1;
 }

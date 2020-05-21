@@ -136,3 +136,4 @@ sparse. Check the commits for more information._
 - Added option to view xp and gold separately in dungeon mode instead of it
   being displayed everytime
 - Cleaned up fight.c a bit
+- Made dungeon seeking random again
