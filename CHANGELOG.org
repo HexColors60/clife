@@ -130,3 +130,5 @@ sparse. Check the commits for more information._
 - Added critical hits
 *** 19. May 2020
 - Added ';version' command
+*** 21. May 2020
+- Fixed help command in dungeon mode

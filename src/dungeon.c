@@ -2,6 +2,17 @@
 
 # include "dungeon.h"
 
+//const char *dHelp = "Dungeon Help\n---------------------------------------------------\n \/
+const char *dHelp = "                           Dungeon Commands                           \n\
+┌────────────────────────────┬───────────────────────────────────────┐\n\
+│ help                       │ Display this help.                    │\n\
+│ coords                     │ Show where you are.                   │\n\
+│ n, e, s, w                 │ Go in a direction.                    │\n\
+│ ;spawn                     │ Spawn a monster (debug).              │\n\
+│ seek                       │ Take the risk and seek for treasures. │\n\
+│ quit                       │ Leave the dungeon.                    │\n\
+└────────────────────────────┴───────────────────────────────────────┘";
+
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
     printf("Waiting for command...\n");
     for(;;) {
@@ -12,7 +23,7 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
         fflush(stdin);
         printf("You entered: %s\n", dinput);
 
-        if(!strcmp(dinput, "help")) printf("No help.");
+        if(!strcmp(dinput, "help")) printf("%s\n", dHelp);
         if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y);
 
         
