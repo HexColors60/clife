@@ -2,7 +2,6 @@
 
 # include "dungeon.h"
 
-//const char *dHelp = "Dungeon Help\n---------------------------------------------------\n \/
 const char *dHelp = "                           Dungeon Commands                           \n\
 ┌────────────────────────────┬───────────────────────────────────────┐\n\
 │ help                       │ Display this help.                    │\n\
@@ -16,14 +15,15 @@ const char *dHelp = "                           Dungeon Commands                
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
     printf("Waiting for command...\n");
     for(;;) {
-        printf("XP:   %d\n", plr->xp);
-        printf("GOLD: %d\n", dungeon->gold);
         printf("DUNGEON> ");
         fgets(dinput, 32, stdin);
         dinput[strcspn(dinput, "\n")] = 0;
         fflush(stdin);
         printf("You entered: %s\n", dinput);
 
+        if(!strcmp(dinput, "xp")) printf("XP: %d\n", plr->xp);
+        if(!strcmp(dinput, "gold")) printf("GOLD: %d\n", dungeon->gold);
+        
         if(!strcmp(dinput, "help")) printf("%s\n", dHelp);
         if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y);
 

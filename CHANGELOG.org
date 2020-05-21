@@ -133,3 +133,5 @@ sparse. Check the commits for more information._
 *** 21. May 2020
 - Fixed help command in dungeon mode
 - A fight ends when the player or the enemy's health drops to 0
+- Added option to view xp and gold separately in dungeon mode instead of it
+  being displayed everytime
