@@ -16,7 +16,8 @@ const char *dHelp = "                           Dungeon Commands                
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
     printf("Waiting for command...\n");
     for(;;) {
-        printf("XP: %d\n", plr->xp);
+        printf("XP:   %d\n", plr->xp);
+        printf("GOLD: %d\n", dungeon->gold);
         printf("DUNGEON> ");
         fgets(dinput, 32, stdin);
         dinput[strcspn(dinput, "\n")] = 0;
@@ -71,8 +72,10 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
         if(!strcmp(dinput, ";spawn")) // Debug command; an enemy appearing should be random
             {
+                int oldgold = dungeon->gold;
                 dungeon->gold += dSpawn(plr->levl);
-                plr->xp += 10;
+                if(dungeon->gold>=oldgold)
+                    plr->xp += 10;
             }
         if(!strcmp(dinput, "seek")) dungeon->gold += dSeek(plr->levl);
         if(!strcmp(dinput, "quit")) break;

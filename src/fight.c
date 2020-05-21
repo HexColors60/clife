@@ -3,10 +3,10 @@
 # include "fight.h"
 
 const char *Fcomms = "Fighting commands\n\
-┌─────────────────────────────────┐\n\
-│ atk, attack   : attack          │\n\
-│ flee          : flee the battle │\n\
-└─────────────────────────────────┘\n"; // This will make compilation impossible if it stands in fight.h
+┌───────────────┬─────────────────┐\n\
+│ atk, attack   │ attack          │\n\
+│ flee          │ flee the battle │\n\
+└───────────────┴─────────────────┘\n"; // This will make compilation impossible if it stands in fight.h
 
 int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level) {
     if(level<=5)
@@ -43,13 +43,17 @@ int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
     if(ranint==1) // Player begins
         {
             printf("The goblin seems to be distracted. You use your chance and curse him!\n");
-            int dmg = rand() % player->ATK[1] + player->ATK[0];
-            if(dmg==3)
+            int crit = rand() % 5 + 1;
+            if(crit==3)
                 {
-                    printf("You did a critical hit!\nYou dealt 10 damage.\n");
-                    enemy->health -= 10;
+                    printf("You did a critical hit!\nYou dealt %d damage.\n", (player->ATK[1]+5));
+                    enemy->health -= (player->ATK[1]+5);
                 }
-            enemy->health -= dmg;
+            else
+                {
+                    int dmg = rand() % player->ATK[1] + player->ATK[0];
+                    enemy->health -= dmg;
+                }
         }
     if(ranint==2) // Enemy begins
         {
@@ -82,6 +86,21 @@ int Fencounter(int level) {
 
     printf("Waiting for command...\n");
     for(;;) {
+
+        if(player.health<=0)
+            {
+                player.health = 0;
+                printf("You manage to run away in the last moment.\n");
+                return 0;
+            }
+
+        if(enemy.health<=0)
+            {
+                enemy.health = 0;
+                printf("The goblin drops dead.\nGood job.\n");
+                return 10;
+            }
+        
         Fround++;
     getInp:printf("\nIt's round %d\n\nSTATS:\nENEMY HP: %d/%d\nYOUR HP: %d/%d\n\n", Fround, enemy.health, enemy.maxHP, player.health, player.maxHP);
         printf("FIGHT> ");

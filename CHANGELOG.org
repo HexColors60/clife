@@ -132,3 +132,4 @@ sparse. Check the commits for more information._
 - Added ';version' command
 *** 21. May 2020
 - Fixed help command in dungeon mode
+- A fight ends when the player or the enemy's health drops to 0
