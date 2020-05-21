@@ -137,3 +137,4 @@ sparse. Check the commits for more information._
   being displayed everytime
 - Cleaned up fight.c a bit
 - Made dungeon seeking random again
+- Changed the license from GPLv3 to the MIT license
