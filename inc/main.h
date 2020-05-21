@@ -29,8 +29,10 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 #include "amp.h" // ASCII (Semigraphical) Map
 #include "arb.h" // Working / earning Money
 #include "defs.h"
+#include "dungeon.h" // Dungeon Crawler Mode
 #include "env.h" // Enviroment
 #include "file.h" // exists(), File writing
+#include "fight.h" // Fighting
 #include "map.h" // In-Game Map
 #include "misc.h" // Other functions
 #include "money.h" // Money Management
@@ -41,6 +43,8 @@ along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
 
 int gold;
 int motivation;
+int level;         // Levels will play a role in minimal and maximal attack in fighting.
+int xp = 0;        // XP is only valid for one session.
 char action = 0;   // See inc/env.h:emotion() for more details.
 char input[32];    // Command input
 char *name;        // User name
@@ -48,7 +52,7 @@ char *role;        // User Role <-- May be removed or altered in the future.
 char *loc;         // Location
 char *country;     // Country
 char *helpath;     // The path of the help pages <-- May be removed or altered in the future.
-const char *ver = "clife 2020.04";
+const char *ver = "clife 2020.05";
 const char *help = "clife\n\
 \n\
 -v, --version\n\
@@ -70,7 +74,7 @@ const char *comms = "                             CLIfe commands\n\
 │ map:                             │ Show ASCII-Map.                     │\n\
 │ goto:                            │ Travel in a country.                │\n\
 │ e:                               │ Use an emotion.                     │\n\
-│ r, travel:                       │ Traven from one country to another. │\n\
+│ r, travel:                       │ Travel from one country to another. │\n\
 │ m, motivation:                   │ View your current motivation.       │\n\
 │ s, sleep:                        │ Sleep.                              │\n\
 │ q, quit, tschüs, tschüß, servus: │ Quit the game.                      │\n\

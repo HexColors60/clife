@@ -70,6 +70,7 @@ void begSequence(struct DATA *d) {
             strcpy(d->loca, "Majkius");
             /* d->loca = "Majkius"; */
             d->moti = 100;
+            d->levl = 0;
             /* setGold(); */
             /* setPos(); */
             /* setMot(); */

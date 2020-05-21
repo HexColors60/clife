@@ -102,3 +102,38 @@ sparse. Check the commits for more information._
 *** 25. April 2020
 - The obfuscators in the newspaper minigame are now random.
 - Fix differing indent size (default is now 4)
+*** 27. April 2020
+- Started work on Dungeon Crawler Mode
+- Added Reward for Dungeon Crawling (Fixed :)
+*** 28. April 2020
+- Added moving in dungeons and barebones fighting mode.
+- Added fighting in dungeons.
+- Added Level and XP
+- Moved game variables to a struct
+- Fixed crash when going into dungeons after moving to struct
+** May 2020
+*** 2. May 2020
+- Added player struct to dungeonHead (for XP functionality)
+*** 3. May 2020
+- Getting XP through fighting
+- Added XP and Level to printf (main.c)
+- Fix typo in comms (main.h)
+- Created new detStruct function which uses only the player struct
+*** 10. May 2020
+- Added "Requirements" page to README.org
+- Added checkLevel function which works as a level up
+*** 16. May 2020
+- Typing 'help' in a fight does not make the whole round end anymore.
+- When not entering a command there is a chance of taking damage.
+*** 18. May 2020
+- Added & integrated FdetMatch() function to generate matches.
+- Added critical hits
+*** 19. May 2020
+- Added ';version' command
+*** 21. May 2020
+- Fixed help command in dungeon mode
+- A fight ends when the player or the enemy's health drops to 0
+- Added option to view xp and gold separately in dungeon mode instead of it
+  being displayed everytime
+- Cleaned up fight.c a bit
+- Made dungeon seeking random again
