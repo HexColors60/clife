@@ -6,7 +6,7 @@ const char *Fcomms = "Fighting commands\n\
 ┌───────────────┬─────────────────┐\n\
 │ atk, attack   │ attack          │\n\
 │ flee          │ flee the battle │\n\
-└───────────────┴─────────────────┘\n"; // This will make compilation impossible if it stands in fight.h
+└───────────────┴─────────────────┘\n";
 
 int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level) {
     if(level<=5)
@@ -37,10 +37,15 @@ int FdetMatch(struct HUMANOID *enemy, struct HUMANOID *player, int level) {
 }
 
 int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
+    /*
+     * This is a very quick and incomplete attack function,
+     * it definitely needs attention, for example adding of
+     * the classes a player chooses, et cetera.
+     */
     printf("ATTACKING!\n\n");
     int ranint = 0;
     ranint = rand() % 2 + 1;
-    if(ranint==1) // Player begins
+    if(ranint==1) // Player taking initiative.
         {
             printf("The goblin seems to be distracted. You use your chance and curse him!\n");
             int crit = rand() % 5 + 1;
@@ -55,14 +60,13 @@ int Fattack(struct HUMANOID *enemy, struct HUMANOID *player) {
                     enemy->health -= dmg;
                 }
         }
-    if(ranint==2) // Enemy begins
+    if(ranint==2) // Enemy taking initiative.
         {
             printf("You were incautious and got hit!\n");
             int dmg = rand() % enemy->ATK[1] + enemy->ATK[0];
             player->health -= dmg;
         }
-
-    /* printf("ENEMY: %d/%d\nPLAYER: %d/%d\n", enemy->health, enemy->maxHP, player->health, player->maxHP); */
+    
     return 0;
 }
 
@@ -70,14 +74,6 @@ int Fencounter(int level) {
     srand(time(NULL));
     struct HUMANOID enemy;
     struct HUMANOID player;
-    /* enemy.maxHP   = enemy.health  = 100; */
-    /* enemy.ATK[0]  = 1; // Minimal attack */
-    /* enemy.ATK[1]  = 4; // Maximal attack */
-    /* enemy.class   = 'k'; // r = Rogue, k = Knight, m = Mage */
-    /* player.maxHP  = player.health = 100; */
-    /* player.ATK[0] = 1; */
-    /* player.ATK[1] = 6; */
-    /* player.class  = 'm'; */
     FdetMatch(&enemy, &player, level);
 
     printf("A goblin appeared!\n");
@@ -110,8 +106,9 @@ int Fencounter(int level) {
         printf("You entered: %s\n", Finput);
 
         if(!strcmp(Finput, "help")) { printf("%s\n", Fcomms); goto getInp; }
-        /* if(!strcmp(Finput, "help")) printf("%s\n", "Fighting commands\natk, attack   : attack\nflee          : flee the battle\n"); */
+        
         if(!strcmp(Finput, "a") | !strcmp(Finput, "atk") | !strcmp(Finput, "attack")) { Fattack(&enemy, &player); }
+        
         if(!strcmp(Finput, "flee"))
             {
                 if(Fround<=3)
