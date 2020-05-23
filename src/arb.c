@@ -81,9 +81,12 @@ bool workMinigame(char *type) {
         num2 = num2 * 100;
         num2 = generate(num2,(num2+999));
         printf("%d\n\n", num2);
-        int decinp; // sum
-        scanf("%d", &decinp);
-        if(decinp==(num1+num2)) { printf("You get a small salary of 50 gold coins for your work.\n"); return true; }
+        char decinp[8];
+        // int decinp; // sum
+        fgets(decinp, 8, stdin);
+        
+        /* scanf("%d", &decinp); */
+        if(atoi(decinp)==(num1+num2)) { printf("You get a small salary of 50 gold coins for your work.\n"); return true; }
         return false;
     }
 }
