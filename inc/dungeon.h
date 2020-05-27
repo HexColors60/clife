@@ -25,4 +25,6 @@ int dSpawn();
 
 int dSeek();
 
+int dMap(int x, int y, int Xmax[], int Ymax[]);
+
 # endif

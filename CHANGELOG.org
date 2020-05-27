@@ -140,3 +140,6 @@ sparse. Check the commits for more information._
 - Changed the license from GPLv3 to the MIT license
 *** 23. May 2020
 - Fixed issue [[https://github.com/cheeesy/clife/issues/10][10]] by replacing scanf with fgets
+*** 27. May 2020
+- Added map in dungeon
+- Added HJKL movement in dungeon

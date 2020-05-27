@@ -9,10 +9,14 @@ const char *dHelp = "                           Dungeon Commands                
 │ n, e, s, w                 │ Go in a direction.                    │\n\
 │ ;spawn                     │ Spawn a monster (debug).              │\n\
 │ seek                       │ Take the risk and seek for treasures. │\n\
+│ map                        │ Display a map of the dungeon.         │\n\
 │ quit                       │ Leave the dungeon.                    │\n\
 └────────────────────────────┴───────────────────────────────────────┘";
 
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
+
+    printf("Xmax0: %d\nXmax1: %d\n\nYmax0: %d\nYmax1: %d", dungeon->Xmax[0], dungeon->Xmax[1], dungeon->Ymax[0], dungeon->Ymax[1]);
+    
     printf("Waiting for command...\n");
     for(;;) {
         printf("DUNGEON> ");
@@ -28,45 +32,49 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
         if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y);
 
         
-        if(!strcmp(dinput, "n") | !strcmp(dinput, "north"))
+        if(!strcmp(dinput, "n") | !strcmp(dinput, "north") | !strcmp(dinput, "k"))
             {
-                if(((dungeon->y)+1) > dungeon->Ymax[1])
+                if(((dungeon->y)+1) > (dungeon->Ymax[1])+1)
                     {
                         printf("You walked against a wall.\n");
                         continue;
                     }
                 printf("You walk towards the north.\n");
                 dungeon->y++;
+                dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "e") | !strcmp(dinput, "east"))
+        if(!strcmp(dinput, "e") | !strcmp(dinput, "east") | !strcmp(dinput, "l"))
             {
-                if(((dungeon->x)+1) > dungeon->Xmax[1])
+                if(((dungeon->x)+1) > (dungeon->Xmax[1])+1)
                     {
                         printf("You walked against a wall.\n");
                         continue;
                     }
                 printf("You walk towards the east.\n");
                 dungeon->x++;
+                dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "s") | !strcmp(dinput, "south"))
+        if(!strcmp(dinput, "s") | !strcmp(dinput, "south") | !strcmp(dinput, "j"))
             {
-                if(((dungeon->y)-1) < dungeon->Ymax[0])
+                if(((dungeon->y)-1) < (dungeon->Ymax[0])+1)
                     {
                         printf("You walked against a wall.\n");
                         continue;
                     }
                 printf("You walk towards the south.\n");
                 dungeon->y--;
+                dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "w") | !strcmp(dinput, "west"))
+        if(!strcmp(dinput, "w") | !strcmp(dinput, "west") | !strcmp(dinput, "h"))
             {
-                if(((dungeon->x)-1) < dungeon->Xmax[0])
+                if(((dungeon->x)-1) < (dungeon->Xmax[0])+1)
                     {
                         printf("You walked against a wall.\n");
                         continue;
                     }
                 printf("You walk towards the south.\n");
                 dungeon->x--;
+                dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
 
 
@@ -77,7 +85,11 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                 if(dungeon->gold>=oldgold)
                     plr->xp += 10;
             }
+
         if(!strcmp(dinput, "seek")) dungeon->gold += dSeek(plr->levl);
+
+        if(!strcmp(dinput, "map")) /* dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax); */ printf("%d\n",dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax));
+        
         if(!strcmp(dinput, "quit")) break;
         continue;
     }
@@ -86,6 +98,7 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
 int checkForDungeon(struct city *city) {
     printf("Looking for dungeon in '%s'.\n", city->name);
+    return 1;
     srand(time(NULL));
     if((rand() % 5 + 1)!=3)
         {
@@ -102,7 +115,7 @@ int dungeonHead(struct city *city, struct DATA *plr) {
     struct DUNGEON dungeon;
     dungeon.gold    = 0;
     dungeon.x       = 5;
-    dungeon.y       = 0;
+    dungeon.y       = 1;
     dungeon.Xmax[0] = 0; // Xmax[0] = west corner
     dungeon.Xmax[1] = 7; // Xmax[1] = east corner
     dungeon.Ymax[0] = 0; // Ymax[0] = south corner
@@ -148,5 +161,52 @@ int dSeek(int level) {
             printf("You found nothing.\n");
             return 0;
         }
+    return 0;
+}
+
+int dMap(int x, int y, int Xmax[], int Ymax[]) {
+    // x and y are the coordinates of the
+    // player. Xmax and Ymax are the max-
+    // imum coordinates which are used to
+    // draw the box.
+    
+    int curX = 0;
+    int curY = Ymax[1];
+
+    int i = 0;
+    
+    printf("+");
+    for(i; i<Xmax[1]; ++i)
+        {
+            printf("-");
+            ++curX;
+        }
+    i = 0;
+    printf("+\n");
+    
+    for(curY; curY>0; --curY)
+        {
+            printf("|");
+            for(i; i<Xmax[1]; ++i)
+                {
+                    if(curY==y && i==x)
+                        {
+                            printf("@");
+                        } else
+                        printf(".");
+                }
+            i = 0;
+            printf("|\n");
+            
+        }
+    
+    printf("+");
+    for(i; i<Xmax[1]; ++i)
+        {
+            printf("-");
+            ++curX;
+        }
+    i = 0;
+    printf("+\n");
     return 0;
 }
