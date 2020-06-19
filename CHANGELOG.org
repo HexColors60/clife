@@ -143,3 +143,7 @@ sparse. Check the commits for more information._
 *** 27. May 2020
 - Added map in dungeon
 - Added HJKL movement in dungeon
+** June 2020
+*** 2. June 2020
+- Add ncurses mode to dungeon crawler
+- Add license notice to main.c

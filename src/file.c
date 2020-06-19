@@ -34,6 +34,17 @@ void wrinte2(const char *fpath, int inte) {
     fclose(f);
 }
 
+void appende2(const char *fpath, int inte) {
+    FILE *f = fopen(fpath, "a");
+    if(f==NULL)
+        {
+            printf("File could not be read!\nFilename: %s", fpath);
+            exit(1);
+        }
+    fprintf(f, "%d", inte);
+    fclose(f);
+}
+
 void cat2(const char *fpath, const char *message) {
     FILE *f = fopen(fpath, "a");
     if(f==NULL)

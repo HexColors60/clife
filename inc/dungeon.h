@@ -6,6 +6,7 @@
 # include <string.h>
 # include <time.h>
 # include <ctype.h>
+# include <ncurses.h>
 
 # include "structs.h"
 # include "fight.h"
@@ -26,5 +27,7 @@ int dSpawn();
 int dSeek();
 
 int dMap(int x, int y, int Xmax[], int Ymax[]);
+
+int dMap_ncurses(WINDOW *mapwindow, int x, int y, int Xmax[], int Ymax[]);
 
 # endif

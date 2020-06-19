@@ -13,6 +13,8 @@ void write2(const char *fpath, const char *message);
 
 void wrinte2(const char *fpath, int inte);
 
+void appende2(const char *fpath, int inte);
+
 void cat2(const char *fpath, const char *message);
 
 # endif

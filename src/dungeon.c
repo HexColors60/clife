@@ -15,6 +15,48 @@ const char *dHelp = "                           Dungeon Commands                
 
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
+    // int dMap_ncurses(WINDOW *mapwindow, int x, int y, int Xmax[], int Ymax[]) {
+    int debug = 1;
+
+    if(debug==1) {
+        initscr();
+        noecho();
+        cbreak();
+
+        clear();
+
+        int yMax, xMax;
+        getmaxyx(stdscr, yMax, xMax);
+
+        box(stdscr, 0, 0);
+
+        WINDOW *mapwin = newwin((dungeon->Ymax[1]+2), (dungeon->Xmax[1]+2), 1, 2);
+        refresh();
+        box(mapwin, 0, 0);
+        wrefresh(mapwin);
+
+        dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
+    
+        /* WINDOW *deWin = newwin((yMax), (xMax-1), 0, 1); */
+        /* refresh(); */
+        /* box(deWin, 0, 0); */
+        /* wrefresh(deWin); */
+
+        char i = getch();
+
+        if(i=='k')
+            {
+                dungeon->y++;
+                dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
+            }
+
+        getch();
+
+        endwin();
+
+        return 0;
+    }
+
     printf("Xmax0: %d\nXmax1: %d\n\nYmax0: %d\nYmax1: %d", dungeon->Xmax[0], dungeon->Xmax[1], dungeon->Ymax[0], dungeon->Ymax[1]);
     
     printf("Waiting for command...\n");
@@ -165,10 +207,12 @@ int dSeek(int level) {
 }
 
 int dMap(int x, int y, int Xmax[], int Ymax[]) {
-    // x and y are the coordinates of the
-    // player. Xmax and Ymax are the max-
-    // imum coordinates which are used to
-    // draw the box.
+    /**
+      * x and y are the coordinates of the
+      * player. Xmax and Ymax are the max-
+      * imum coordinates which are used to
+      * draw the box.
+      **/
     
     int curX = 0;
     int curY = Ymax[1];
@@ -209,4 +253,81 @@ int dMap(int x, int y, int Xmax[], int Ymax[]) {
     i = 0;
     printf("+\n");
     return 0;
+}
+
+int dMap_ncurses(WINDOW *mapwindow, int x, int y, int Xmax[], int Ymax[]) {
+    /**
+      * x and y are the coordinates of the
+      * player. Xmax and Ymax are the max-
+      * imum coordinates which are used to
+      * draw the box.
+      **/
+
+    int curX = 0;
+    int curY = Ymax[1];
+    
+    int i = 0;
+    
+    wprintw(mapwindow, "+");
+    for(i; i<Xmax[1]; ++i)
+        {
+            wprintw(mapwindow, "-");
+            ++curX;
+        }
+    i = 1;
+    wprintw(mapwindow, "+");
+    wrefresh(mapwindow);
+    refresh();
+
+    for(int j=0; j<curY; j++)
+    /* for(i; i<curY; ++i) */
+        /* for(curY; curY>0; --curY) */
+        {
+            /* move(14,14); */
+            /* printw("%d %d", i, curY); */
+            /* wrefresh(stdscr); */
+            /* refresh(); */
+            
+            wprintw(mapwindow, "|");
+            wrefresh(mapwindow);
+            refresh();
+            //            return 0;
+            for(int k = 0; k<Xmax[1]; ++k)
+                {
+                    if(/*curY*/j==y && k==x)
+                        {
+                            wprintw(mapwindow, "@");
+                        }
+                    else
+                        {
+                            wprintw(mapwindow, ".");
+                        }
+                }
+            i = 0;
+            wprintw(mapwindow, "|");
+            
+            wrefresh(mapwindow);
+            refresh();
+
+            /* getch(); */
+            
+            /* if(exists("/tmp/CLIFEDEBUG")==false) */
+            /*     wrinte2("/tmp/CLIFEDEBUG", i); */
+            /* else */
+            /*     appende2("/tmp/CLIFEDEBUG", i); */
+            move(curY+2, 2);
+        }
+    wrefresh(mapwindow);
+    refresh();
+    
+    printf("+");
+    for(i; i<Xmax[1]; ++i)
+        {
+            printf("-");
+            ++curX;
+        }
+    i = 0;
+    printf("+\n");
+    return 0;
+
 }
