@@ -8,7 +8,7 @@
 
 int sleepGen();
 
-int sleep(int m);
+int goSleep(int m);
 
 void seeMotivation(int m);
 

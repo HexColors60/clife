@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
 
         if(!strcmp(input,";motivation") | !strcmp(input,";m")) seeMotivation(plr.moti);
 
-        if(!strcmp(input,";sleep") | !strcmp(input,";s")) { if(sleep(plr.moti)!=3) plr.moti = 80;
+        if(!strcmp(input,";sleep") | !strcmp(input,";s")) { if(goSleep(plr.moti)!=3) plr.moti = 80;
             else plr.moti-=10; }
         /* else motivation = motivation - 10; } */
 

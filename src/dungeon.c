@@ -15,68 +15,76 @@ const char *dHelp = "                           Dungeon Commands                
 
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
 
-    // int dMap_ncurses(WINDOW *mapwindow, int x, int y, int Xmax[], int Ymax[]) {
-    int debug = 1;
+/*     int debug = 0; */
 
-    if(debug==1) {
-        initscr();
-        noecho();
-        cbreak();
+/*     if(debug==1) { */
+/*         initscr(); */
+/*         noecho(); */
+/*         cbreak(); */
 
-        clear();
+/*         clear(); */
 
-        int yMax, xMax;
-        getmaxyx(stdscr, yMax, xMax);
+/*         int yMax, xMax; */
+/*         getmaxyx(stdscr, yMax, xMax); */
 
-        box(stdscr, 0, 0);
+/*         box(stdscr, 0, 0); */
 
-        WINDOW *mapwin = newwin((dungeon->Ymax[1]+2), (dungeon->Xmax[1]+2), 1, 2);
-        refresh();
-        box(mapwin, 0, 0);
-        wrefresh(mapwin);
+/*         WINDOW *mapwin = newwin((dungeon->Ymax[1]+2), (dungeon->Xmax[1]+2), 1, 2); */
+/*         refresh(); */
+/*         box(mapwin, 0, 0); */
+/*         wrefresh(mapwin); */
 
-        dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
-    
-        /* WINDOW *deWin = newwin((yMax), (xMax-1), 0, 1); */
-        /* refresh(); */
-        /* box(deWin, 0, 0); */
-        /* wrefresh(deWin); */
+/*         dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax); */
 
-        char i = getch();
+/*         char i = getch(); */
 
-        if(i=='k')
-            {
-                dungeon->y++;
-                dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
-            }
+/*         if(i=='k') */
+/*             { */
+/*                 dungeon->y++; */
+/*                 dMap_ncurses(mapwin, dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax); */
+/*             } */
 
-        getch();
+/*         getch(); */
 
-        endwin();
+/*         endwin(); */
 
-        return 0;
-    }
+/*         return 0; */
+/*     } */
+
+    // This code stems from P13324 Week 3 Report 6 from the ITT Mombay
+    char c;
+    static struct termios oldt, newt;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+
+    newt.c_lflag &= ~(ICANON);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
     printf("Xmax0: %d\nXmax1: %d\n\nYmax0: %d\nYmax1: %d", dungeon->Xmax[0], dungeon->Xmax[1], dungeon->Ymax[0], dungeon->Ymax[1]);
     
     printf("Waiting for command...\n");
     for(;;) {
         printf("DUNGEON> ");
-        fgets(dinput, 32, stdin);
-        dinput[strcspn(dinput, "\n")] = 0;
-        fflush(stdin);
-        printf("You entered: %s\n", dinput);
 
-        if(!strcmp(dinput, "xp")) printf("XP: %d\n", plr->xp);
-        if(!strcmp(dinput, "gold")) printf("GOLD: %d\n", dungeon->gold);
+        c = getchar();
+
+        /* fgets(dinput, 32, stdin); */
+        /* dinput[strcspn(dinput, "\n")] = 0; */
+        /* fflush(stdin); */
+        printf("You entered: %c\n", c);
+
+        /* if(!strcmp(dinput, "xp")) printf("XP: %d\n", plr->xp); */
+        /* if(!strcmp(dinput, "gold")) printf("GOLD: %d\n", dungeon->gold); */
         
-        if(!strcmp(dinput, "help")) printf("%s\n", dHelp);
-        if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y);
+        /* if(!strcmp(dinput, "help")) printf("%s\n", dHelp); */
+        /* if(!strcmp(dinput, "coords")) printf("x: %d\ny: %d\n", dungeon->x, dungeon->y); */
 
         
-        if(!strcmp(dinput, "n") | !strcmp(dinput, "north") | !strcmp(dinput, "k"))
+        /* if(!strcmp(dinput, "n") | !strcmp(dinput, "north") | !strcmp(dinput, "k")) */
+        if(c=='n' || c=='k')
             {
-                if(((dungeon->y)+1) > (dungeon->Ymax[1])+1)
+                if(((dungeon->y)+1) > (dungeon->Ymax[1]))
                     {
                         printf("You walked against a wall.\n");
                         continue;
@@ -85,9 +93,10 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                 dungeon->y++;
                 dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "e") | !strcmp(dinput, "east") | !strcmp(dinput, "l"))
+        /* if(!strcmp(dinput, "e") | !strcmp(dinput, "east") | !strcmp(dinput, "l")) */
+        if(c=='e' || c=='l')
             {
-                if(((dungeon->x)+1) > (dungeon->Xmax[1])+1)
+                if(((dungeon->x)+1) > (dungeon->Xmax[1])-1)
                     {
                         printf("You walked against a wall.\n");
                         continue;
@@ -96,7 +105,8 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                 dungeon->x++;
                 dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "s") | !strcmp(dinput, "south") | !strcmp(dinput, "j"))
+        /* if(!strcmp(dinput, "s") | !strcmp(dinput, "south") | !strcmp(dinput, "j")) */
+        if(c=='s' || c=='j')
             {
                 if(((dungeon->y)-1) < (dungeon->Ymax[0])+1)
                     {
@@ -107,9 +117,10 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                 dungeon->y--;
                 dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
-        if(!strcmp(dinput, "w") | !strcmp(dinput, "west") | !strcmp(dinput, "h"))
+        /* if(!strcmp(dinput, "w") | !strcmp(dinput, "west") | !strcmp(dinput, "h")) */
+        if(c=='w' || c=='h')
             {
-                if(((dungeon->x)-1) < (dungeon->Xmax[0])+1)
+                if(((dungeon->x)-1) < (dungeon->Xmax[0]))
                     {
                         printf("You walked against a wall.\n");
                         continue;
@@ -119,8 +130,7 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                 dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
             }
 
-
-        if(!strcmp(dinput, ";spawn")) // Debug command; an enemy appearing should be random
+        if(c==';') // Debug command; an enemy appearing should be random
             {
                 int oldgold = dungeon->gold;
                 dungeon->gold += dSpawn(plr->levl);
@@ -128,14 +138,24 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
                     plr->xp += 10;
             }
 
-        if(!strcmp(dinput, "seek")) dungeon->gold += dSeek(plr->levl);
+        if(c=='a')
+            dungeon->gold += dSeek(plr->levl);
+
+        if(c=='q')
+            break;
+
+        if(c=='m')
+            dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax);
+
+        continue;
 
         if(!strcmp(dinput, "map")) /* dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax); */ printf("%d\n",dMap(dungeon->x, dungeon->y, dungeon->Xmax, dungeon->Ymax));
         
-        if(!strcmp(dinput, "quit")) break;
         continue;
     }
     return 0;
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
 int checkForDungeon(struct city *city) {
@@ -156,7 +176,7 @@ int dungeonHead(struct city *city, struct DATA *plr) {
     printf("NAME: %s\n", plr->name);
     struct DUNGEON dungeon;
     dungeon.gold    = 0;
-    dungeon.x       = 5;
+    dungeon.x       = 1;
     dungeon.y       = 1;
     dungeon.Xmax[0] = 0; // Xmax[0] = west corner
     dungeon.Xmax[1] = 7; // Xmax[1] = east corner

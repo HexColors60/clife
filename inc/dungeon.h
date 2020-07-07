@@ -1,12 +1,14 @@
 # ifndef __CLIFE_DUNGEON_H__
 # define __CLIFE_DUNGEON_H__
 
+# include <time.h>
 # include <stdio.h>
+# include <ctype.h>
 # include <stdlib.h>
 # include <string.h>
-# include <time.h>
-# include <ctype.h>
+# include <unistd.h>
 # include <ncurses.h>
+# include <termios.h>
 
 # include "structs.h"
 # include "fight.h"

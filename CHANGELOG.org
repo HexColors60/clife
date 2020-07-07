@@ -147,3 +147,7 @@ sparse. Check the commits for more information._
 *** 2. June 2020
 - Add ncurses mode to dungeon crawler
 - Add license notice to main.c
+** July 2020
+*** 7. July 2020
+- Removed ncurses mode form dungeon crawler
+- Removed copyright notice from main.h

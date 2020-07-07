@@ -2,22 +2,6 @@
 # define __CLIFE_MAIN_H__
 //--TRANSLATED 15%--//
 
-// Copyright (C) 2018-2020 cheeesy
-
-/* CLIfe is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or (at
-your option) any later version.
-
-CLIfe is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with CLIfe. If not, see <https://www.gnu.org/licenses/>.  */
-
-
 #include <ncurses.h>
 #include <signal.h>
 #include <stdbool.h>
@@ -52,7 +36,7 @@ char *role;        // User Role <-- May be removed or altered in the future.
 char *loc;         // Location
 char *country;     // Country
 char *helpath;     // The path of the help pages <-- May be removed or altered in the future.
-const char *ver = "clife 2020.06";
+const char *ver = "clife 2020.07";
 const char *help = "clife\n\
 \n\
 -v, --version\n\

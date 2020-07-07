@@ -7,7 +7,7 @@ int sleepGen() {
     if(ranlol==3) return 3;
     else return 1;
 }
-int sleep(int m) {
+int goSleep(int m) {
     if(m>=50) { printf("You are too motivated to sleep!\n");
         return 3; }
     if(sleepGen()==3) { printf("You had a terrible nightmare!\n You did not regenerate motivation!\n");
