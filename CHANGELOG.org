@@ -151,3 +151,5 @@ sparse. Check the commits for more information._
 *** 7. July 2020
 - Removed ncurses mode form dungeon crawler
 - Removed copyright notice from main.h
+- Added help in dungeon crawler again
+- Fixed typo in dungeon.c
