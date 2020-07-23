@@ -9,7 +9,7 @@ still in early stage.
 
 ** Requirements
 To compile, you need:
-- gcc or a comparable compiler
+- gcc or a comparable compiler (gcc10 fucked this project apart so don't attempt to use it)
 - gnu standard libraries (see [[https://github.com/cheeesy/clife/issues/7][Compilation Error on OpenBSD 6.6]])
 - ncurses development libraries
 ** Supported Operating Systems

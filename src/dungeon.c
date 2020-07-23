@@ -135,8 +135,8 @@ int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr) {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
-int checkForDungeon(struct city *city) {
-    printf("Looking for dungeon in '%s'.\n", city->name);
+int checkForDungeon(struct city *cty) {
+    printf("Looking for dungeon in '%s'.\n", cty->name);
     return 1;
     srand(time(NULL));
     if((rand() % 5 + 1)!=3)
@@ -148,8 +148,8 @@ int checkForDungeon(struct city *city) {
     return 1;
 }
 
-int dungeonHead(struct city *city, struct DATA *plr) {
-    if(checkForDungeon(city)!=1) return 0;
+int dungeonHead(struct city *cty, struct DATA *plr) {
+    if(checkForDungeon(cty)!=1) return 0;
     printf("NAME: %s\n", plr->name);
     struct DUNGEON dungeon;
     dungeon.gold    = 0;

@@ -20,9 +20,9 @@ char dinput[32];
 
 int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr);
 
-int checkForDungeon(struct city *city);
+int checkForDungeon(struct city *cty);
 
-int dungeonHead(struct city *city, struct DATA *plr);
+int dungeonHead(struct city *cty, struct DATA *plr);
 
 int dSpawn();
 
