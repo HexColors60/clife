@@ -1,5 +1,5 @@
 #include "structs.h"
-#include "dungeon.h"
+# include "dungeon.h"
 
 void setAll() { // Get rid of reading dozens of files and replace it with a nice struct
     Majkius.name = "Majkius";

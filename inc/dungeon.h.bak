@@ -1,4 +1,5 @@
-
+# ifndef __CLIFE_DUNGEON_H__
+# define __CLIFE_DUNGEON_H__
 
 # include <time.h>
 # include <stdio.h>
@@ -14,11 +15,8 @@
 
 /* const char *dcommands = "seek: seek for treasures.\nquit: sheepishly leave the dungeon. \n"; */
 
-# ifndef __CLIFE_DUNGEON_H__
-# define __CLIFE_DUNGEON_H__
-
-char decision[8];
-char dinput[32];
+extern char decision[8];
+extern char dinput[32];
 
 extern int dungeonMain(struct DUNGEON *dungeon, struct DATA *plr);
 

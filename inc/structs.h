@@ -3,6 +3,7 @@
 
 # include <string.h>
 
+/* # include "dungeon.h" */
 # include "env.h"
 # include "map.h"
 
@@ -44,13 +45,13 @@ struct city {
     char key[12];
 } Majkius, NovaA, Metron, Orar;
 
-void setAll(); // Get rid of reading dozens of files and replace it with a nice struct
+extern void setAll(); // Get rid of reading dozens of files and replace it with a nice struct
 
-void detStruct(char *location, char *country, int la, struct DATA *data, struct DATA *plr); // la = lookAround? <- determines if the command is lookAround or inspectDialog
+extern void detStruct(char *location, char *country, int la, struct DATA *data, struct DATA *plr); // la = lookAround? <- determines if the command is lookAround or inspectDialog
 
-void detStruct_plr(struct DATA *plr, int Sswitch);
+extern void detStruct_plr(struct DATA *plr, int Sswitch);
 
-int checkLevel(int level, int xp);
+extern int checkLevel(int level, int xp);
 
 // Keymap
 /* a - Center of a city

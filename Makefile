@@ -1,5 +1,5 @@
 CC           = gcc 
-CCFLAGS      = -g # -Wfatal-errors -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wformat-security
+CCFLAGS      = -g # -fcommon # -Wfatal-errors -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wformat-security
 LFLAGS       = -lncurses
 SRCDIR       = src
 BINDIR       = bin
